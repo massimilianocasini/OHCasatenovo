@@ -1,0 +1,14 @@
+// rule "OffSet DHTT"
+//     when
+//         Item Prodino_temp received update
+//     then
+//         Proxy_prodino_temp.sendCommand((Prodino_temp.state as DecimalType) -1.0)
+//     end
+    
+rule "OffSet Temperatura Camera Alice"
+    when
+        Item SensorTemperature3_DS1820_Cameretta_ZW17 received update //or
+       // Time cron "0 0/1 * 1/1 * ? *" //ogni 1 minuto
+    then
+        OffSetTemperature3_DS1820_Cameretta_ZW17.sendCommand((SensorTemperature3_DS1820_Cameretta_ZW17.state as DecimalType) -1.0)
+    end

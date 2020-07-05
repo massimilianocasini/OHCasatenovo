@@ -1,0 +1,1 @@
+Thing onewiregpio:sensor:Owcm3home "Owcm3home" [gpio_bus_file="/sys/bus/w1/devices/28-0000027f9d49/w1_slave",refresh_time=30]

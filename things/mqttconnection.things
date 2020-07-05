@@ -1,0 +1,10 @@
+Bridge mqtt:broker:myUnsecureBroker [ host="localhost", secure=false ]
+{
+    Thing topic prodino {
+    Channels:
+      //  Type number : temp_prodino "Temperatura prodino" [ stateTopic="/KMP/ProDinoWiFi/dhtt"]
+      //  Type number : umid_prodino "Umidità prodino" [ stateTopic="/KMP/ProDinoWiFi/dhth"]
+        Type string : alarmpanel "Alarm system status" [ stateTopic="/KMP/ProDinoWiFi/optoin", transformationPattern="MAP:prodino.map" ]
+        Type switch : alarmkey "Alarm system key" [ commandTopic="/KMP/ProDinoWiFi/Cmd", on="rel-0-1", off="rel-0-0" ]
+    }
+}

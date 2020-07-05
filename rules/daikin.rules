@@ -1,0 +1,12 @@
+var counter 
+
+rule "SetPoint All"
+    when
+        Item DaikinACUnit_SetPoint_All changed
+    then
+            val setpoint_all = (DaikinACUnit_SetPoint_All.state)
+            DaikinACUnit_SetPoint_Studio.sendCommand(setpoint_all)
+            DaikinACUnit_SetPoint_Alice.sendCommand(setpoint_all)
+            DaikinACUnit_SetPoint_Letto.sendCommand(setpoint_all)
+            DaikinACUnit_SetPoint_Salotto.sendCommand(setpoint_all)
+end

@@ -1,0 +1,16 @@
+// Prodino
+String Prodino0_in1 "Stato Antifurto [%s]" <alarm> (gAll, gAntifurto) ["iss:type:DevDoor","iss:room:Antifurto","iss:icon:alarm"]	{channel="mqtt:topic:myUnsecureBroker:prodino:alarmpanel"}
+//Switch prodino0_in2 "In 2 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-1.*]"}
+//Switch prodino0_in3 "In 3 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-2.*]"}
+//Switch prodino0_in4 "In 4 Status [%s]"  (gAll, gAntifurto)	{mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-3.*]"}
+// Switch prodino0_out1 "Key gAntifurto"    <switch>  {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-0-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-0-0], <[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-0.*]"}
+Switch Prodino0_out1 "Chiave"    <switch> (gAll, gAntifurto) ["iss:type:DevSwitch","iss:room:Antifurto"] {channel="mqtt:topic:myUnsecureBroker:prodino:alarmkey", expire="2s,command=OFF"}
+//Switch prodino0_out2 "Out 2"           (gAll, gAntifurto)      {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-1-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-1-0]"}
+//Switch prodino0_out3 "Out 3"           (gAll, gAntifurto)     {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-2-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-2-0]"}
+//Switch prodino0_out4 "Out 4"           (gAll, gAntifurto)     {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-3-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-3-0]"}
+//Number Prodino_temp "Antifurto Temperatura [%.1f °C]"  <temperature> (gAll, gTemperatura, gAntifurto, gInfluxdb) {channel="mqtt:topic:myUnsecureBroker:prodino:temp_prodino"}
+//Number Proxy_prodino_temp "Antifurto Temperatura [%.1f °C]"  <temperature> (gAll, gAntifurto, gInfluxdb) 
+//Number Prodino_umid "Antifurto Umidità [%.1f %%]"     <humidity> (gAll, gAntifurto, gInfluxdb)  {channel="mqtt:topic:myUnsecureBroker:prodino:umid_prodino"}
+
+//StudioLuce 
+Switch StudioLuce "Luce Studio" <light> (gAll, gStudio) ["Lighting"] 

@@ -1,0 +1,65 @@
+Group gFritz
+Group gIP
+String  fboxName            "FBox Model [%s]"      (gFritz)       {fritzboxtr064="modelName"}
+String  fboxManufacturer    "FBox Manufacturer [%s]"   (gFritz)   {fritzboxtr064="manufacturerName"}
+String  fboxSerial          "FBox Serial [%s]"       (gFritz)     {fritzboxtr064="serialNumber"}
+String  fboxVersion         "FBox Version [%s]"      (gFritz)     {fritzboxtr064="softwareVersion"}
+// get wan ip if FritzBox establishes the internet connection (e. g. via DSL)
+String  fboxWanIP           "FBox WAN IP [%s]"      (gFritz)      {fritzboxtr064="wanip"}
+// get wan ip if FritzBox uses internet connection of external router
+//String  fboxWanIPExternal   "FBox external WAN IP [%s]" (gFritz)  {fritzboxtr064="externalWanip"}
+Switch  fboxWifi24         "2,4GHz Wifi"        (gFritz)         {fritzboxtr064="wifi24Switch"}
+Switch  fboxWifi50          "5,0GHz Wifi"          (gFritz)       {fritzboxtr064="wifi50Switch"}
+Switch  fboxGuestWifi       "Guest Wifi"            (gFritz)      {fritzboxtr064="wifiGuestSwitch"}
+Contact repeater1160      "Presence Repeater 1160 [MAP(presence.map):%s]"    (gFritz, gIP)    {fritzboxtr064="maconline:62-FF-4D-83-EE-03" }
+//Contact frascati2      "Presence Frascati2 [MAP(presence.map):%s]"    (gFritz,gIP)    {fritzboxtr064="maconline:B8-27-EB-C1-A2-90" }
+Contact repeater310      "Presence Repeater 310 [MAP(presence.map):%s]"    (gFritz, gIP)    {fritzboxtr064="maconline:E6-28-6D-34-71-49" }
+Contact prodino    "Presence Prodino [MAP(presence.map):%s]"    (gFritz, gIP)    {fritzboxtr064="maconline:5C-CF-7F-13-6E-D7"}
+
+// WAN statistics 
+String  fboxWanAccessType "FBox WAN access type [%s]" (gFritz)  {fritzboxtr064="wanWANAccessType"}
+Number  fboxWanLayer1UpstreamMaxBitRate "FBox WAN us max bit rate [%s]" (gFritz)  {fritzboxtr064="wanLayer1UpstreamMaxBitRate"}
+Number  fboxWanLayer1DownstreamMaxBitRate "FBox WAN ds max bit rate [%s]" (gFritz)  {fritzboxtr064="wanLayer1DownstreamMaxBitRate"}
+String  fboxWanPhysicalLinkStatus "FBox WAN physical link status [%s]" (gFritz)  {fritzboxtr064="wanPhysicalLinkStatus"}
+Number  fboxWanTotalBytesSent "WAN total bytes sent [%s]" (gFritz)  {fritzboxtr064="wanTotalBytesSent"}
+Number  fboxWanTotalBytesReceived "WAN total bytes received [%s]" (gFritz)  {fritzboxtr064="wanTotalBytesReceived"}
+
+// DSL statistics
+
+Contact fboxDslEnable       "FBox DSL Enable [%s]"      (gFritz)  {fritzboxtr064="dslEnable"}
+String  fboxDslStatus       "FBox DSL Status [%s]"      (gFritz)  {fritzboxtr064="dslStatus"}
+Number  fboxDslUpstreamCurrRate "DSL Upstream Current [%s mbit/s]" (gFritz)  {fritzboxtr064="dslUpstreamCurrRate"}
+Number  fboxDslDownstreamCurrRate "DSL Downstream Current [%s mbit/s]" (gFritz)  {fritzboxtr064="dslDownstreamCurrRate"}
+Number  fboxDslUpstreamMaxRate "DSL Upstream Max [%s mbit/s]" (gFritz)  {fritzboxtr064="dslUpstreamMaxRate"}
+Number  fboxDslDownstreamMaxRate "DSL Downstream Max [%s mbit/s]" (gFritz)  {fritzboxtr064="dslDownstreamMaxRate"}
+Number  fboxDslUpstreamNoiseMargin "DSL Upstream Noise Margin [%s dB*10]" (gFritz)  {fritzboxtr064="dslUpstreamNoiseMargin"}
+Number  fboxDslDownstreamNoiseMargin "DSL Downstream Noise Margin [%s dB*10]" (gFritz)  {fritzboxtr064="dslDownstreamNoiseMargin"}
+Number  fboxDslUpstreamAttenuation "DSL Upstream Attenuation [%s dB*10]" (gFritz)  {fritzboxtr064="dslUpstreamAttenuation"}
+Number  fboxDslDownstreamAttenuation "DSL Downstream Attenuation [%s dB*10]" (gFritz)  {fritzboxtr064="dslDownstreamAttenuation"}
+Number  fboxDslFECErrors "DSL FEC Errors [%s]" (gFritz)  {fritzboxtr064="dslFECErrors"}
+Number  fboxDslHECErrors "DSL HEC Errors [%s]" (gFritz)  {fritzboxtr064="dslHECErrors"}
+Number  fboxDslCRCErrors "DSL CRC Errors [%s]" (gFritz)  {fritzboxtr064="dslCRCErrors"}
+
+// only when using call monitor
+Switch  fboxRinging         "Phone ringing [%s]"                (gFritz)  {fritzboxtr064="callmonitor_ringing" }
+Switch  fboxRinging_Out     "Phone ringing [%s]"                (gFritz)  {fritzboxtr064="callmonitor_outgoing" }
+Call    fboxIncomingCall    "Incoming call: [%1$s to %2$s]"     (gFritz)  {fritzboxtr064="callmonitor_ringing" } 
+Call    fboxOutgoingCall    "Outgoing call: [%1$s from %2$s]"     (gFritz)  {fritzboxtr064="callmonitor_outgoing" }
+
+// resolve numbers to names based on phonebook
+Call    fboxIncomingCallResolved    "Incoming call: [%1$s to %2$s]"     (gFritz)  {fritzboxtr064="callmonitor_ringing:resolveName" } 
+
+// Telephone answering machine (TAM) items
+// Number after tamSwitch is ID of configured TAM, start with 0
+Switch  fboxTAM0Switch   "Answering machine ID 0"       (gFritz)  {fritzboxtr064="tamSwitch:0"}
+Number  fboxTAM0NewMsg   "New Messages TAM 0 [%s]"      (gFritz)  {fritzboxtr064="tamNewMessages:0"}
+
+// Missed calls: specify the number of last days which should be searched for missed calls
+Number  fboxMissedCalls  "Missed Calls [%s]"            (gFritz)  {fritzboxtr064="missedCallsInDays:5"}
+
+// Call deflection items
+// Number after callDeflectionSwitch is ID of configured call deflection
+// The ID count includes the entries from the "Call Blocks" page.
+// If you have no "Call Blocks", the first entry on the "Call Diversions" page has ID 0.
+// If you have 3 "Call Blocks", the first entry on the "Call Diversions" page has ID 3.
+//Switch  fboxCD0Switch    "Call Deflection ID 0"         (gFritz)  {fritzboxtr064="callDeflectionSwitch:0"}

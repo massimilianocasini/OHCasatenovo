@@ -1,0 +1,25 @@
+rule "Move cameras direction"
+when
+    Item ONVIF1Direction changed
+then
+    switch (ONVIF1Direction.state as DecimalType) {
+        case 0 :{
+        //Room
+        ONVIF1Pan.sendCommand(-1.0)
+        ONVIF1Tilt.sendCommand()
+        ONVIF1Zoom.sendCommand(100)
+        }
+        case 1 :{
+        //Cot
+        ONVIF1Pan.sendCommand(-0.5)
+        ONVIF1Tilt.sendCommand(0)
+        ONVIF1Zoom.sendCommand(0)
+        }
+        case 2 : {
+        //Door
+        ONVIF1Pan.sendCommand(1)
+        ONVIF1Tilt.sendCommand(75)
+        ONVIF1Zoom.sendCommand(1)
+        }
+    }
+end

@@ -1,0 +1,22 @@
+var Timer occupancyTimer = null
+val int timeoutMinutes = 30 // choose an appropriate value
+
+
+rule "Spegni luce se non rilevi presenza"
+when
+    Item SensorBinary1_IRMotion_Cameretta_ZW17 received update ON or
+    Item SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 received update ON
+then
+    if(occupancyTimer === null) {
+        logInfo("PresenceCameretta", "StartTimer")
+        occupancyTimer = createTimer(now.plusMinutes(timeoutMinutes ), [|
+            SensorBinary1_IRMotion_Cameretta_ZW17.sendCommand(OFF)
+            SwitchBinary1_LuceLatoPorta_Cameretta_ZW18.sendCommand(OFF)
+            occupancyTimer = null
+            logInfo("PresenceCameretta", "StopTimer")
+        ])
+    }
+    else {
+        occupancyTimer.reschedule(now.plusMinutes(timeoutMinutes ))
+    }
+end

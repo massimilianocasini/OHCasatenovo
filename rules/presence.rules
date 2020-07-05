@@ -1,0 +1,78 @@
+
+rule "Reset Presence and sensors to OFF on startup"
+when
+    System started
+then
+    Presence.sendCommand(OFF)
+    gPresence_Sensors.sendCommand(OFF)
+    Presence_Auto.sendCommand(OFF)
+    Presence_Timer.sendCommand(OFF)
+end
+
+rule "Presenza accendi albero"
+when
+    Item gPresence_Sensors changed
+then
+    if(Presence_Timer.state == ON && gPresence_Sensors.state == Presence.state ) {
+        logInfo("presence", "Timer is running but group and proxy are the same, cancelling timer")
+        Presence_Timer.postUpdate(OFF)
+    }
+    else if(gPresence_Sensors.state == Presence.state) {
+        logInfo("presence", "No timer and both group and proxy are the same, nothing to do")
+        return;
+    }
+
+    if(gPresence_Sensors.state == OFF && Presence_Auto.state==ON) {
+        logInfo("presence", "Non vedo più nessuno, setto anti-flapping timer")
+        Presence_Timer.sendCommand(ON)
+    }
+    else if(gPresence_Sensors.state == ON && Presence_Auto.state == ON) {
+        logInfo("presence", "Ho visto qualcuno, setto presence to ON")
+        Presence.sendCommand(ON)
+       // SwitchBinary1_AlberoNatale_Salotto_ZW22.sendCommand(ON) //Albero
+       // sendTelegram("bot1", "Albero ON")
+    }
+    
+end
+
+rule "Timer di presenza terminato, non c'è nessuno"
+when
+        Item Presence_Timer received command OFF
+then
+        logInfo("presence", "Tutti sono usciti, setto la presenza a OFF")
+        Presence.sendCommand(OFF)
+        StudioLuce.sendCommand(OFF)
+       //SwitchBinary1_AlberoNatale_Salotto_ZW22.sendCommand(OFF) //Albero
+  //  sendTelegram("bot1", "Albero OFF")
+end
+
+rule "Presenza rilevata - presence ON"
+when
+        Item Presence changed
+then
+        if (Presence.state==ON && Presence_Auto.state==ON){
+        // SwitchBinary1_AlberoNatale_Salotto_ZW22.sendCommand(ON) //Albero
+        StudioLuce.sendCommand(ON)
+        }
+end
+
+rule "Azzera variabili quando disabilito il presence"
+when
+        Item Presence_Auto changed
+then
+        Presence_Timer.sendCommand(OFF)
+        Presence.sendCommand(OFF)
+        gPresence_Sensors.sendCommand(OFF)
+end
+
+
+// when
+//         Item gIP changed
+// then
+//         if (pMacOnline1.state == OPEN) {
+//            sendTelegram("bot1", "Repeater 1160 CONNESSO") 
+//         }
+//         else {
+//             sendTelegram("bot1", "Repeater 1160 DISCONNESSO") 
+//         }
+// end

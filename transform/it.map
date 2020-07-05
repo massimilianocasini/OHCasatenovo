@@ -1,0 +1,17 @@
+Clear=Sereno
+Partly\ Cloudy=Parzialmente nuvoloso
+Mostly\ Cloudy=Prevalentemente nuvoloso
+Scattered\ Clouds=Nubi sparse
+Overcast=Parzialmente nuvoloso
+Chance\ of\ Rain=Probabili pioggie
+Rain=Pioggia
+Drizzle=Piogerella
+Fog=Nebbia
+Thunderstorm=Temporale
+Chance\ of\ a\ Thunderstorm=Probabile temporale
+Light\ Thunderstorms\ and\ Rain=Leggero temporale e pioggia
+Light\ Rain=Leggera pioggia
+UNDEF=Indefinito
+NULL=Indefinito
+-=Indefinito
+Mist=Nebbia

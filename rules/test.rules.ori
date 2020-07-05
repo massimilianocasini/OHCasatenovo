@@ -1,0 +1,7 @@
+val mailActions = getActions("mail","mail:smtp:gmail_service")
+rule "Test invio email"
+when 
+    Item StudioLuce changed
+then
+     mailActions.sendMail("massimiliano.casini@gmail.com","Test", "Antifurto INSERITO")
+end

@@ -1,0 +1,14 @@
+proc            /proc           proc    defaults          0       0
+PARTUUID=e7e24853-01  /boot           vfat    defaults          0       2
+PARTUUID=e7e24853-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+/usr/share/openhab2          /srv/openhab2-sys           none bind 0 0
+/etc/openhab2                /srv/openhab2-conf          none bind 0 0
+/var/lib/openhab2            /srv/openhab2-userdata      none bind 0 0
+/var/log/openhab2            /srv/openhab2-logs          none bind 0 0
+/usr/share/openhab2/addons   /srv/openhab2-addons        none bind 0 0
+
+#nas2:/mnt/WD4T/OpenhabBackup     /mnt/nas2    nfs     nolock,noatime  0   0
+/dev/sda /media/usb ext4 defaults,noatime 0 1

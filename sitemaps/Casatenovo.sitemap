@@ -1,0 +1,406 @@
+sitemap Casatenovo label="Benvenuto a Casa" 
+
+{ 
+	Frame label=Oggi{
+		Text item=Date icon="calendar"
+		Text item=Temperatura_esterna
+		Text item=TempMinMax
+	}
+	Frame label="Stato generale" {
+		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
+		Text item=gAvgUmidita labelcolor=[<40="orange",>=40="green",>=60="red"] valuecolor=[<40="orange",>=40="green",>=60="red"] icon="humidity"
+		Text label="Temperature/Umidità/Pressione Interna" icon=temperature {
+			Default item=Aquara1T
+			Default item=Aquara2T
+			Default item=Aquara3T
+			Default item=SensorTemperature_MotionSensor_Studio_ZW10
+
+			Default item=Aquara1H
+			Default item=Aquara2H
+			Default item=Aquara3H
+			
+			Default item=Aquara1P
+			Default item=Aquara3P
+		}
+		Text item=Prodino0_in1  labelcolor=[DISINSERITO="green", INSERITO="red"] valuecolor=[DISINSERITO="green", INSERITO="red"]
+		Switch item=Prodino0_out1 label="Antifurto INS/DIS[]" mappings=[ON="Premi"]
+	}
+	Frame label="Fotovoltaico"	{
+		Default item=I_Status 
+		Default item=I_AC_Power_POST labelcolor=[>0="green",<=0="black"] valuecolor=[>0="green",<=0="black"] visibility=[I_Status==4] //Produzione
+		Default item=M_AC_Power_POST_abs label="Immessa in rete" visibility=[M_AC_Power_POST >= 0] labelcolor=["green"] valuecolor=["green"]
+		Default item=M_AC_Power_POST_abs label="Prelevata da rete" visibility=[M_AC_Power_POST < 0] labelcolor=["red"] valuecolor=["red"]
+		Default item=AC_Power_USED visibility=[I_Status==4]
+		Default item=I_AC_VoltageAB_POST labelcolor=[>226="green",>220="orange",<220="red"] valuecolor=[>226="green",>220="orange",<220="red"]
+		
+		Text label="Dati aggregati" icon=line {
+			Text label="Odierni" icon=calendar {
+				Default item=SE5000_AggregateDayProduction  //Produzione odierna
+				Default item=SE5000_AggregateDayImport //Importata odierna
+				Default item=SE5000_AggregateDayConsumption //Consumo odierno
+				Default item=SE5000_AggregateDayExport //Esportata odierna
+				Default item=SE5000_AggregateDayAutoconsumo //Autoconsumo odierno
+			}
+			Text label="Valori ultimi 7gg" icon=calendar {
+				Default item=SE5000_AggregateWeekProduction
+				Default item=SE5000_AggregateWeekImport
+				Default item=SE5000_AggregateWeekConsumption
+				Default item=SE5000_AggregateWeekExport
+				Default item=SE5000_AggregateWeekAutoconsumo
+			}
+		}
+		//Default item=SE5000_Live_Consumption
+		//Default item=SE5000_Live_Import
+		//Default item=SE5000_Live_Production
+		//Default item=M_AC_Power_
+		// Default item=I_AC_Current_POST
+		// Default item=I_DC_Voltage_POST
+		// Default item=I_AC_Frequency_
+		// Default item=M_AC_Current_POST
+		//Group item=gFVI label="Fotovoltaico Inverter" icon="energy"
+		//Group item=gFVM label="Fotovoltaico Meter" icon="energy"
+		Text label="SolarEdgeCloud" icon=line { 
+			Webview url="https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk?guid=35f0e451-ba70-4008-968b-414eaedf1395" height=30
+			}
+	}
+	Frame label="Condizionamento" {
+		Default item=MeterWatts_R220P_QE_ZW11
+		Text label="Base" icon=climate {
+			Switch item=gORCondSwitch  mappings=[ON="ON", OFF="OFF"] 
+			Selection item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
+			Switch item=DaikinACUnit_Power_Studio label="Studio Power" mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Studio label="Studio SP" minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Letto  label="Letto Power" mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Letto label="Letto SP" minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Alice label="Alice Power" mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Alice label="Alice SP" minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Salotto label="Salotto Power" mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Salotto label="Salotto SP" minValue=16 maxValue=30 step=0.5
+		}
+
+		Text label="Avanzate" icon=climate {
+			Text label="Studio" icon=climate {
+				Switch item=DaikinACUnit_Power_Studio
+				Setpoint item=DaikinACUnit_SetPoint_Studio visibility=[DaikinACUnit_Power_Studio==ON] minValue=16 maxValue=30 step=0.5
+				Selection item=DaikinACUnit_Mode_Studio mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
+				Selection item=DaikinACUnit_Fan_Studio mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Studio==ON]
+				Selection item=DaikinACUnit_Fan_Movement_Studio mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Studio==ON]
+				Text item=DaikinACUnit_IndoorTemperature_Studio
+				Text item=DaikinACUnit_OutdoorTemperature_Studio
+				Text item=DaikinACUnit_CompressorFrequency_Studio
+				}
+			Text label="Letto" icon=climate {
+				Switch item=DaikinACUnit_Power_Letto
+				Setpoint item=DaikinACUnit_SetPoint_Letto visibility=[DaikinACUnit_Power_Letto==ON] minValue=16 maxValue=30 step=0.5
+				Selection item=DaikinACUnit_Mode_Letto mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
+				Selection item=DaikinACUnit_Fan_Letto mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Letto==ON]
+				Selection item=DaikinACUnit_Fan_Movement_Letto mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Letto==ON]
+				Text item=DaikinACUnit_IndoorTemperature_Letto
+				Text item=DaikinACUnit_OutdoorTemperature_Letto
+			}
+			Text label="Alice" icon=climate {
+				Switch item=DaikinACUnit_Power_Alice
+				Setpoint item=DaikinACUnit_SetPoint_Alice visibility=[DaikinACUnit_Power_Alice==ON] minValue=16 maxValue=30 step=0.5
+				Selection item=DaikinACUnit_Mode_Alice mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
+				Selection item=DaikinACUnit_Fan_Alice mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Alice==ON]
+				Selection item=DaikinACUnit_Fan_Movement_Alice mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Alice==ON]
+				Text item=DaikinACUnit_IndoorTemperature_Alice
+				Text item=DaikinACUnit_OutdoorTemperature_Alice
+			}
+			Text label="Salotto" icon=climate {
+				Switch item=DaikinACUnit_Power_Salotto
+				Setpoint item=DaikinACUnit_SetPoint_Salotto visibility=[DaikinACUnit_Power_Salotto==ON] minValue=16 maxValue=30 step=0.5
+				Selection item=DaikinACUnit_Mode_Salotto mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
+				Selection item=DaikinACUnit_Fan_Salotto mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Salotto==ON]
+				Selection item=DaikinACUnit_Fan_Movement_Salotto mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Salotto==ON]
+				Text item=DaikinACUnit_IndoorTemperature_Salotto
+				Text item=DaikinACUnit_OutdoorTemperature_Salotto
+			}
+		}
+	}
+	Frame label="Riscaldamento"	{
+		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
+		Text item=SwitchBinary2_Caldaia_Tecnico_ZW22 valuecolor=[ON="green", OFF="red"]
+		Switch item=Riscaldamento_Auto mappings=[OFF="Manuale", ON="Automatico"]
+		Default item=Riscaldamento_Auto_SP visibility=[Riscaldamento_Auto==ON]
+		Setpoint item=Riscaldamento_ManualSetPoint label="SetPoint Manuale [%.1f °C]" minValue=15 maxValue=25 step=0.5 visibility=[Riscaldamento_Auto==OFF] //Set temperatura
+	}	
+	Frame label="Gestione presenza" {
+		Text item=Presence label="Non c'è nessuno!" visibility=[Presence==OFF] 
+		Text item=Presence label="C'è qualcuno" visibility=[Presence==ON] 
+		Switch item=Presence_Auto label="Presenza" mappings=[OFF="Disabilitata", ON="Abilitata"]
+	}
+	Frame label="Dispositivi IP" {
+		Default item=repeater1160 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		//Default item=frascati2 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		Default item=repeater310 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		Default item=prodino icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+	}
+	// Frame label="SystemInfo" {
+	// 	Group item=gSystemInfo
+	// }
+	Frame label="Stanze" {
+		// Text label="Cucina" icon="kitchen" { 
+		// 	Switch item=SwitchBinary_Frigorifero_Cucina_ZW3 icon="light" mappings=[ON="ON", OFF="OFF"]
+		// 		Text item=MeterKwh_Frigorifero_Cucina_ZW3 icon="energy"
+		// 		Text item=SensorPower_Frigorifero_Cucina_ZW3 icon="energy"
+		// }
+		Text label="Camera Alice" icon="bedroom" {
+			//Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="Premi"]
+			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == OFF]
+			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == ON]
+			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == OFF]
+			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == ON]
+			Text item=SensorBinary1_IRMotion_Cameretta_ZW17
+			Text item=SensorBinary2_IRTamper_Cameretta_ZW17
+			//Text item=FGBS001_17_sensor_temperature3 icon="temperature"
+			Default item=OffSetTemperature3_DS1820_Cameretta_ZW17 icon="temperature"
+		}
+		Text label="Salotto" icon="player" {
+			Switch item=SwitchBinary2_TV_Salotto_ZW22 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary2_TV_Salotto_ZW22 == OFF]
+			Switch item=SwitchBinary2_TV_Salotto_ZW22 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary2_TV_Salotto_ZW22 == ON]
+			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == OFF]
+			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == ON]
+			Default item=Prodino_temp
+			Default item=Prodino_umid
+		}
+		Text label="Corridoio" icon="corridor" {
+			Slider item=SwitchDimmer_Luce_Corridoio_ZW20
+		}
+		Text label="Studio" icon="office" {
+			Default item=SensorTemperature_MotionSensor_Studio_ZW10 icon="temperature"
+			Default item=SensorLuminance_MotionSensor_Studio_ZW10 icon="rgb"
+			Text item=AlarmMotion_MotionSensor_Studio_ZW10 icon="motion" 
+			Switch item=StudioLuce icon=light visibility=[StudioLuce == OFF] mappings=[ON="ACCENDI"]
+			Switch item=StudioLuce icon=light visibility=[StudioLuce == ON] mappings=[OFF="SPEGNI"]
+		}
+		Text label="Cucina" icon="kitchen" {
+			//Default item=Osram01P
+			Default item=Osram01S 
+		}
+	}
+	Frame label="Ambienti" {
+		Text label="Giardino" icon="garden" {
+			Slider item=BlindsControl_Pergotenda_Giardino_ZW21
+			Switch item=BlindsControl_Pergotenda_Giardino_ZW21  mappings=[0="Chiusa", 100="Aperta"]
+		}
+		Text label="Portone" icon="cellar" {
+			Switch item=SwitchBinary1_Luce_Portone_ZW13 mappings=[ON=ACCESO, OFF=SPENTO]
+		}	
+		Text label="Garage" icon="garage" {
+			Switch item=SwitchBinary1_Serranda_Garage_ZW15 mappings=[ON="APRI"]
+			Switch item=SwitchBinary2_Luce_Garage_ZW15 mappings=[ON="Premi"]
+			Text item=SensorBinary1_Serranda_Garage_ZW16 
+			Text  item=SensorBinary2_IRMotion_Garage_ZW16
+			Text item=SensorTemperature3_DS1820_Garage_ZW16
+		}
+	}
+	Frame label="Accessori"	{
+		Text label="Caldaia" icon="settings"{
+			Switch item=SwitchBinary2_Caldaia_Tecnico_ZW22 mappings=[ON="Accesa", OFF="Spenta"]
+		}
+		Text label="Condizionamento" icon="settings" {
+			Text item=MeterVoltage_R220P_QE_ZW11
+			Text item=MeterWatts_R220P_QE_ZW11
+			Text item=MeterCurrent_R220P_QE_ZW11
+			Text item=MeterPowerFactor_R220P_QE_ZW11
+			Text item=MeterKwh_R220P_QE_ZW11
+		}
+		Text label="CM3-Home" icon="settings" {
+			Text item=Owcm3home icon=temperature			
+		}	
+		Text label="Antifurto" icon="siren" {
+			Default item=Prodino0_in1
+			// Switch item=prodino0_in2
+			// Switch item=prodino0_in3
+			// Switch item=prodino0_in4
+			Switch item=Prodino0_out1
+			// Switch item=prodino0_out2
+			// Switch item=prodino0_out3
+			// Switch item=prodino0_out4
+			//Text item=Prodino_temp
+			//Text item=Prodino_umid
+		}
+	}
+	Frame label="Che tempo che fa" {
+		 Group item=gWeather label=Meteo icon="sun_clouds"
+	}
+	Frame label="Astro" {
+			Text item=Sunrise_Time
+			Text item=Sunset_Time
+			Text item=SunElevation
+	}
+	Frame label="Dispositivi" {
+		Text label="Elenco" icon="settings" {
+			Text label="Double relay Switch 2x1.5kW, Salotto" icon="cellar" 	{
+				Switch item=FGS221_22_switch_binary
+				Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22
+				Switch item=SwitchBinary2_TV_Salotto_ZW22
+			}
+			Text label="MotionSensor" icon="cellar"	{
+				Text item=SensorTemperature_MotionSensor_Studio_ZW10 
+				Text item=SensorLuminance_MotionSensor_Studio_ZW10
+				Default item=AlarmMotion_MotionSensor_Studio_ZW10
+				Default item=BatteryLevel_MotionSensor_Studio_ZW10
+			}
+			Text label="WallPlug" icon="cellar"	{
+			 	Switch item=Osram01S
+			 }
+			Text label="Energy Driven Switch C" icon="cellar"{
+				Text item=MeterVoltage_R220P_QE_ZW11
+				Text item=MeterCurrent_R220P_QE_ZW11
+				Text item=MeterKwh_R220P_QE_ZW11
+				Text item=MeterWatts_R220P_QE_ZW11
+				Text item=MeterPowerFactor_R220P_QE_ZW11
+				Text item=SensorPower_R220P_QE_ZW11
+				Switch item=WPS104_11_switch_binary
+			}
+			Text label="Double relay Switch 2x1.5kW, Portone" icon="cellar" {
+				Switch item=FGS222_13_switch_binary
+				Switch item=SwitchBinary1_Luce_Portone_ZW13
+				Switch item=SwitchBinary2_Luce_CancellettoEst_ZW13
+			}
+			Text label="Double relay Switch 2x1.5kW, Garage" icon="cellar" {
+				Switch item=FGS222_15_switch_binary
+				Switch item=SwitchBinary1_Serranda_Garage_ZW15
+				Switch item=SwitchBinary2_Luce_Garage_ZW15
+			}
+			Text label="Double relay Switch 2x1.5kW, Camera Alice porta" icon="cellar" {
+				Switch item=FGS222_18_switch_binary
+				Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18
+				Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18
+			}
+			Text label="Double relay Switch 2x1.5kW, Camera Alice lumetti" icon="cellar" {
+				Switch item=FGS222_19_switch_binary
+				Switch item=SwitchBinary1_LuceLatoLetti_Cameretta_ZW19
+				Switch item=SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19
+			}
+			Text label="Universal Binary Sensor, Garage" icon="garage" {
+				//Switch item=FGBS001_16_alarm_general1
+				//Switch item=FGBS001_16_alarm_general2
+				//Text item=FGBS001_16_scene_number
+				Default item=SensorBinary1_Serranda_Garage_ZW16
+				Default item=SensorBinary2_IRMotion_Garage_ZW16
+				Text item=FGBS001_16_sensor_temperature3
+			}
+			Text label="Universal Binary Sensor, Camera Alice" icon="cellar" {
+				//Text item=FGBS001_17_alarm_general1
+				//Text item=FGBS001_17_alarm_general2
+				//Text item=FGBS001_17_scene_number
+				Text item=SensorBinary1_IRMotion_Cameretta_ZW17
+				Text item=SensorBinary2_IRTamper_Cameretta_ZW17
+				Text item=OffSetTemperature3_DS1820_Cameretta_ZW17
+			}
+			Text label="Roller Shutter, Pergotenda" icon="terrace" {
+				Switch item=FGRM222_21_switch_binary 
+				Default item=BlindsControl_Pergotenda_Giardino_ZW21
+				Text item=FGRM222_21_blinds_scene_number
+				Text item=SensorPower_Pergotenda_Giardino_ZW21
+				Text item=MeterWatts_Pergotenda_Giardino_ZW21
+				Text item=MeterKwh_Pergotenda_Giardino_ZW21
+			}
+			Text label="Prodino WIFI MQTT, Sala da pranzo" icon="cellar" {
+				Switch item=Prodino0_in1
+				// Switch item=prodino0_in2
+				// Switch item=prodino0_in3
+				// Switch item=prodino0_in4
+				Switch item=Prodino0_out1
+				// Switch item=prodino0_out2
+				// Switch item=prodino0_out3
+				// Switch item=prodino0_out4
+				Text item=Prodino_temp
+				Text item=Prodino_umid
+			}
+			Text label="CM3-Home" icon="cellar" {
+				Text item=Owcm3home
+			}
+		}
+	}
+	Frame label="Gruppi" {
+			Group item=gTemperatura label="Temperature" icon="temperature"
+			Group item=gFritz label="Router" icon="settings"
+	}
+	Frame label="ADSL"
+		{
+		Text item=SpeedtestSummary {
+			Frame label="Risultati" {
+				Text item=SpeedtestResultDown
+				Text item=SpeedtestResultUp
+				Text item=SpeedtestResultPing
+			}
+			Frame label="Controllo"{
+				Text item=SpeedtestResultDate
+				Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
+				Switch item=SpeedtestRerun mappings=[ON="Start"]
+			}
+			Frame label="Statistica" {
+				Text label="..." icon="speedtest_analytics8"
+			}
+		}
+	}
+	Frame label="System ADSL Ping"
+		{
+			Text label="Google DNS IP" {
+				Frame label="Online Status" {
+				Text item=GoogleIP label="[%s]"
+				}
+				Frame label="Latenza (ms)" {
+				Text item=GoogleIPlt label="Device Response Time [%s]"
+				}
+				Frame label="LastSeen" {
+				Text item=GoogleIPls
+				}
+			}
+		}
+	Frame label="System" {
+	//	Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", PowerOff="Shut down", Reboot="Reboot"]
+		Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", Reboot="Reboot"]
+		Selection item=cm3home label="CM3-Home" mappings=[PowerOff="Shut down", Reboot="Reboot"]
+	}
+	Frame label="TVCC"
+		{
+			Text label="Camera1" icon=camera {
+			Video url="http://192.168.178.58:8081"  encoding="mjpeg"
+			}
+		
+			Text label="Camera2" icon=camera {
+			Video url="http://192.168.178.58:8082"  encoding="mjpeg"
+			}	
+
+		// 	Text label="BabyMonitor" icon="camera"{
+		// 	//Image url="http://google.com/leaveLinkAsThis" item=ONVIF1Image refresh=2000
+		// 	//Video url="rtsp://192.168.178.72:6554/stream_0/" encoding="mjpeg"
+		// 	Video url="http://192.168.178.72:9527/ipc_snapshot.cgi" 
+		// 	Switch item=ONVIF1Direction icon=movecontrol label="Camera Direction" mappings=[0="Room", 1="Cot", 2="Door"]
+		// 	Switch item=ONVIF1UpdateImage
+		// 	Default item=ONVIF1MotionAlarm icon=siren
+		// 	Default item=ONVIF1AudioAlarm icon=siren
+		// 	Text label="Advanced Controls" icon="settings"{
+		// 		Switch item=ONVIF1EnableMotion
+		// 		Default item=ONVIF1EnableAudioAlarm
+		// 		Default item=ONVIF1AudioThreshold icon=recorder
+		// 		Slider item=ONVIF1LED
+		// 		Default item=ONVIF1AutoLED
+		// 		Slider item=ONVIF1Pan icon=movecontrol
+		// 		Slider item=ONVIF1Tilt icon=movecontrol
+		// 		Slider item=ONVIF1Zoom icon=zoom
+        // 	}
+    	// }
+		}
+	
+	// Frame label="Grafici" {
+	// 	Text label="Grafici" {
+	// //	Image label="Room Temperatures" refresh=60000 url="http://192.168.178.90:3000/render/d-solo/gKNdSvRRk/temperatura?orgId=1&panelId=10&from=1546985283141&to=1547158083141&width=1000&height=500&tz=UTC%2B01%3A00"
+	// 	Chart item=gAvgTemperatura icon="chart" label="Grafico" refresh=60000 period=D legend=true
+	// 	}
+	
+	// }
+	// Frame label="FotoV"
+	// 	Text label="Autoconsumo"
+	// 	Image refresh=60000 url="http://192.168.178.90:3000/d/2WwJNPkRk/fotovoltaico?panelId=4&orgId=1&fullscreen"
+/* 	Frame label="Periferiche di rete" {
+		Switch item=RaspberryPI0_online mappings=[ON="ONLINE", OFF="OFFLINE"]
+		Default item=RaspberryPI0_latency
+		Text item=RaspberryPI0_datetime
+	} */
+}

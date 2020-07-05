@@ -1,0 +1,29 @@
+// Number:Power    SE5000_Live_Production   "Produzione FV live [%.2f kW]" (gInfluxdb, gFotoVoltaico)   {channel="solaredge:generic:se5000:live#production"}
+// String          SE5000_Live_Status       "Stato impianto [%s]"        (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000:live#pv_status"}
+// Number:Power    SE5000_Live_Consumption    "Consumo live [%.2f kW]"  (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000:live#consumption"}
+// String          SE5000_Live_CurrentLoadStatus "Stato attuale carico"     (gInfluxdb, gFotoVoltaico)           {channel="solaredge:generic:se5000:live#load_status"}
+// Number:Power    SE5000_Live_Import    "Prielevo da ACEA live [%.2f kW]"  (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000:live#import"}
+// Number:Power    SE5000_Live_Export    "Immesso in ACEA live [%.2f kW]"  (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000:live#export"}
+// String          SE5000_Live_GridStatus "Stato attuale rete"      (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000:live#grid_status"}
+ 
+Number:Power    SE5000_Live_Production   "Produzione live [%.1f kW]" <solarplant> (gInfluxdb, gFotoVoltaico)   {channel="solaredge:generic:se5000private:live#production"}
+String          SE5000_Live_Status       "Stato impianto [%s]"        (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000private:live#pv_status"}
+Number:Power    SE5000_Live_Consumption    "Consumo live [%.1f kW]"  (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000private:live#consumption"}
+String          SE5000_Live_CurrentLoadStatus "Stato attuale carico"     (gInfluxdb, gFotoVoltaico)           {channel="solaredge:generic:se5000private:live#load_status"}
+Number:Power    SE5000_Live_Import    "Prelievo da ACEA live [%.1f kW]" <energy>  (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:live#import"}
+Number:Power    SE5000_Live_Export    "Immesso in ACEA live [%.1f kW]" <price> (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000private:live#export"}
+String          SE5000_Live_GridStatus "Stato attuale rete"      (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000private:live#grid_status"}
+
+Number:Energy   SE5000_AggregateDayProduction    "Produzione odierna [%.0f kWh]" <solarplant> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_day#production"}
+Number:Energy   SE5000_AggregateDayConsumption    "Consumo odierno [%.0f kWh]" <fan>  (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_day#consumption"}
+Number:Energy   SE5000_AggregateDayPerAutoconsumo    "Autoconsumo odierno [%.1f kWh]" <price> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_day#selfConsumptionForConsumption"}
+Number:Dimensionless   SE5000_AggregateDayAutoconsumo    "Autoconsumo odierno [%.0f]" <price> (gInfluxdb, gFotoVoltaico) {channel="solaredge:generic:se5000private:aggregate_day#selfConsumptionCoverage"}
+Number:Energy   SE5000_AggregateDayImport    "Prelievo odierno da rete [%.0f kWh]" <energy> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_day#import"}
+Number:Energy   SE5000_AggregateDayExport    "Immissione in rete odierna [%.0f kWh]" <price> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_day#export"}
+
+Number:Energy   SE5000_AggregateWeekProduction  "Produzione ultimi 7gg [%.0f kWh]" <solarplant> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#production"}
+Number:Energy   SE5000_AggregateWeekConsumption  "Consumo ultimi 7gg [%.0f kWh]" <fan>  (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#consumption"}
+Number:Energy   SE5000_AggregateWeekPerAutoconsumo    "Autoconsumo ultimi 7gg [%.0f kWh]" <price> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#selfConsumptionForConsumption"}
+Number:Dimensionless   SE5000_AggregateWeekAutoconsumo    "Autoconsumo ultimi 7gg [%.1f]" <price> (gInfluxdb, gFotoVoltaico) {channel="solaredge:generic:se5000private:aggregate_week#selfConsumptionCoverage"}
+Number:Energy   SE5000_AggregateWeekImport    "Prelievo ultimi 7gg da rete [%.0f kWh]" <energy> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#import"}
+Number:Energy   SE5000_AggregateWeekExport    "Immissione in rete ultimi 7gg [%.0f kWh]" <price> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#export"}

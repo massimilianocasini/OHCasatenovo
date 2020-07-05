@@ -1,0 +1,62 @@
+val mailActions = getActions("mail","mail:smtp:gmail_service")
+
+// rule "allinea stato allarme ON"
+// when
+//     Item prodino0_in1 changed from DISINSERITO to INSERITO
+// then
+//   //  sendCommand(prodino0_out1, ON)
+//   prodino0_out1.sendCommand(ON)
+//     sendTelegram("bot1", "Antifurto INSerito!")
+// end
+
+// rule "allinea stato allarme OFF"
+// when
+//     Item prodino0_in1 changed from INSERITO to DISINSERITO
+// then
+//     sendCommand(prodino0_out1, OFF)
+//     sendTelegram("bot1", "Antifurto DISinserito!")
+// end
+
+
+// rule "Stato antifurto"
+// when 
+//     Item prodino0_in1 changed
+// then
+//     if(prodino0_in1.state == INSERITO) {
+//       sendCommand(prodino0_out1, ON)
+//       createTimer(now.plusSeconds(1) [|
+// 			prodino0_out1.sendCommand(OFF)
+// 			])
+//     sendTelegram("bot1", "Antifurto INSerito!")
+//     }
+//     if( prodino0_in1.state == DISINSERITO)
+//     {
+//       sendCommand(prodino0_out1, OFF)
+//     sendTelegram("bot1", "Antifurto DISnserito!")
+//     }
+// end
+rule "Antifurto cambio stato"
+when 
+    Item Prodino0_in1 changed
+then
+    if(Prodino0_in1.state == "INSERITO") {
+       sendTelegram("bot1", "Antifurto INSerito!") 
+     mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Antifurto INSERITO")
+    }
+     if(Prodino0_in1.state == "DISINSERITO") {
+       sendTelegram("bot1", "Antifurto DIsInserito!")
+     mailActions.sendMail("myemail@gmail.com","Antifurto", "Antifurto DISNSERITO")
+    }
+end
+
+// rule "Impulso per KEY"
+// when
+//     Item prodino0_out1 received update
+// then
+//    // (if timer === null) {
+//         timer = createTimer(now.plusSeconds(1), [|
+//         prodino0_out1.sendCommand(OFF)
+//     //    timer = null
+//     ])
+//  //   }
+// end

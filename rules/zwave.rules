@@ -1,0 +1,168 @@
+rule "zwave:device:512:node3"
+when Thing "zwave:device:512:node3" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node3"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node10"
+when Thing "zwave:device:512:node10" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node10"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node11"
+when Thing "zwave:device:512:node11" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node11"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node13"
+when Thing "zwave:device:512:node13" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node13"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node15"
+when Thing "zwave:device:512:node15" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node15"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node16"
+when Thing "zwave:device:512:node16" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node16"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node17"
+when Thing "zwave:device:512:node17" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node17"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node18"
+when Thing "zwave:device:512:node18" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node18"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node19"
+when Thing "zwave:device:512:node19" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node19"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node20"
+when Thing "zwave:device:512:node20" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node20"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node21"
+when Thing "zwave:device:512:node21" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node21"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node22"
+when Thing "zwave:device:512:node22" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node22"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end
+
+rule "zwave:device:512:node23"
+when Thing "zwave:device:512:node23" changed
+// to “OFFLINE (COMMUNICATION_ERROR)“
+then
+val String thingUID = "zwave:device:512:node23"
+var thingStatusInfo = getThingStatusInfo(thingUID)
+// && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+    if (thingStatusInfo !== null) {
+        sendTelegram("bot1", thingUID + " " + thingStatusInfo.getStatus().toString())
+        logError("", "Thing status: " + thingUID + " " + thingStatusInfo.getStatus().toString() )
+    } return
+end

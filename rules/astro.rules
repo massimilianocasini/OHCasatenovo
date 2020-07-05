@@ -1,0 +1,45 @@
+rule "Controllo luci 30min prima del tramonto e al sorgere" 
+when
+    Item SunElevation changed
+then
+    if(now.getHourOfDay > 12 && SunElevation.state < -3 && SwitchBinary1_Luce_Portone_ZW13.state != ON)
+    {
+       SwitchBinary1_Luce_Portone_ZW13.sendCommand(ON)
+       sendTelegram("bot1", "Luce portone ACCESA!")
+      
+//       logInfo("Luce accesa")
+    }
+    if(now.getHourOfDay < 12 && SunElevation.state > -3 && SwitchBinary1_Luce_Portone_ZW13.state != OFF)
+    {
+       SwitchBinary1_Luce_Portone_ZW13.sendCommand(OFF)
+       sendTelegram("bot1", "Luce portone SPENTA!")
+    }
+    
+end
+
+// rule "Controllo alimentazione lumetti"
+// when
+//     Item SunElevation changed
+// then
+//     if(now.getHourOfDay > 12 && SunElevation.state < 1 && SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19.state != ON)
+//     {
+//        SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19.sendCommand(ON)
+//        sendTelegram("bot1", "Alimentazione lumetti ON!")
+//     }
+//     if(now.getHourOfDay < 12 && SunElevation.state > 0 && SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19.state != OFF)
+//     {
+//        SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19.sendCommand(OFF)
+//        sendTelegram("bot1", "Alimentazione lumetti OFF!")
+//     }
+// end
+
+rule "Accendi luce Garage dopo il tramonto Contatto"
+when
+    Item SensorBinary1_Serranda_Garage_ZW16 changed from OFF to ON
+    
+then
+    if(SunElevation.state < 20 && SwitchBinary2_Luce_Garage_ZW15.state != ON)
+    {
+       SwitchBinary2_Luce_Garage_ZW15.sendCommand(ON)
+    }
+end 

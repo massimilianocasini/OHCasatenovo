@@ -1,0 +1,32 @@
+//https://www.freeformatter.com/cron-expression-generator-quartz.html
+//Seconds	Minutes	    Hours	Day Of Month	Month	Day Of Week	            Year
+//  0	        30	      1	        ?	          *	    MON,TUE,WED,THU,FRI	    *
+
+rule "reset Variabili riscaldamento alla partenza "
+when
+    System started
+then
+    Riscaldamento_Auto.sendCommand(ON)
+    Riscaldamento_ManualSetPoint.postUpdate(18)
+end
+
+rule "invia a telegram lo stato caldaia ON"
+when
+    Item SwitchBinary2_Caldaia_Tecnico_ZW22 changed from OFF to ON
+then
+    sendTelegram("bot1", "Termosifoni ON")
+end 
+
+rule "invia a telegram lo stato caldaia OFF"
+when
+    Item SwitchBinary2_Caldaia_Tecnico_ZW22 changed from ON to OFF
+then
+    sendTelegram("bot1", "Termosifoni OFF")
+end 
+
+rule "imposta il riscaldamento in auto a mezzanotte"
+when
+    Time cron "0 0 0 ? * * *"
+then
+    Riscaldamento_Auto.sendCommand(ON)
+end

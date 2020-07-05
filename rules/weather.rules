@@ -1,0 +1,15 @@
+rule "Stringa Min Max"
+when 
+    Item Temp_Min0 changed or
+    Item Temp_Max0 changed
+
+then 
+var min = (Temp_Min0.minimumSince(now.withTimeAtStartOfDay).state as Number).floatValue
+var max = (Temp_Max0.maximumSince(now.withTimeAtStartOfDay).state as Number).floatValue
+    if (max !== null && min !== null) {
+        Temp_Max0.postUpdate(max)
+        Temp_Min0.postUpdate(min)
+        var result = String::format("%.0f °C  |  %.0f °C", min, max)
+        postUpdate(TempMinMax,result)  
+}
+end

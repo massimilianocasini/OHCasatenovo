@@ -1,0 +1,58 @@
+//https://www.freeformatter.com/cron-expression-generator-quartz.html
+//Seconds	Minutes	    Hours	Day Of Month	Month	Day Of Week	            Year
+//  0	        30	      1	        ?	          *	    MON,TUE,WED,THU,FRI	    *
+rule "01:30 OFF lun-ven e domenica"
+when
+    Time cron "0 30 1 ? * MON,TUE,WED,THU,FRI,SUN *"
+then
+  //  SwitchBinary2_TV_Salone_ZW22.sendCommand(OFF) //TV
+    
+  //  FGS221_22_switch_binary1.sendCommand(OFF) //Albero
+    sendTelegram("bot1", "TV OFF!")
+end
+
+
+rule "05:30 ON lun-ven"
+when
+    Time cron "0 30 5 ? * MON,TUE,WED,THU,FRI *"
+then
+    SwitchBinary2_TV_Salone_ZW22.sendCommand(ON)
+   // FGS221_22_switch_binary1.sendCommand(ON)
+    sendTelegram("bot1", "TV ON!")
+end
+
+// rule "09:30 OFF lun-ven"
+// when
+//     Time cron "0 30 9 ? * MON,TUE,WED,THU,FRI *"
+// then
+//     SwitchBinary2_TV_Salone_ZW22.sendCommand(OFF)
+//    // FGS221_22_switch_binary1.sendCommand(OFF)
+//     sendTelegram("bot1", "TV OFF!")
+// end
+
+// rule "14:30 ON lun-ven"
+// when
+//     Time cron "0 30 14 ? * MON,TUE,WED,THU,FRI *"
+// then
+//     SwitchBinary2_TV_Salone_ZW22.sendCommand(ON)
+//    // FGS221_22_switch_binary1.sendCommand(ON)
+//     sendTelegram("bot1", "TV ON!")
+// end
+
+rule "07:00 ON sabato e domenica"
+when
+    Time cron "0 00 8 ? * SAT,SUN *"
+then
+    SwitchBinary2_TV_Salone_ZW22.sendCommand(ON)
+   // FGS221_22_switch_binary1.sendCommand(ON)
+    sendTelegram("bot1", "TV ON!")
+end
+
+rule "02:00 OFF sabato"
+when
+    Time cron "0 0 2 ? * SAT *"
+then
+//   SwitchBinary2_TV_Salone_ZW22.sendCommand(OFF)
+   // FGS221_22_switch_binary1.sendCommand(OFF)
+    sendTelegram("bot1", "TV OFF!")
+end

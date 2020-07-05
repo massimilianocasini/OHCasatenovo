@@ -1,0 +1,389 @@
+{
+    "dashboards": [
+        {
+            "id": "Temp",
+            "name": "Temperatura",
+            "widgets": [
+                {
+                    "name": "Temperatura interna",
+                    "sizeX": 3,
+                    "sizeY": 3,
+                    "item": "MotionSensor1_PT_sensorTemperature",
+                    "type": "knob",
+                    "row": 0,
+                    "col": 0,
+                    "floor": 0,
+                    "ceil": 50,
+                    "step": 1,
+                    "barColor": "transparent",
+                    "trackColor": "transparent",
+                    "skinType": "tron",
+                    "skinColor": "#009933",
+                    "rangesEnabled": true,
+                    "rangesTextColorMatching": true,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 17,
+                            "barColor": "#0066FF"
+                        },
+                        {
+                            "min": 17,
+                            "max": 23,
+                            "barColor": "#66FF33"
+                        },
+                        {
+                            "min": 23,
+                            "max": 50,
+                            "barColor": "#FF3300"
+                        }
+                    ],
+                    "unit": "°C",
+                    "readOnly": true,
+                    "barWidth": 20,
+                    "trackWidth": 10,
+                    "barCap": 10,
+                    "trackCap": 10,
+                    "scaleEnabled": true,
+                    "scaleType": "dots",
+                    "fontSize": null,
+                    "subTextEnabled": true
+                },
+                {
+                    "name": "Temperatura esterna",
+                    "sizeX": 3,
+                    "sizeY": 3,
+                    "item": "currentTemperature",
+                    "type": "knob",
+                    "floor": -10,
+                    "ceil": 50,
+                    "step": 1,
+                    "barColor": "transparent",
+                    "trackColor": "transparent",
+                    "skinType": "tron",
+                    "skinColor": "#009933",
+                    "rangesEnabled": true,
+                    "rangesTextColorMatching": true,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 17,
+                            "barColor": "#0066FF"
+                        },
+                        {
+                            "min": 17,
+                            "max": 23,
+                            "barColor": "#66FF33"
+                        },
+                        {
+                            "min": 23,
+                            "max": 50,
+                            "barColor": "#FF3300"
+                        }
+                    ],
+                    "row": 3,
+                    "col": 0,
+                    "unit": "°C",
+                    "readOnly": true,
+                    "barWidth": 20,
+                    "trackWidth": 10,
+                    "scaleEnabled": true,
+                    "scaleType": "dots",
+                    "subTextEnabled": true
+                },
+                {
+                    "name": "Grafico Temperatura interna",
+                    "sizeX": 8,
+                    "sizeY": 3,
+                    "item": null,
+                    "type": "chart",
+                    "row": 0,
+                    "col": 3,
+                    "charttype": "interactive",
+                    "service": "influxdb",
+                    "period": "D",
+                    "axis": {
+                        "y": {}
+                    },
+                    "series": [
+                        {
+                            "axis": "y",
+                            "display_line": true,
+                            "display_area": true,
+                            "item": "MotionSensor1_PT_sensorTemperature",
+                            "name": "Temperatura interna"
+                        }
+                    ],
+                    "liveUpdates": {}
+                },
+                {
+                    "name": "Temperatura esterna",
+                    "sizeX": 8,
+                    "sizeY": 3,
+                    "item": null,
+                    "type": "chart",
+                    "row": 3,
+                    "col": 3,
+                    "charttype": "interactive",
+                    "service": "influxdb",
+                    "period": "D",
+                    "axis": {
+                        "y": {}
+                    },
+                    "series": [
+                        {
+                            "axis": "y",
+                            "display_line": true,
+                            "display_area": true,
+                            "item": "currentTemperature",
+                            "name": "Temperatura esterna"
+                        }
+                    ],
+                    "liveUpdates": {}
+                }
+            ],
+            "row": 1,
+            "col": 0,
+            "tile": {
+                "backdrop_iconset": "eclipse-smarthome-classic",
+                "backdrop_icon": "temperature",
+                "iconset": "eclipse-smarthome-classic",
+                "icon": "temperature",
+                "icon_size": "20",
+                "custom_widget_config": {}
+            },
+            "$$hashKey": "object:19"
+        },
+        {
+            "id": "Consumi",
+            "name": "Consumi",
+            "widgets": [
+                {
+                    "name": "Consumo W",
+                    "sizeX": 3,
+                    "sizeY": 3,
+                    "item": "WallPlug1_PT_sensorPower",
+                    "type": "knob",
+                    "floor": 0,
+                    "ceil": 2500,
+                    "step": 1,
+                    "barColor": "#FF0000",
+                    "trackColor": "transparent",
+                    "skinType": "tron",
+                    "skinColor": "#009933",
+                    "rangesEnabled": true,
+                    "rangesTextColorMatching": true,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 200,
+                            "barColor": "#0066FF"
+                        },
+                        {
+                            "min": 201,
+                            "max": 600,
+                            "barColor": "#6666FF"
+                        },
+                        {
+                            "min": 601,
+                            "max": 1500,
+                            "barColor": "#FF99FF"
+                        },
+                        {
+                            "min": 1500,
+                            "max": 2500,
+                            "barColor": "#FF0000"
+                        }
+                    ],
+                    "unit": "W",
+                    "readOnly": true,
+                    "barWidth": 40,
+                    "trackWidth": 10,
+                    "barCap": 10,
+                    "trackCap": 10,
+                    "fontSize": 40,
+                    "scaleEnabled": true,
+                    "scaleType": "dots",
+                    "row": 0,
+                    "col": 0
+                },
+                {
+                    "name": "Grafico consumo",
+                    "sizeX": 8,
+                    "sizeY": 3,
+                    "item": null,
+                    "type": "chart",
+                    "charttype": "interactive",
+                    "service": "influxdb",
+                    "period": "W",
+                    "axis": {
+                        "y": {
+                            "min": null,
+                            "max": null
+                        }
+                    },
+                    "series": [
+                        {
+                            "axis": "y",
+                            "display_line": true,
+                            "display_area": true,
+                            "item": "WallPlug1_PT_sensorPower",
+                            "color": "#00FFFF",
+                            "name": "Watt",
+                            "display_dots": true
+                        }
+                    ],
+                    "liveUpdates": {
+                        "enabled": false
+                    },
+                    "row": 0,
+                    "col": 3
+                },
+                {
+                    "name": "Consumo W",
+                    "sizeX": 3,
+                    "sizeY": 3,
+                    "item": "WallPlug1_PT_meterKwh",
+                    "type": "knob",
+                    "floor": 0,
+                    "ceil": 100,
+                    "step": 1,
+                    "barColor": "#FF0000",
+                    "trackColor": "transparent",
+                    "skinType": "tron",
+                    "skinColor": "#009933",
+                    "rangesEnabled": false,
+                    "rangesTextColorMatching": false,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 200,
+                            "barColor": "#0066FF"
+                        },
+                        {
+                            "min": 201,
+                            "max": 600,
+                            "barColor": "#6666FF"
+                        },
+                        {
+                            "min": 601,
+                            "max": 1500,
+                            "barColor": "#FF99FF"
+                        },
+                        {
+                            "min": 1500,
+                            "max": 2500,
+                            "barColor": "#FF0000"
+                        }
+                    ],
+                    "unit": "KW/h",
+                    "readOnly": true,
+                    "barWidth": 40,
+                    "trackWidth": 10,
+                    "barCap": 10,
+                    "trackCap": 10,
+                    "fontSize": 40,
+                    "scaleEnabled": true,
+                    "scaleType": "dots",
+                    "row": 3,
+                    "col": 0
+                },
+                {
+                    "name": "Grafico potenza KWh",
+                    "sizeX": 8,
+                    "sizeY": 3,
+                    "item": null,
+                    "type": "chart",
+                    "charttype": "interactive",
+                    "service": "influxdb",
+                    "period": "Y",
+                    "axis": {
+                        "y": {
+                            "min": null,
+                            "max": null
+                        }
+                    },
+                    "series": [
+                        {
+                            "axis": "y",
+                            "display_line": true,
+                            "display_area": true,
+                            "item": "WallPlug1_PT_meterKwh",
+                            "color": "#00FFFF",
+                            "name": "KW/h",
+                            "display_dots": true
+                        }
+                    ],
+                    "liveUpdates": {
+                        "enabled": false
+                    },
+                    "row": 3,
+                    "col": 3
+                }
+            ],
+            "row": 2,
+            "col": 0,
+            "tile": {
+                "iconset": "custom-icon",
+                "icon": "energy",
+                "icon_size": "40",
+                "custom_widget_config": {}
+            },
+            "drawer": {},
+            "header": {},
+            "sizeY": 2,
+            "$$hashKey": "object:20"
+        },
+        {
+            "id": "Meteo 1",
+            "name": "Meteo",
+            "widgets": [
+                {
+                    "name": "Previsioni",
+                    "sizeX": 3,
+                    "sizeY": 4,
+                    "type": "template",
+                    "customwidget": "Weather-Forecast-flat_colorful",
+                    "row": 0,
+                    "col": 4,
+                    "nobackground": true,
+                    "config": {},
+                    "dontwrap": false
+                },
+                {
+                    "name": "Data",
+                    "sizeX": 4,
+                    "sizeY": 2,
+                    "type": "template",
+                    "customwidget": "Data corrente",
+                    "row": 1,
+                    "col": 0,
+                    "config": {},
+                    "nobackground": true
+                }
+            ],
+            "row": 0,
+            "col": 0,
+            "tile": {
+                "iconset": "eclipse-smarthome-classic",
+                "icon": "sun_clouds"
+            },
+            "$$hashKey": "object:18"
+        }
+    ],
+    "menucolumns": 2,
+    "settings": {
+        "theme": "translucent",
+        "panel_name": "Benvenuto a casa",
+        "show_header_clock": true
+    },
+    "customwidgets": {
+        "Weather-Forecast-flat_colorful": {
+            "template": "<div ng-init=\"ServerPath='../static/weather-data'; IconSet='flat_colorful'\">\n<div ng-init=\"daysnames={'Sunday': 'Domenica', 'Monday': 'Lunedì','Tuesday': 'Martedì', 'Wednesday': 'Mercoledì', 'Thursday': 'Giovedì', 'Friday': 'Venerdì', 'Saturday': 'Sabato'}\">\n  \n<!--<div ng-init=\"statesnames={'UNDEF': 'unknown', 'Clear': 'clear', 'Partly Cloudy': 'partly-cloudy-day', 'Mostly Cloudy': 'mostly-cloudy', 'Scattered Clouds': 'scattered-showers', 'Overcast': 'cloudy', \n              'Chance of Rain': 'rain-and-sleet', 'Rain': 'rain', 'Drizzle': 'rain', 'Fog': 'fog'}\"> -->\n  \n<!--<div ng-init=\"statesdescr={'UNDEF': 'unknown', 'Clear': 'Sereno', 'Partly Cloudy': 'Parzialmente nuvoloso', 'Mostly Cloudy': 'Prevalentemente nuvoloso', 'Scattered Clouds': 'Nubi sparse', \n              'Overcast': 'Nuvoloso', 'Chance of Rain': 'Probabili pioggie', 'Rain': 'Pioggia', 'Drizzle': 'Piogerella', 'Fog': 'Nebbia'}\"> -->\n  \n<link rel=\"stylesheet\" type=\"text/css\" href=\"{{ServerPath}}/layouts/meteo.css\" />\n</div>\n\n<table id=\"weather-table\">\n\t<tr>\n\t\t<td rowspan=\"2\"><img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('currentCondition').replace(' ','-') | lowercase }}.png\"/></td>\n\t\t<td id=\"weather-temp\">{{'%.1f' | sprintf:itemValue('currentTemperature')}}</td>\n\t\t<td id=\"weather-temp-sign\">°C</td>\n\t</tr>\n\t<tr>\n\t\t<td colspan=\"2\">\n\t\t\t<table id=\"weather-table-details\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td>Umidità:</td>\n\t\t\t\t\t<td>{{'%.0f' | sprintf:itemValue('currentRelativeHumidity')}} %</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td>Pressione:&nbsp</td>\n\t\t\t\t\t<td>{{'%.0f' | sprintf:itemValue('currentPressure')}} mBar</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n</table>\n<p/> \n<table id=\"weather-forecast-table\">\n\t<tr>\n\t\t<td/>\n\t\t<td>Oggi</td>\n    <td>{{daysnames[(itemValue('forecastTimeTomorrow')| date:'EEEE')]}}</td>\n    <td>{{daysnames[(itemValue('forecastTime2') | date:'EEEE')]}}</td>\n    <td>{{daysnames[(itemValue('forecastTime3') | date:'EEEE')]}}</td>\n    <td>{{daysnames[(itemValue('forecastTime4') | date:'EEEE')]}}</td>\n\t</tr>\n\t<tr>\n\t\t<td/>\n\t\t<td>\n\t\t\t<img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('currentCondition').replace(' ','-') | lowercase }}.png\"/>\n      <p>{{itemValue('currentCondition')}}</p>\n\t\t</td>\n\t\t<td>\n\t\t\t<img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('forecastTomorrowCondition').replace(' ','-') | lowercase }}.png\"/>\n      <p>{{itemValue('forecastTomorrowCondition')}}</p>\n\t\t</td>\n\t\t<td>\n\t\t\t<img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('forecast2Condition').replace(' ','-') | lowercase }}.png\"/>\n      <p>{{itemValue('forecast2Condition')}}</p>\n\t\t</td>\n    <td>\n\t\t\t<img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('forecast3Condition').replace(' ','-') | lowercase }}.png\"/>\n      <p>{{itemValue('forecast3Condition')}}</p>\n\t\t</td>\n    <td>\n\t\t\t<img id=\"weather-icon\" src=\"{{ServerPath}}/images/{{IconSet}}/{{itemValue('forecast4Condition').replace(' ','-') | lowercase }}.png\"/>\n      <p>{{itemValue('forecast4Condition')}}</p>\n\t\t</td>\n\t</tr>\n\t<tr>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">Max</td>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">{{'%.0f' | sprintf:itemValue('forecastTodayMaxTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">{{'%.0f' | sprintf:itemValue('forecastTomorrowMaxTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">{{'%.0f' | sprintf:itemValue('forecastDay2MaxTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">{{'%.0f' | sprintf:itemValue('forecastDay3MaxTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:red\">{{'%.0f' | sprintf:itemValue('forecastDay4MaxTemperature')}} °C</td>\n\t</tr>\n\t<tr>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">Min</td>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">{{'%.0f' | sprintf:itemValue('forecastTodayMinTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">{{'%.0f' | sprintf:itemValue('forecastTomorrowMinTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">{{'%.0f' | sprintf:itemValue('forecastDay2MinTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">{{'%.0f' | sprintf:itemValue('forecastDay3MinTemperature')}} °C</td>\n\t\t<td class=\"col-xs-4\" style=\"color:#0db9f0\">{{'%.0f' | sprintf:itemValue('forecastDay4MinTemperature')}} °C</td>\n\t</tr> \n</table>",
+            "name": "Weather Forecast FLAT-COLORFUL"
+        },
+        "Data corrente": {
+            "template": "<div ng-init=\"daysnames={'Sunday': 'Domenica', 'Monday': 'Lunedì', 'Tuesday': 'Martedì', 'Wednesday': 'Mercoledì', 'Thursday': 'Giovedì', 'Friday': 'Venerdì', 'Saturday': 'Sabato'}\">\n <div ng-init=\"monthsnames={'January': 'gennaio', 'February': 'febbraio', 'March': 'marzo', 'April': 'aprile', 'May': 'maggio', 'June': 'giugno', 'July': 'luglio', 'August': 'agosto', 'September': 'settembre', 'October': 'ottobre', 'November': 'novembre', 'December': 'dicembre'}\">\n  <link rel=\"stylesheet\" type=\"text/css\" href=\"../static/other/layouts/date.css\" />\n</div>\n \n\t\n<text id=\"textdate\">\n\t<!--\t<tr>\n\t<td>Oggi è: </td><br/> \n\t</tr>-->\n  <tr>\n    <td><b>{{daysnames[(itemValue('Date') | date:'EEEE')]}}</b></td>\n    <td><b>{{itemValue('Date')| date:'dd'}}</b></td>\n    <td>{{monthsnames[(itemValue('Date') | date:'MMMM')]}}</td>\n    <td>{{itemValue('Date')| date:'y'}}</td><br/>\n\t</tr>\n</text>\n<td></td><br/>  \n<text id=\"texthour\">\n<!--\t<tr>\n\t\t<td>Sono le ore: </td><br/>\n    <tr> -->\n    <td><b>{{itemValue('Date')| date:'HH'}}</b></td>\n    <td>{{itemValue('Date')| date:':mm'}}</td>\n\t</tr>\n\t</tr>\n\n\t"
+        }
+    }
+}

@@ -1,0 +1,4 @@
+daikin:ac_unit:Salotto [ host="192.168.178.56" ]
+daikin:ac_unit:Alice [ host="192.168.178.57" ]
+daikin:ac_unit:Studio [ host="192.168.178.67" ]
+daikin:ac_unit:Letto [ host="192.168.178.69" ]

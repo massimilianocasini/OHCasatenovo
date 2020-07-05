@@ -1,0 +1,9 @@
+//import java.lang.Math
+rule "Conversione a positivo"
+
+when
+    Item M_AC_Power_POST received update
+then
+  val abs = Math::abs((M_AC_Power_POST.state as Number).floatValue)
+   M_AC_Power_POST_abs.postUpdate(abs)
+end

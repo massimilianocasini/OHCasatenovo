@@ -1,0 +1,9 @@
+rule "Dash button pressed"
+    when
+        Channel "amazondashbutton:dashbutton:34-d2-70-af-18-10:press" triggered
+    then
+    if(FGS222_18_switch_binary1.state==OFF)
+        FGS222_18_switch_binary1.sendCommand(ON)
+    else
+        FGS222_18_switch_binary1.sendCommand(OFF)
+end

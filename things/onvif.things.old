@@ -1,0 +1,17 @@
+// Thing ipcamera:ONVIF:001
+// [
+//     IPADDRESS="192.168.178.72",
+//     PASSWORD="admin",
+//     USERNAME="admin",
+//     ONVIF_PORT=8080,
+//     PORT=8080,
+//     SERVER_PORT=50002,
+//     //POLL_CAMERA_MS=2000,
+//     ONVIF_MEDIA_PROFILE=0,
+//     IMAGE_UPDATE_EVENTS=1,
+//     UPDATE_IMAGE=false,
+//     //FFMPEG_INPUT="rtsp://192.168.178.72:6554/stream_0",
+//     FFMPEG_OUTPUT="/tmp/camera/",
+//     FFMPEG_LOCATION="/usr/bin/ffmpeg",
+//     IP_WHITELIST="(127.0.0.1) (192.168.178.2)"
+// ]

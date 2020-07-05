@@ -1,0 +1,13 @@
+rule "1Wire conversione da stringa a numero"
+when
+    Item Owcm3home changed
+/*then
+    var TempIntStr = owcm3home.state.toString
+    val TempFloat = Float::parseFloat(TempIntStr)
+    
+        owcm3home_int.postUpdate(TempFloat)*/
+then
+val stateAsString = Owcm3home.state.toString
+    Owcm3homeNumber.postUpdate(stateAsString)
+//    HVAC_LR_Temp.postUpdate(stateAsString)
+end

@@ -1,0 +1,4 @@
+OFF=NoMotion
+ON=MOTION
+-=No input
+NULL=No input

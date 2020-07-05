@@ -1,0 +1,121 @@
+body {
+	font-size: 14px;
+	font-family: sans-serif;
+	color: white;
+}
+
+table {
+	border-spacing: 10px;
+	empty-cells: show;
+	border: 0px;
+	padding: 0px;
+	width: 1px;
+}
+
+#weather-table, #weather-location-name{
+	padding-top: 10px;
+	padding-left: 0px;
+	empty-cells: show;
+	width: 100%;
+}
+#space-table {
+	border-spacing: 10px;
+	empty-cells: show;
+	border: 0px;
+	padding: 20px;
+	width: 1px;
+}
+#weather-icon {
+	width: 100px;
+	height: 100px;
+	padding-right: 0px;
+	padding-left: 0px
+}
+#system-icon {
+	width: 30px;
+	height: 30px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#weather-temp {
+	text-align: center;
+	text-align: center;
+	padding-left: 0px;
+	font-size: 25px;
+	width: 1px;
+	color: rgb(214, 228, 26);
+}
+
+#weather-temp-sign {
+	vertical-align: center;
+	text-align: left;
+	padding-left: 0px;
+	border: 10px;
+	font-size: 25px;
+	color: rgb(214, 228, 26);
+}
+
+#weather-humid {
+	vertical-align: center;
+	text-align: center;
+	padding-left: 0px;
+	font-size: 25px;
+	border: 10px;
+	color: rgb(129, 136, 192);
+}
+
+#weather-humid-sign {
+	vertical-align: center;
+	text-align: left;
+	padding-left: 0px;
+	font-size: 25px;
+	border: 10px;
+	color: rgb(129, 136, 192);
+}
+
+#weather-temp-forecast {
+	text-align: center;
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+	font-size: 25px;
+	width: 1px;
+	color: rgb(214, 228, 26);
+}
+
+#weather-table-details {
+	vertical-align: center;
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+	font-size: 25px;
+	color: rgb(129, 136, 192);
+}
+
+/* #weather-table-details td {
+	white-space: nowrap;
+} */
+
+#weather-forecast-table img {
+	width: 110px;
+	height:90px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#weather-forecast-table td {
+  text-align: center;
+  vertical-align: text-top;
+  font-size: 13px;
+}
+
+#weather-forecast-table .temp-max {
+	font-size: 18px;
+	color: red;
+}
+
+#weather-forecast-table .temp-min {
+	font-size: 18px;
+	color: white;
+}

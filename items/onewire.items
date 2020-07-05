@@ -1,0 +1,3 @@
+//String Owcm3home "CM3-Home Temperatura [%s °C]" <temperature>  (gAll, gCM3) {channel="exec:command:onewiretemp1:output"} 
+//Number Owcm3homeNumber "CM3-Home Temperatura [%.1f °C]" <temperature>  (gAll, gCM3, gTemperatura, gInfluxdb, gAvgTemperatura) ["CurrentTemperature","LRTemp"] 
+Number Owcm3home "CM3-Home Temperatura [%.1f °C]" <temperature> (gAll, gCM3, gTemperatura, gInfluxdb) ["CurrentTemperature","LRTemp"] { channel="onewiregpio:sensor:Owcm3home:temperature" }

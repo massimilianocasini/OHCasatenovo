@@ -1,0 +1,77 @@
+Group gFVI 
+Group gFVM
+Number I_AC_Current  "I-AC Total Current [%.0f A]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Current:number"}
+//Number I_AC_CurrentA_    "I-AC Phase A Current"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_CurrentA:number"}
+Number I_AC_Current_SF   "I-AC Current scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Current_SF:number"}
+Number I_AC_Current_POST "I-AC Current POST (Produzione) [%.0f A]" (gFVI, gInfluxdb)
+
+Number I_AC_VoltageAB "I-AC Voltage Phase AN [%.0f V]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VoltageAB:number"}
+Number I_AC_Voltage_SF (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Voltage_SF:number"}
+Number I_AC_VoltageAB_POST "Tensione [%.0f V]" <energy> (gFVI, gInfluxdb) ["iss:type:DevGenericSensor","iss:unit:Volt","iss:room:Fotovoltaico"]
+
+//Number I_AC_VoltageAN_   "I-AC Voltage Phase A to N [JS(divide.js):%s 10V]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VoltageAN:number"}
+Number I_AC_Power   "I-AC Power (Prodotta) [%.0f W]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Power:number"}
+Number I_AC_Power_SF   "I-AC Power SF"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Power_SF:number"}
+Number I_AC_Power_POST "Produzione [%.1f kW]" <solarplant> (gFVI, gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"] 
+
+Number I_AC_Frequency   "I-AC Frequency [JS(divide.js):%s 1000H]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Frequency:number"}
+//Number I_AC_Frequency_SF_   "I-AC Frequency Scale factor "  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Frequency_SF:number"}
+
+Number I_AC_VA   "I-AC Apparent Power [JS(divide.js):%s 100VA]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VA:number"}
+//Number I_AC_VA_SF_   "I-AC Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VA_SF:number"}
+Number I_AC_VAR   "I-Reactive Power [%.1f VAR]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VAR:number"}
+//Number I_AC_VAR_SF_   "I-Reactive Power Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VAR_SF:number"}
+
+Number I_AC_PF   "I-Power Factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_PF:number"}
+//Number I_AC_PF_SF_  "I-Power Factor Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_PF_SF:number"}
+
+Number I_AC_Energy_WH   "I-AC Lifetime Energy production [%.0f Wh]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Energy_WH:number"}
+Number I_AC_Energy_WH_SF   "I-C Lifetime Energy production Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Energy_WH_SF:number"}
+
+Number I_DC_Current   "I-DC Current [%.1f A]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Current:number"}
+//Number I_DC_Current_SF_   "I-DC Current Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Current_SF:number"}
+
+//Number I_DC_Voltage_   "I-DC Voltage [JS(divide.js):%s 10V] "  (gFVI, gInfluxdb) {channel="modbus:data:localhostTCP:inverter:I_DC_Voltage:number"}
+Number I_DC_Voltage   "I-DC Voltage [REGEX(s/^6553.$/0/g):%s] "  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Voltage:number"}
+Number I_DC_Voltage_SF   "I-DC Voltage Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Voltage_SF:number"}
+Number I_DC_Voltage_POST "I-DC Voltage POST [%.0f V]" (gFVI, gInfluxdb)
+
+Number I_DC_Power   "I-DC Power [JS(divide.js):%s 100W]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Power:number"}
+Number I_DC_Power_SF   "I-DC Power Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_DC_Power_SF:number"}
+//Number I_Temp_Sink   "I-Heat Sink Temperature [JS(divide.js):%s 100C]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Temp_Sink:number"}
+//Number I_Temp_SF_   "I-Heat Sink Temperature Scale factor"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Temp_SF:number"}
+//Number I_Status   "I-Operating State [MAP(solaredge.map):%s]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Status:number"}
+
+
+//String C_Option_   "M-Export + Import, Production, consumption "  (gFVM) {channel="modbus:data:localhostTCP:commonBlock:C_Option:string"}
+
+Number M_AC_Current   "M-AC Current (Consumo attuale) [%.0f A]"  (gFVM) {channel="modbus:data:localhostTCP:current:M_AC_Current:number"}
+//Number M_AC_Current_A_   "M-Phase A AC Current [JS(divide.js):%s 10A]"  (gFVM) {channel="modbus:data:localhostTCP:current:M_AC_Current_A:number"}
+//Number M_AC_Current_B_   "M-Phase B AC Current [JS(divide.js):%s 10A]"  (gFVM) {channel="modbus:data:localhostTCP:current:M_AC_Current_B:number"}
+//Number M_AC_Current_C_   "M-Phase C AC Current [JS(divide.js):%s 10A]"  (gFVM) {channel="modbus:data:localhostTCP:current:M_AC_Current_C:number"}
+Number M_AC_Current_SF   "M-AC Current Scale Factor"  (gFVM) {channel="modbus:data:localhostTCP:current:M_AC_Current_SF:number"}
+Number M_AC_Current_POST "M-AC Current POST (Consumo attuale) [%.1f A]" (gFVM, gInfluxdb) //Prelevata da rete?
+
+Number M_AC_Freq   "M-AC Frequency [JS(divide.js):%s 100H]" (gFVM)  {channel="modbus:data:localhostTCP:frequency:M_AC_Freq:number"}
+//Number M_AC_Freq_SF_   "M-AC Frequency Scale Factor"  (gFVM)  {channel="modbus:data:localhostTCP:frequency:M_AC_Freq_SF:number"}
+
+Number M_AC_Power   "M-Total Power [%.0f W]" (gFVM)  {channel="modbus:data:localhostTCP:realPower:M_AC_Power:number"}
+Number M_AC_Power_SF   "M-Total Power SF" (gFVM)   {channel="modbus:data:localhostTCP:realPower:M_AC_Power_SF:number"}
+Number M_AC_Power_POST_abs "M-Total Power abs [%.2f kW]" <softener> (gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"] 
+Number M_AC_Power_POST "M-Total Power [%.2f kW]" <softener> (gFVM, gInfluxdb)
+
+Number M_AC_VA   "M-Total AC Apparent Power (sum of active phases) [%.1f VA] " (gFVM)   {channel="modbus:data:localhostTCP:apparentPower:M_AC_VA:number"}
+
+Number M_AC_VA_R   "M-Total AC Reactive Power (sum of active phases) [%.1f VAR] " (gFVM)   {channel="modbus:data:localhostTCP:reactivePower:M_AC_VAR:number"}
+
+Number M_AC_PF   "M-Average Power Factor (average of active phases) [JS(divide.js):%s 100P] " (gFVM)   {channel="modbus:data:localhostTCP:powerFactor:M_AC_PF:number"}
+//Number M_AC_PF_A_   "M-Phase A Power Factor [JS(divide.js):%s 100P] " (gFVM)   {channel="modbus:data:localhostTCP:powerFactor:M_AC_PF_A:number"}
+//Number M_AC_PF_B_   "M-Phase B Power Factor [JS(divide.js):%s 100P] " (gFVM)   {channel="modbus:data:localhostTCP:powerFactor:M_AC_PF_B:number"}
+//Number M_AC_PF_C_   "M-Phase C Power Factor [JS(divide.js):%s 100P]" (gFVM)   {channel="modbus:data:localhostTCP:powerFactor:M_AC_PF_C:number"}
+//Number M_AC_PF_SF_   "M-AC Power Factor Scale Factor [%.2f ] " (gFVM)   {channel="modbus:data:localhostTCP:powerFactor:M_AC_PF_SF:number"}
+
+// Number M_Exported_   "M-Total Exported Real Energy [%.0f Wh] " (gFVM, gInfluxdb)   {channel="modbus:data:localhostTCP:realenergy:M_Exported:number"}
+// Number M_Imported_   "M-Total Imported Real Energy [%.0f Wh] " (gFVM, gInfluxdb)   {channel="modbus:data:localhostTCP:realenergy:M_Imported:number"}
+Number AC_Power_USED "Assorbita [%.1f kW]" <fan> (gFVM, gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"]
+
+Number I_Status "[MAP(solaredge.map):%s]" <solarplant> (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Status:number"}

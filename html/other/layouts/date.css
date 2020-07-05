@@ -1,0 +1,18 @@
+body {
+	font-size: 14px;
+	color: rgb(255, 255, 255);
+}
+
+#textdate {
+	font-size: 24px;
+	font-family: Comic Sans MS;
+	text-align: center;
+	color: rgb(218, 8, 8);
+	}
+
+#texthour {
+		font-size: 50px;
+		font-family: Comic Sans MS;
+		text-align: center;
+		color: rgb(51, 158, 9);
+		}

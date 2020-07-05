@@ -1,0 +1,24 @@
+
+// Image ONVIF1Image { channel="ipcamera:ONVIF:001:image" }
+// Switch ONVIF1UpdateImage "Get new picture" { channel="ipcamera:ONVIF:001:updateImageNow" }
+// Switch ONVIF1CreateGif "Create animated GIF" { channel="ipcamera:ONVIF:001:updateGif" }
+// Number ONVIF1Direction "Camera Direction"
+// Dimmer ONVIF1Pan "Pan [%d] left/right" { channel="ipcamera:ONVIF:001:pan" }
+// Dimmer ONVIF1Tilt "Tilt [%d] up/down" { channel="ipcamera:ONVIF:001:tilt" }
+// Dimmer ONVIF1Zoom "Zoom [%d] in/out" { channel="ipcamera:ONVIF:001:zoom" }
+
+// // Switch ONVIF1EnableMotion "MotionAlarm on/off" { channel="ipcamera:ONVIF:001:enableMotionAlarm" }
+// // Switch ONVIF1MotionAlarm "Motion detected" { channel="ipcamera:ONVIF:001:motionAlarm" }
+// // Switch ONVIF1EnableAudioAlarm "AudioAlarm on/off" { channel="ipcamera:ONVIF:001:enableAudioAlarm" }
+// // Switch ONVIF1AudioAlarm "Audio detected" { channel="ipcamera:ONVIF:001:audioAlarm" }
+// // Dimmer ONVIF1AudioThreshold "Audio Threshold [%d]" { channel="ipcamera:ONVIF:001:thresholdAudioAlarm" }
+// // Dimmer ONVIF1LED "IR LED [%d]" { channel="ipcamera:ONVIF:001:enableLED" }
+// // Switch ONVIF1AutoLED "Auto IR LED" { channel="ipcamera:ONVIF:001:autoLED" }
+// // String ONVIF1TextOverlay "Text to overlay" { channel="ipcamera:ONVIF:001:textOverlay" }
+// // String ONVIF1APIAccess "Access the API" { channel="ipcamera:ONVIF:001:apiAccess" }
+
+// String ONVIF1StreamUrl "Mjpeg Stream" { channel="ipcamera:ONVIF:001:streamUrl" }
+// String ONVIF1HlsStreamUrl "HLS Stream" { channel="ipcamera:ONVIF:001:hlsUrl" }
+// String ONVIF1RTSPStreamUrl "RTSP Stream" { channel="ipcamera:ONVIF:001:rtspUrl" }
+// String ONVIF1ImageURL "Image URL" { channel="ipcamera:ONVIF:001:imageUrl" }
+// DateTime ONVIF1LastMotionTime "Time motion was last detected [%1$ta %1$tR]"

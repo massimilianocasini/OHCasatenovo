@@ -1,0 +1,3 @@
+Switch GoogleIP "Device" <qualityofservice> { channel="network:pingdevice:GoogleIP:online"}
+Number:Time GoogleIPlt "8.8.8.8" <qualityofservice> (gInfluxdb) { channel="network:pingdevice:GoogleIP:latency" }
+DateTime GoogleIPls "LastSeen [%1$tH:%1$tM:%1$tS]" <time> {channel="network:pingdevice:GoogleIP:lastseen"}  

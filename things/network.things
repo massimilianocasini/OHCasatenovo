@@ -1,0 +1,1 @@
+network:pingdevice:GoogleIP [ hostname="8.8.8.8", retry=1, timeout=1000, refreshInterval=30000 ]

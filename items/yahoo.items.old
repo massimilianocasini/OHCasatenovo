@@ -1,0 +1,35 @@
+Number   Temperatura_esterna   "Temperatura esterna [%.2f °C]" <temperature> (gWeather)  {weather="locationId=casa, type=temperature, property=current"}
+Number   Umidita_esterna      "Umidità esterna [%d %%]"  <humidity>  (gWeather)    {weather="locationId=casa, type=atmosphere, property=humidity"}
+
+// condition
+String   Condition        "Condizione [MAP(it.map):%s]"  <sun_clouds>   (gWeather)  {weather="locationId=casa, type=condition, property=text"}
+String   Condition_ID     "Condition id [%s]"   {weather="locationId=casa, type=condition, property=id"}
+DateTime ObservationTime  "Observation time [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"  (gWeather) {weather="locationId=casa, type=condition, property=observationTime"}
+DateTime LastUpdate       "Last update [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"   (gWeather)     {weather="locationId=casa, type=condition, property=lastUpdate"}
+String   CommonId         "Common id [%s]"  {weather="locationId=casa, type=condition, property=commonId"}
+
+// temperature
+Number   Temperature      "Temperature [%.2f °C]"   <temperature>  (gWeather)  {weather="locationId=casa, type=temperature, property=current"}
+Number   Temp_Feel        "Temperature feel [%.2f °C]"<temperature> (gWeather) {weather="locationId=casa, type=temperature, property=feel"}
+Number   Temp_Dewpoint    "Dewpoint [%.2f °C]"  <temperature>   (gWeather)   {weather="locationId=casa, type=temperature, property=dewpoint"}
+
+// min and max values only available in forecasts
+Number   Temp_Min         "Temperature min [%.2f °C]" <temperature> (gWeather)  {weather="locationId=casa, type=temperature, property=min"}
+Number   Temp_Max         "Temperature max [%.2f °C]" <temperature> (gWeather)  {weather="locationId=casa, type=temperature, property=max"}
+String   Temp_MinMax      "Min/Max [%s °C]" <temperature>  (gWeather)   {weather="locationId=casa, type=temperature, property=minMax"}
+
+// wind
+Number   Wind_Speed           "Windspeed [%.2f km/h]"    {weather="locationId=casa, type=wind, property=speed"}
+Number   Wind_Speed_Beaufort  "Windspeed Beaufort [%d]"  {weather="locationId=casa, type=wind, property=speed, unit=beaufort"}
+Number   Wind_Speed_Knots     "Windspeed [%.2f kn]"      {weather="locationId=casa, type=wind, property=speed, unit=knots"}
+Number   Wind_Speed_Mps       "Windspeed [%.2f mps]"     {weather="locationId=casa, type=wind, property=speed, unit=mps"}
+Number   Wind_Speed_Mph       "Windspeed [%.2f mph]"     {weather="locationId=casa, type=wind, property=speed, unit=mph"}
+String	 Wind_Direction       "Wind direction [%s]"      {weather="locationId=casa, type=wind, property=direction"}
+Number   Wind_Degree          "Wind degree [%.0f °]"     {weather="locationId=casa, type=wind, property=degree"}
+Number   Wind_Gust            "Wind gust [%.2f km/h]"    {weather="locationId=casa, type=wind, property=gust"}
+Number   Wind_Gust_Beaufort   "Wind gust Beaufort [%d]"  {weather="locationId=casa, type=wind, property=gust, unit=beaufort"}
+Number   Wind_Gust_Knots      "Wind gust [%.2f kn]"      {weather="locationId=casa, type=wind, property=gust, unit=knots"}
+Number   Wind_Gust_Mps        "Wind gust [%.2f mps]"     {weather="locationId=casa, type=wind, property=gust, unit=mps"}
+Number   Wind_Gust_Mph        "Wind gust [%.2f mph]"     {weather="locationId=casa, type=wind, property=gust, unit=mph"}
+Number   Wind_Chill           "Wind chill [%.2f °C]"     {weather="locationId=casa, type=wind, property=chill"}
+Number   Wind_Chill_F         "Wind chill [%.2f °F]"     {weather="locationId=casa, type=wind, property=chill, unit=fahrenheit"}

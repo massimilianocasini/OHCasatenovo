@@ -1,0 +1,109 @@
+var Number stato = 0
+var Number ciclo = 0
+rule "Chiudi tenda in caso di pioggia" 
+when
+    Item currentCondition received update
+ then
+     if((currentCondition.state == "Rain") && (BlindsControl_Pergotenda_Giardino_ZW21.state < 95))
+     {
+        BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(DOWN)
+        sendTelegram("bot1", "Pergotenda chiusa per pioggia!")
+        logInfo("Pergotenda","Pergotenda chiusa per pioggia")
+     }
+     if((currentCondition.state == "Thunderstorm") && (BlindsControl_Pergotenda_Giardino_ZW21.state < 95))
+     {
+        BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(DOWN)
+        sendTelegram("bot1", "Pergotenda chiusa per temporale!")
+        logInfo("Pergotenda","Pergotenda chiusa per temporale")
+     }
+     if((currentCondition.state == "Light Rain") && (BlindsControl_Pergotenda_Giardino_ZW21.state < 95))
+     {
+        BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(DOWN)
+        sendTelegram("bot1", "Pergotenda chiusa per leggera pioggia!")
+        logInfo("Pergotenda", "Pergotenda chiusa per leggera pioggia")
+     }
+     if((currentCondition.state == "Light Thunderstorms and Rain") && (BlindsControl_Pergotenda_Giardino_ZW21.state < 95))
+     {
+        BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(DOWN)
+        sendTelegram("bot1", "Pergotenda chiusa per leggero temporale e pioggia!")
+        logInfo("Pergotenda", "Pergotenda chiusa per leggero temporale e pioggia!")
+      }
+      if((currentCondition.state == "Partly Cloudy") && (BlindsControl_Pergotenda_Giardino_ZW21.state < 95))
+     {
+        BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(DOWN)
+        sendTelegram("bot1", "Pergotenda chiusa per parzialmente nuvoloso!")
+        logInfo("Pergotenda", "Pergotenda chiusa per parzialmente nuvoloso!")
+      }
+ end
+
+
+rule "Chiude tenda di sera"
+
+when
+    Item SunElevation changed
+then
+    if((now.getHourOfDay > 17) && (now.getHourOfDay < 24) && (SunElevation.state < 0) && (stato == 0))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(20)
+       stato = 1
+       sendTelegram("bot1", "Pergotenda a 20")
+       logInfo("Pergotenda a 20")
+    }  
+    if((now.getHourOfDay >= 8) && (now.getHourOfDay < 17) && (SunElevation.state > 20) && (stato == 1))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(100)
+       stato = 2
+       sendTelegram("bot1", "Pergotenda a 100")
+       logInfo("Pergotenda a 100")
+    }
+      if((now.getHourOfDay) > 17 && (now.getHourOfDay) < 24 && (SunElevation.state > 30) && (SunElevation.state < 40) && (stato == 2))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(70)
+       stato = 3
+       sendTelegram("bot1", "Pergotenda a 80")
+       logInfo("Pergotenda a 80")
+    }
+     if((now.getHourOfDay) > 17 && (now.getHourOfDay < 24) && (SunElevation.state > 20) && (SunElevation.state < 30) && (stato == 3))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(70)
+       stato = 4
+       sendTelegram("bot1", "Pergotenda a 70")
+       logInfo("Pergotenda a 70")
+    }
+    if((now.getHourOfDay > 17) && (now.getHourOfDay < 24) && (SunElevation.state > 10) && (SunElevation.state < 20) && (stato == 4))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(60)
+       stato = 5
+       sendTelegram("bot1", "Pergotenda a 60")
+       logInfo("Pergotenda a 60")
+    } 
+    if((now.getHourOfDay > 17) && (now.getHourOfDay < 24) && (SunElevation.state > 0) && (SunElevation.state < 10) && (stato == 5))
+    {
+       BlindsControl_Pergotenda_Giardino_ZW21.sendCommand(50)
+       stato = 0
+       sendTelegram("bot1", "Pergotenda a 50")
+       logInfo("Pergotenda a 50")
+    }  
+    
+end
+
+
+// rule "Flurlicht nachts einschalten"
+
+// when
+
+//     Item itmFIBmotion2 changed from 0 to 1
+
+// then
+
+//     var Timer timerFlur = null
+//     var Integer timerFlurTimeout = 5
+//     var CurrentHour = now.getHourOfDay
+//     var CurrentMinute = now.getMinuteOfHour
+
+//     // Prüfung ob die aktuelle Uhrzeit nicht zwischen 23 und 5 Uhr liegt, dann abbrechen
+//     if(CurrentHour <5 && (CurrentHour =23 && CurrentMinute >=1))
+//     {
+//         logInfo("RuleFlurNight", "Die Regel wird abgebrochen, es ist nicht Nacht.")
+//         return (false)
+//     }

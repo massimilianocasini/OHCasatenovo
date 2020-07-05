@@ -1,0 +1,6 @@
+//Astro 
+DateTime Sunrise_Time "Il Sole sorge alle [%1$tH:%1$tM]"    <sunrise>	{channel="astro:sun:local:rise#start"}
+DateTime Sunset_Time  "Il Sole tramonta alle [%1$tH:%1$tM]"   <sunset>	{channel="astro:sun:local:set#start"}
+DateTime Sunrise_Time_75 "Il Sole sorge alle [%1$tH:%1$tM]"      <sunrise>	{channel="astro:sun:local75:rise#start"}
+DateTime Sunset_Time_75  "Il Sole tramonta alle [%1$tH:%1$tM]"  <sunset>	{channel="astro:sun:local75:set#start"}
+Number  SunElevation "Elevazione"  <sun> {channel="astro:sun:local75:position#elevation"}

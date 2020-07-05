@@ -1,0 +1,2 @@
+//solaredge:generic:se5000            [ tokenOrApiKey="I27XHPNSU0EQAXKA1HTCG14GZVT166KA", solarId="1020598", meterInstalled=true, usePrivateApi=false, liveDataPollingInterval=10, aggregateDataPollingInterval=30 ]
+solaredge:generic:se5000private     [ tokenOrApiKey="bWFzc2ltaWxpYW5vLmNhc2luaUBnbWFpbC5jb206MzY5OTYyMjY1MzUxMjpiZGU2MjFmMjhhOTg4MDI1MzJmZTRiNjc4NmU2MzYyYw", solarId="1020598", meterInstalled=true, usePrivateApi=true, liveDataPollingInterval=15, aggregateDataPollingInterval=30 ]

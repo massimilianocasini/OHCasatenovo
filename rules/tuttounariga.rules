@@ -1,0 +1,10 @@
+rule "Mette tutto su una riga"
+        when
+              Item  MeterVoltage_R220P_QE_ZW11 changed or
+              Item  MeterWatts_R220P_QE_ZW11 changed 
+        then
+               val voltage = MeterVoltage_R220P_QE_ZW11.state
+               val potenza = MeterWatts_R220P_QE_ZW11.state
+               val stato_ant = Prodino0_in1.state
+               WPS104_tensione_potenza.postUpdate(stato_ant + " " + voltage + " V" + " - " + potenza + " W")
+end
