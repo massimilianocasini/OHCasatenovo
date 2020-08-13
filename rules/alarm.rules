@@ -41,11 +41,11 @@ when
 then
     if(Prodino0_in1.state == "INSERITO") {
        sendTelegram("bot1", "Antifurto INSerito!") 
-     mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Antifurto INSERITO")
+    // mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Antifurto INSERITO")
     }
      if(Prodino0_in1.state == "DISINSERITO") {
        sendTelegram("bot1", "Antifurto DIsInserito!")
-     mailActions.sendMail("myemail@gmail.com","Antifurto", "Antifurto DISNSERITO")
+     // mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Antifurto DISINSERITO")
     }
 end
 

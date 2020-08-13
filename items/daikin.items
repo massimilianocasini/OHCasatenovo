@@ -21,6 +21,7 @@ String DaikinACUnit_Fan_Movement_Studio "Swing" <fan> (gAll, gCond, gCondMov, gC
 Number:Temperature DaikinACUnit_IndoorTemperature_Studio  "Temp. Interna" <temperature> (gAll, gCond, gCondTInt, gInfluxdb, gCondStudio)  { channel="daikin:ac_unit:Studio:indoortemp" }
 Number:Temperature DaikinACUnit_OutdoorTemperature_Studio "Temp. Esterna" <temperature> (gAll, gCond,  gCondTExt, gInfluxdb, gCondStudio)  { channel="daikin:ac_unit:Studio:outdoortemp" }
 Number DaikinACUnit_CompressorFrequency_Studio "Frequenza compressore" (gAll, gCond, gCondStudio, gInfluxdb) { channel="daikin:ac_unit:Studio:cmpfrequency"}
+//Number DaikinACUnit_SpecialMode_Studio "Modo speciale" (gAll, gCond, gCondStudio) { channel="daikin:ac_unit:Studio:specialmode"}
 
 Switch DaikinACUnit_Power_Salotto "ON/OFF" <switch> (gAll, gCond, gORCondSwitch, gCondSalotto) { channel="daikin:ac_unit:Salotto:power" }
 Number:Temperature DaikinACUnit_SetPoint_Salotto "SetPoint" <temperature> (gAll, gCond, gCondSet, gCondSalotto, gInfluxdb)  { channel="daikin:ac_unit:Salotto:settemp" }

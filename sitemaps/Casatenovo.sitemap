@@ -67,7 +67,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Default item=MeterWatts_R220P_QE_ZW11
 		Text label="Base" icon=climate {
 			Switch item=gORCondSwitch  mappings=[ON="ON", OFF="OFF"] 
-			Selection item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
+			Switch item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
 			Switch item=DaikinACUnit_Power_Studio label="Studio Power" mappings=[ON="ON", OFF="OFF"]
 			Setpoint item=DaikinACUnit_SetPoint_Studio label="Studio SP" minValue=16 maxValue=30 step=0.5
 			Switch item=DaikinACUnit_Power_Letto  label="Letto Power" mappings=[ON="ON", OFF="OFF"]
@@ -80,17 +80,18 @@ sitemap Casatenovo label="Benvenuto a Casa"
 
 		Text label="Avanzate" icon=climate {
 			Text label="Studio" icon=climate {
-				Switch item=DaikinACUnit_Power_Studio
+				Switch item=DaikinACUnit_Power_Studio mappings=[ON="ON", OFF="OFF"]
 				Setpoint item=DaikinACUnit_SetPoint_Studio visibility=[DaikinACUnit_Power_Studio==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Studio mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
-				Selection item=DaikinACUnit_Fan_Studio mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Studio==ON]
+			//	Selection item=DaikinACUnit_SpecialMode_Studio mappings=["OFF"="Off", "STREAMER"="Streamer", "ECO"="ECO", "POWERFUL"="PowerFull", "POWERFUL & STREAMER"="PowerFull e Streamer", "ECO & STREAMER"="ECO e Streamer"]
+				Selection item=DaikinACUnit_Fan_Studio mappings=["OFF"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Studio==ON]
 				Selection item=DaikinACUnit_Fan_Movement_Studio mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Studio==ON]
 				Text item=DaikinACUnit_IndoorTemperature_Studio
 				Text item=DaikinACUnit_OutdoorTemperature_Studio
 				Text item=DaikinACUnit_CompressorFrequency_Studio
 				}
 			Text label="Letto" icon=climate {
-				Switch item=DaikinACUnit_Power_Letto
+				Switch item=DaikinACUnit_Power_Letto mappings=[ON="ON", OFF="OFF"]
 				Setpoint item=DaikinACUnit_SetPoint_Letto visibility=[DaikinACUnit_Power_Letto==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Letto mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
 				Selection item=DaikinACUnit_Fan_Letto mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Letto==ON]
@@ -99,7 +100,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Text item=DaikinACUnit_OutdoorTemperature_Letto
 			}
 			Text label="Alice" icon=climate {
-				Switch item=DaikinACUnit_Power_Alice
+				Switch item=DaikinACUnit_Power_Alice mappings=[ON="ON", OFF="OFF"]
 				Setpoint item=DaikinACUnit_SetPoint_Alice visibility=[DaikinACUnit_Power_Alice==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Alice mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
 				Selection item=DaikinACUnit_Fan_Alice mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Alice==ON]
@@ -108,7 +109,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Text item=DaikinACUnit_OutdoorTemperature_Alice
 			}
 			Text label="Salotto" icon=climate {
-				Switch item=DaikinACUnit_Power_Salotto
+				Switch item=DaikinACUnit_Power_Salotto mappings=[ON="ON", OFF="OFF"]
 				Setpoint item=DaikinACUnit_SetPoint_Salotto visibility=[DaikinACUnit_Power_Salotto==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Salotto mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
 				Selection item=DaikinACUnit_Fan_Salotto mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Salotto==ON]
@@ -130,12 +131,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Text item=Presence label="C'è qualcuno" visibility=[Presence==ON] 
 		Switch item=Presence_Auto label="Presenza" mappings=[OFF="Disabilitata", ON="Abilitata"]
 	}
-	Frame label="Dispositivi IP" {
-		Default item=repeater1160 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		//Default item=frascati2 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		Default item=repeater310 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		Default item=prodino icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-	}
+
+	
 	// Frame label="SystemInfo" {
 	// 	Group item=gSystemInfo
 	// }
@@ -181,8 +178,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 	}
 	Frame label="Ambienti" {
 		Text label="Giardino" icon="garden" {
-			Slider item=BlindsControl_Pergotenda_Giardino_ZW21
-			Switch item=BlindsControl_Pergotenda_Giardino_ZW21  mappings=[0="Chiusa", 100="Aperta"]
+			Slider item=BlindsControl_Pergotenda_Giardino_ZW24
+			Switch item=BlindsControl_Pergotenda_Giardino_ZW24  mappings=[0="Chiusa", 100="Aperta"]
 		}
 		Text label="Portone" icon="cellar" {
 			Switch item=SwitchBinary1_Luce_Portone_ZW13 mappings=[ON=ACCESO, OFF=SPENTO]
@@ -292,12 +289,9 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Text item=OffSetTemperature3_DS1820_Cameretta_ZW17
 			}
 			Text label="Roller Shutter, Pergotenda" icon="terrace" {
-				Switch item=FGRM222_21_switch_binary 
-				Default item=BlindsControl_Pergotenda_Giardino_ZW21
-				Text item=FGRM222_21_blinds_scene_number
-				Text item=SensorPower_Pergotenda_Giardino_ZW21
-				Text item=MeterWatts_Pergotenda_Giardino_ZW21
-				Text item=MeterKwh_Pergotenda_Giardino_ZW21
+				Default item=BlindsControl_Pergotenda_Giardino_ZW24
+				Text item=MeterWatts_Pergotenda_Giardino_ZW24
+				Text item=MeterKwh_Pergotenda_Giardino_ZW24
 			}
 			Text label="Prodino WIFI MQTT, Sala da pranzo" icon="cellar" {
 				Switch item=Prodino0_in1
@@ -320,42 +314,44 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			Group item=gTemperatura label="Temperature" icon="temperature"
 			Group item=gFritz label="Router" icon="settings"
 	}
-	Frame label="ADSL"
-		{
-		Text item=SpeedtestSummary {
-			Frame label="Risultati" {
-				Text item=SpeedtestResultDown
-				Text item=SpeedtestResultUp
-				Text item=SpeedtestResultPing
-			}
-			Frame label="Controllo"{
-				Text item=SpeedtestResultDate
-				Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
-				Switch item=SpeedtestRerun mappings=[ON="Start"]
-			}
-			Frame label="Statistica" {
-				Text label="..." icon="speedtest_analytics8"
-			}
+	
+
+	Frame label="System"  {
+		Text label="Dispositivi IP" icon="network" {
+		//Default item=repeater1160 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		//Default item=frascati2 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		//Default item=repeater310 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		//Default item=prodino icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
+		Text item=CondSalottoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=CondAliceIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=CondStudioIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=CondLettoP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Repeater1750 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Repeater1160 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Prodino icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		}
-	}
-	Frame label="System ADSL Ping"
-		{
-			Text label="Google DNS IP" {
-				Frame label="Online Status" {
-				Text item=GoogleIP label="[%s]"
-				}
-				Frame label="Latenza (ms)" {
-				Text item=GoogleIPlt label="Device Response Time [%s]"
-				}
-				Frame label="LastSeen" {
-				Text item=GoogleIPls
-				}
-			}
-		}
-	Frame label="System" {
+		Text label="Hardware" icon="settings"{
 	//	Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", PowerOff="Shut down", Reboot="Reboot"]
 		Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", Reboot="Reboot"]
 		Selection item=cm3home label="CM3-Home" mappings=[PowerOff="Shut down", Reboot="Reboot"]
+		}
+		Text label="ADSL" icon="network" {
+			Text item=SpeedtestSummary {
+				Frame label="Risultati" {
+					Text item=SpeedtestResultDown
+					Text item=SpeedtestResultUp
+					Text item=SpeedtestResultPing
+			}
+				Frame label="Controllo"{
+					Text item=SpeedtestResultDate
+					Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
+					Switch item=SpeedtestRerun mappings=[ON="Start"]
+				}
+				Frame label="Statistica" {
+					Text label="..." icon="speedtest_analytics8"
+				}
+			}
+		}
 	}
 	Frame label="TVCC"
 		{
