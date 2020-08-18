@@ -24,6 +24,10 @@ Group:Number:AVG gAvgTemperatura "Temp.media interna [%.1f °C]" (gInfluxdb, gTe
 Group:Number:AVG gAvgUmidita "Umidità media interna [%.1f %%]" (gInfluxdb, gUmidita) 
 Group:Switch:OR(ON, OFF) gMotion "Stato presenza [MAP(ir.map):%s]"
 
+Number Scena "Scena" 
+//Number Modalita
+
+
 //Gestione Riscaldamento
 Switch Riscaldamento_Auto "Modo riscaldamento" <temperature> //Riscaldamento automatico o manuale
 Number Riscaldamento_ManualSetPoint "SetPoint manuale [%.1f °C]" <temperature>  //SetPoint manuale riscaldamento

@@ -1,5 +1,3 @@
-var counter 
-
 rule "SetPoint All"
     when
         Item DaikinACUnit_SetPoint_All changed

@@ -1,0 +1,19 @@
+rule "Scene"
+    when 
+        Item Scena changed
+    then
+    switch(Scena.state) {
+      case 0: {
+            logInfo("scena-0", "Notte, cond acceso settato a 28")
+            DaikinACUnit_SetPoint_All.postUpdate(28)
+      }
+      case 1: {
+            logInfo("scena-0", "Presenza, cond acceso settato a 27.5")
+            DaikinACUnit_SetPoint_All.postUpdate(27.5)
+      }
+      case 2: {
+            logInfo("scena-0", "Uscita, cond acceso settato a 27.5")
+            DaikinACUnit_SetPoint_All.postUpdate(27.5)
+      }
+    }
+end

@@ -1,0 +1,11 @@
+//https://www.freeformatter.com/cron-expression-generator-quartz.html
+//Seconds	Minutes	    Hours	Day Of Month	Month	Day Of Week	            Year
+//  0	        30	      1	        ?	          *	    MON,TUE,WED,THU,FRI	    *
+
+rule "Reset variable at start"
+when 
+//Time cron "0 * * ? * * *"
+   System started
+then
+    DaikinACUnit_SetPoint_All.sendCommand(28)
+end

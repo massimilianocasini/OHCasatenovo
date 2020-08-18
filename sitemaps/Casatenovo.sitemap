@@ -5,6 +5,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Text item=Date icon="calendar"
 		Text item=Temperatura_esterna
 		Text item=TempMinMax
+		Switch item=Scena mappings=["0"="NOTTE", "1"="PRESENZA", "2"="USCITA"]
+	//	Switch item=Modalita mappings=["0"="INVERNO", "1"="ESTATE"]
 	}
 	Frame label="Stato generale" {
 		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
@@ -12,13 +14,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Text label="Temperature/Umidità/Pressione Interna" icon=temperature {
 			Default item=Aquara1T
 			Default item=Aquara2T
-			Default item=Aquara3T
+			Default item=Lumi1T
 			Default item=SensorTemperature_MotionSensor_Studio_ZW10
-
 			Default item=Aquara1H
 			Default item=Aquara2H
-			Default item=Aquara3H
-			
+			Default item=Lumi1H
 			Default item=Aquara1P
 			Default item=Aquara3P
 		}
@@ -49,33 +49,25 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Default item=SE5000_AggregateWeekAutoconsumo
 			}
 		}
-		//Default item=SE5000_Live_Consumption
-		//Default item=SE5000_Live_Import
-		//Default item=SE5000_Live_Production
-		//Default item=M_AC_Power_
-		// Default item=I_AC_Current_POST
-		// Default item=I_DC_Voltage_POST
-		// Default item=I_AC_Frequency_
-		// Default item=M_AC_Current_POST
-		//Group item=gFVI label="Fotovoltaico Inverter" icon="energy"
-		//Group item=gFVM label="Fotovoltaico Meter" icon="energy"
+
 		Text label="SolarEdgeCloud" icon=line { 
 			Webview url="https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk?guid=35f0e451-ba70-4008-968b-414eaedf1395" height=30
 			}
 	}
 	Frame label="Condizionamento" {
 		Default item=MeterWatts_R220P_QE_ZW11
+		Setpoint item=DaikinACUnit_SetPoint_All minValue=16 maxValue=30 step=0.5
 		Text label="Base" icon=climate {
 			Switch item=gORCondSwitch  mappings=[ON="ON", OFF="OFF"] 
 			Switch item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
-			Switch item=DaikinACUnit_Power_Studio label="Studio Power" mappings=[ON="ON", OFF="OFF"]
-			Setpoint item=DaikinACUnit_SetPoint_Studio label="Studio SP" minValue=16 maxValue=30 step=0.5
-			Switch item=DaikinACUnit_Power_Letto  label="Letto Power" mappings=[ON="ON", OFF="OFF"]
-			Setpoint item=DaikinACUnit_SetPoint_Letto label="Letto SP" minValue=16 maxValue=30 step=0.5
-			Switch item=DaikinACUnit_Power_Alice label="Alice Power" mappings=[ON="ON", OFF="OFF"]
-			Setpoint item=DaikinACUnit_SetPoint_Alice label="Alice SP" minValue=16 maxValue=30 step=0.5
-			Switch item=DaikinACUnit_Power_Salotto label="Salotto Power" mappings=[ON="ON", OFF="OFF"]
-			Setpoint item=DaikinACUnit_SetPoint_Salotto label="Salotto SP" minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Studio mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Studio minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Letto  mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Letto  minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Alice  mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Alice minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Salotto mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Salotto  minValue=16 maxValue=30 step=0.5
 		}
 
 		Text label="Avanzate" icon=climate {
@@ -204,19 +196,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			Text item=MeterKwh_R220P_QE_ZW11
 		}
 		Text label="CM3-Home" icon="settings" {
-			Text item=Owcm3home icon=temperature			
-		}	
+			Text item=Owcm3home icon=temperature
+		}
 		Text label="Antifurto" icon="siren" {
 			Default item=Prodino0_in1
-			// Switch item=prodino0_in2
-			// Switch item=prodino0_in3
-			// Switch item=prodino0_in4
 			Switch item=Prodino0_out1
-			// Switch item=prodino0_out2
-			// Switch item=prodino0_out3
-			// Switch item=prodino0_out4
-			//Text item=Prodino_temp
-			//Text item=Prodino_umid
 		}
 	}
 	Frame label="Che tempo che fa" {
@@ -273,17 +257,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Switch item=SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19
 			}
 			Text label="Universal Binary Sensor, Garage" icon="garage" {
-				//Switch item=FGBS001_16_alarm_general1
-				//Switch item=FGBS001_16_alarm_general2
-				//Text item=FGBS001_16_scene_number
 				Default item=SensorBinary1_Serranda_Garage_ZW16
 				Default item=SensorBinary2_IRMotion_Garage_ZW16
 				Text item=FGBS001_16_sensor_temperature3
 			}
 			Text label="Universal Binary Sensor, Camera Alice" icon="cellar" {
-				//Text item=FGBS001_17_alarm_general1
-				//Text item=FGBS001_17_alarm_general2
-				//Text item=FGBS001_17_scene_number
 				Text item=SensorBinary1_IRMotion_Cameretta_ZW17
 				Text item=SensorBinary2_IRTamper_Cameretta_ZW17
 				Text item=OffSetTemperature3_DS1820_Cameretta_ZW17
@@ -318,10 +296,6 @@ sitemap Casatenovo label="Benvenuto a Casa"
 
 	Frame label="System"  {
 		Text label="Dispositivi IP" icon="network" {
-		//Default item=repeater1160 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		//Default item=frascati2 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		//Default item=repeater310 icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
-		//Default item=prodino icon="network" valuecolor=[OPEN="green",CLOSED="red"] labelcolor=[OPEN="green", CLOSED="red"]
 		Text item=CondSalottoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondAliceIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondStudioIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
@@ -332,8 +306,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		}
 		Text label="Hardware" icon="settings"{
 	//	Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", PowerOff="Shut down", Reboot="Reboot"]
-		Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", Reboot="Reboot"]
-		Selection item=cm3home label="CM3-Home" mappings=[PowerOff="Shut down", Reboot="Reboot"]
+		Selection item=cm3panel mappings=["sudo /bin/systemctl restart chromium.service"=RestartX, "sudo reboot"= Reboot]
+		//Selection item=cm3home label="CM3-Home" mappings=[PowerOff="Shut down", Reboot="Reboot"]
 		}
 		Text label="ADSL" icon="network" {
 			Text item=SpeedtestSummary {

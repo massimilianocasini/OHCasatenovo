@@ -7,4 +7,8 @@ Bridge mqtt:broker:myUnsecureBroker [ host="localhost", secure=false ]
         Type string : alarmpanel "Alarm system status" [ stateTopic="/KMP/ProDinoWiFi/optoin", transformationPattern="MAP:prodino.map" ]
         Type switch : alarmkey "Alarm system key" [ commandTopic="/KMP/ProDinoWiFi/Cmd", on="rel-0-1", off="rel-0-0" ]
     }
+    Thing topic cm3panel {
+    Channels:
+        Type string : cm3panel-startx "Cm3Panel StartX" [ stateTopic="cm3panel/cm3shell", commandTopic="cm3panel/cm3shell"]
+    }
 }

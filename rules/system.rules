@@ -1,8 +1,9 @@
 rule "cm3panel"
 when Item cm3panel received update
 then
-if (cm3panel.state == "Startx") {
+if (cm3panel.state == "restartX") {
        executeCommandLine("ssh openhab@cm3panel sudo /bin/systemctl restart startx", 5000)
+      // mqttActions.publishMQTT("cm3panel/cm3shell","sudo startx", true)
        logInfo("Flag_System", "Rebooting STARTX su CM3-PANEL")
     }
 if (cm3panel.state == "PowerOff") {
