@@ -2,18 +2,28 @@ rule "Scene"
     when 
         Item Scena changed
     then
-    switch(Scena.state) {
+    switch(Scena.state as DecimalType) {
       case 0: {
             logInfo("scena-0", "Notte, cond acceso settato a 28")
-            DaikinACUnit_SetPoint_All.postUpdate(28)
+            DaikinACUnit_Power_Studio.sendCommand(OFF)
+            DaikinACUnit_Power_Salotto.sendCommand(OFF)
+            DaikinACUnit_SetPoint_All.sendCommand(28)
       }
       case 1: {
-            logInfo("scena-0", "Presenza, cond acceso settato a 27.5")
-            DaikinACUnit_SetPoint_All.postUpdate(27.5)
+            logInfo("scena-1", "Presenza, cond acceso settato a 27.5")
+            DaikinACUnit_Power_Studio.sendCommand(ON)
+            DaikinACUnit_Power_Salotto.sendCommand(ON)
+            DaikinACUnit_Power_Cameretta.sendCommand(ON)
+            DaikinACUnit_Power_Letto.sendCommand(ON)
+            DaikinACUnit_SetPoint_All.sendCommand(27.5)
       }
       case 2: {
-            logInfo("scena-0", "Uscita, cond acceso settato a 27.5")
-            DaikinACUnit_SetPoint_All.postUpdate(27.5)
+            logInfo("scena-2", "Uscita, cond acceso settato a 27.5")
+            DaikinACUnit_Power_Studio.sendCommand(OFF)
+            DaikinACUnit_Power_Salotto.sendCommand(OFF)
+            DaikinACUnit_Power_Cameretta.sendCommand(OFF)
+            DaikinACUnit_Power_Letto.sendCommand(OFF)
+            DaikinACUnit_SetPoint_All.sendCommand(28)
       }
     }
 end

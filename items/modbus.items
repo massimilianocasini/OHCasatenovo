@@ -74,4 +74,4 @@ Number M_AC_PF   "M-Average Power Factor (average of active phases) [JS(divide.j
 // Number M_Imported_   "M-Total Imported Real Energy [%.0f Wh] " (gFVM, gInfluxdb)   {channel="modbus:data:localhostTCP:realenergy:M_Imported:number"}
 Number AC_Power_USED "Assorbita [%.1f kW]" <fan> (gFVM, gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"]
 
-Number I_Status "[MAP(solaredge.map):%s]" <solarplant> (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Status:number"}
+Number I_Status "[MAP(solaredge.map):%s]" <solarplant> (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Status:number"} 

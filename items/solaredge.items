@@ -5,7 +5,7 @@
 // Number:Power    SE5000_Live_Import    "Prielevo da ACEA live [%.2f kW]"  (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000:live#import"}
 // Number:Power    SE5000_Live_Export    "Immesso in ACEA live [%.2f kW]"  (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000:live#export"}
 // String          SE5000_Live_GridStatus "Stato attuale rete"      (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000:live#grid_status"}
- 
+
 Number:Power    SE5000_Live_Production   "Produzione live [%.1f kW]" <solarplant> (gInfluxdb, gFotoVoltaico)   {channel="solaredge:generic:se5000private:live#production"}
 String          SE5000_Live_Status       "Stato impianto [%s]"        (gInfluxdb, gFotoVoltaico)          {channel="solaredge:generic:se5000private:live#pv_status"}
 Number:Power    SE5000_Live_Consumption    "Consumo live [%.1f kW]"  (gInfluxdb, gFotoVoltaico)      {channel="solaredge:generic:se5000private:live#consumption"}

@@ -64,8 +64,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			Setpoint item=DaikinACUnit_SetPoint_Studio minValue=16 maxValue=30 step=0.5
 			Switch item=DaikinACUnit_Power_Letto  mappings=[ON="ON", OFF="OFF"]
 			Setpoint item=DaikinACUnit_SetPoint_Letto  minValue=16 maxValue=30 step=0.5
-			Switch item=DaikinACUnit_Power_Alice  mappings=[ON="ON", OFF="OFF"]
-			Setpoint item=DaikinACUnit_SetPoint_Alice minValue=16 maxValue=30 step=0.5
+			Switch item=DaikinACUnit_Power_Cameretta  mappings=[ON="ON", OFF="OFF"]
+			Setpoint item=DaikinACUnit_SetPoint_Cameretta minValue=16 maxValue=30 step=0.5
 			Switch item=DaikinACUnit_Power_Salotto mappings=[ON="ON", OFF="OFF"]
 			Setpoint item=DaikinACUnit_SetPoint_Salotto  minValue=16 maxValue=30 step=0.5
 		}
@@ -91,14 +91,14 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Text item=DaikinACUnit_IndoorTemperature_Letto
 				Text item=DaikinACUnit_OutdoorTemperature_Letto
 			}
-			Text label="Alice" icon=climate {
-				Switch item=DaikinACUnit_Power_Alice mappings=[ON="ON", OFF="OFF"]
-				Setpoint item=DaikinACUnit_SetPoint_Alice visibility=[DaikinACUnit_Power_Alice==ON] minValue=16 maxValue=30 step=0.5
-				Selection item=DaikinACUnit_Mode_Alice mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
-				Selection item=DaikinACUnit_Fan_Alice mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Alice==ON]
-				Selection item=DaikinACUnit_Fan_Movement_Alice mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Alice==ON]
-				Text item=DaikinACUnit_IndoorTemperature_Alice
-				Text item=DaikinACUnit_OutdoorTemperature_Alice
+			Text label="Cameretta" icon=climate {
+				Switch item=DaikinACUnit_Power_Cameretta mappings=[ON="ON", OFF="OFF"]
+				Setpoint item=DaikinACUnit_SetPoint_Cameretta visibility=[DaikinACUnit_Power_Cameretta==ON] minValue=16 maxValue=30 step=0.5
+				Selection item=DaikinACUnit_Mode_Cameretta mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
+				Selection item=DaikinACUnit_Fan_Cameretta mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Cameretta==ON]
+				Selection item=DaikinACUnit_Fan_Movement_Cameretta mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Cameretta==ON]
+				Text item=DaikinACUnit_IndoorTemperature_Cameretta
+				Text item=DaikinACUnit_OutdoorTemperature_Cameretta
 			}
 			Text label="Salotto" icon=climate {
 				Switch item=DaikinACUnit_Power_Salotto mappings=[ON="ON", OFF="OFF"]
@@ -134,7 +134,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		// 		Text item=MeterKwh_Frigorifero_Cucina_ZW3 icon="energy"
 		// 		Text item=SensorPower_Frigorifero_Cucina_ZW3 icon="energy"
 		// }
-		Text label="Camera Alice" icon="bedroom" {
+		Text label="Camera Cameretta" icon="bedroom" {
 			//Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="Premi"]
 			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == OFF]
 			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == ON]
@@ -170,7 +170,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 	}
 	Frame label="Ambienti" {
 		Text label="Giardino" icon="garden" {
-			Slider item=BlindsControl_Pergotenda_Giardino_ZW24
+			Default item=BlindsControl_Pergotenda_Giardino_ZW24
 			Switch item=BlindsControl_Pergotenda_Giardino_ZW24  mappings=[0="Chiusa", 100="Aperta"]
 		}
 		Text label="Portone" icon="cellar" {
@@ -246,12 +246,12 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Switch item=SwitchBinary1_Serranda_Garage_ZW15
 				Switch item=SwitchBinary2_Luce_Garage_ZW15
 			}
-			Text label="Double relay Switch 2x1.5kW, Camera Alice porta" icon="cellar" {
+			Text label="Double relay Switch 2x1.5kW, Camera Cameretta porta" icon="cellar" {
 				Switch item=FGS222_18_switch_binary
 				Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18
 				Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18
 			}
-			Text label="Double relay Switch 2x1.5kW, Camera Alice lumetti" icon="cellar" {
+			Text label="Double relay Switch 2x1.5kW, Camera Cameretta lumetti" icon="cellar" {
 				Switch item=FGS222_19_switch_binary
 				Switch item=SwitchBinary1_LuceLatoLetti_Cameretta_ZW19
 				Switch item=SwitchBinary2_LumettiLatoLetti_Cameretta_ZW19
@@ -261,7 +261,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Default item=SensorBinary2_IRMotion_Garage_ZW16
 				Text item=FGBS001_16_sensor_temperature3
 			}
-			Text label="Universal Binary Sensor, Camera Alice" icon="cellar" {
+			Text label="Universal Binary Sensor, Camera Cameretta" icon="cellar" {
 				Text item=SensorBinary1_IRMotion_Cameretta_ZW17
 				Text item=SensorBinary2_IRTamper_Cameretta_ZW17
 				Text item=OffSetTemperature3_DS1820_Cameretta_ZW17
@@ -290,14 +290,14 @@ sitemap Casatenovo label="Benvenuto a Casa"
 	}
 	Frame label="Gruppi" {
 			Group item=gTemperatura label="Temperature" icon="temperature"
-			Group item=gFritz label="Router" icon="settings"
+		//	Group item=gFritz label="Router" icon="settings"
 	}
 	
 
 	Frame label="System"  {
 		Text label="Dispositivi IP" icon="network" {
 		Text item=CondSalottoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
-		Text item=CondAliceIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=CondCamerettaIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondStudioIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondLettoP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=Repeater1750 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]

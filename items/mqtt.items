@@ -1,5 +1,5 @@
 // Prodino
-String Prodino0_in1 "Stato Antifurto [%s]" <alarm> (gAll, gAntifurto) ["iss:type:DevDoor","iss:room:Antifurto","iss:icon:alarm"]	{channel="mqtt:topic:myUnsecureBroker:prodino:alarmpanel"}
+String Prodino0_in1 "Stato Antifurto [%s]" <alarm> (gAll, gAntifurto) ["iss:type:DevDoor","iss:room:Antifurto","iss:icon:alarm"]    {channel="mqtt:topic:myUnsecureBroker:prodino:alarmpanel"}
 //Switch prodino0_in2 "In 2 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-1.*]"}
 //Switch prodino0_in3 "In 3 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-2.*]"}
 //Switch prodino0_in4 "In 4 Status [%s]"  (gAll, gAntifurto)	{mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-3.*]"}
@@ -13,4 +13,7 @@ Switch Prodino0_out1 "Chiave"    <switch> (gAll, gAntifurto) ["iss:type:DevSwitc
 //Number Prodino_umid "Antifurto Umidità [%.1f %%]"     <humidity> (gAll, gAntifurto, gInfluxdb)  {channel="mqtt:topic:myUnsecureBroker:prodino:umid_prodino"}
 
 //StudioLuce 
-Switch StudioLuce "Luce Studio" <light> (gAll, gStudio) ["Lighting"] 
+Switch StudioLuce "Luce Studio" <light> (gAll, gStudio) { ga="Light" [roomHint="Studio"]}
+
+//Cm3Panel
+String cm3panel "CM3Panel" <settings> {channel="mqtt:topic:myUnsecureBroker:cm3panel:cm3panel-startx"}

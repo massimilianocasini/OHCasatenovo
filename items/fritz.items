@@ -26,7 +26,6 @@ Number  fboxWanTotalBytesSent "WAN total bytes sent [%s]" (gFritz)  {fritzboxtr0
 Number  fboxWanTotalBytesReceived "WAN total bytes received [%s]" (gFritz)  {fritzboxtr064="wanTotalBytesReceived"}
 
 // DSL statistics
-
 Contact fboxDslEnable       "FBox DSL Enable [%s]"      (gFritz)  {fritzboxtr064="dslEnable"}
 String  fboxDslStatus       "FBox DSL Status [%s]"      (gFritz)  {fritzboxtr064="dslStatus"}
 Number  fboxDslUpstreamCurrRate "DSL Upstream Current [%s mbit/s]" (gFritz)  {fritzboxtr064="dslUpstreamCurrRate"}

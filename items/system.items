@@ -1,2 +1,0 @@
-String cm3panel "CM3Panel" <settings> {channel="mqtt:topic:myUnsecureBroker:cm3panel:cm3panel-startx"}
-//String cm3home "CM3Home"  <settings>
