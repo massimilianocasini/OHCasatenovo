@@ -24,10 +24,12 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		}
 		Text item=Prodino0_in1  labelcolor=[DISINSERITO="green", INSERITO="red"] valuecolor=[DISINSERITO="green", INSERITO="red"]
 		Switch item=Prodino0_out1 label="Antifurto INS/DIS[]" mappings=[ON="Premi"]
-	}
+	} 
 	Frame label="Fotovoltaico"	{
+		Default item=Total_Radiation
 		Default item=I_Status 
 		Default item=I_AC_Power_POST labelcolor=[>0="green",<=0="black"] valuecolor=[>0="green",<=0="black"] visibility=[I_Status==4] //Produzione
+		Default item=PowerAvailable
 		Default item=M_AC_Power_POST_abs label="Immessa in rete" visibility=[M_AC_Power_POST >= 0] labelcolor=["green"] valuecolor=["green"]
 		Default item=M_AC_Power_POST_abs label="Prelevata da rete" visibility=[M_AC_Power_POST < 0] labelcolor=["red"] valuecolor=["red"]
 		Default item=AC_Power_USED visibility=[I_Status==4]

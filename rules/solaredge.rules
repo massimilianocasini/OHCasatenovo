@@ -2,7 +2,6 @@ var Number v_ac_power_used
 var Number v_i_ac_power_post
 var Number v_m_ac_power_post
 
-
 rule "I_AC_Power" //produzione
 when
 	Item I_AC_Power changed or
@@ -64,15 +63,18 @@ rule "Calcolo energia"
 
 when
     Item M_AC_Power_POST changed or
-    Item I_AC_Power_POST changed
+    Item I_AC_Power_POST changed or
+    Item Total_Radiation changed
 then
-    v_m_ac_power_post = M_AC_Power_POST.state
- //   logError("SOLAREDGE", "M_AC_Power_POST:" + v_m_ac_power_post)
-    v_i_ac_power_post = I_AC_Power_POST.state
- //   logError("SOLAREDGE", "I_AC_Power_POST:" + v_i_ac_power_post)
+    var v_m_ac_power_post = M_AC_Power_POST.state as Number
+    var v_i_ac_power_post = I_AC_Power_POST.state as Number
+    var powerMaxTeoricAvailable = Total_Radiation.state as Number
+    //var v_powermaxavailable = v_i_ac_power_post * 1.6 * 14 //Calcolo potenza teorica disponibile
     v_ac_power_used = v_i_ac_power_post - v_m_ac_power_post // Calcolo dell'energia richiesta (prodotta - misurata dal modulo[se - prelevata, se + immessa])
+
     AC_Power_USED.postUpdate(v_ac_power_used)
-  //  logError("SOLAREDGE", "AC_Power_USED:" + v_ac_power_used)
+    PowerAvailable.postUpdate(powerMaxTeoricAvailable*1.6*14*0.1926/1000)  //Calcolo Irradazione diretta * 1,6 mq (singolo pannello) * 14 numero pannelli * 0,1926 ( modulo conversione efficienza 19,26%)
+      //  logError("SOLAREDGE", "AC_Power_USED:" + v_ac_power_used)
 end
 
 rule "I_AC_Current"

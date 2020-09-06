@@ -7,12 +7,13 @@ Number I_AC_Current_POST "I-AC Current POST (Produzione) [%.0f A]" (gFVI, gInflu
 
 Number I_AC_VoltageAB "I-AC Voltage Phase AN [%.0f V]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VoltageAB:number"}
 Number I_AC_Voltage_SF (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Voltage_SF:number"}
-Number I_AC_VoltageAB_POST "Tensione [%.0f V]" <energy> (gFVI, gInfluxdb) ["iss:type:DevGenericSensor","iss:unit:Volt","iss:room:Fotovoltaico"]
+Number I_AC_VoltageAB_POST "Tensione [%.0f V]" <energy> (gFVI, gInfluxdb)
 
 //Number I_AC_VoltageAN_   "I-AC Voltage Phase A to N [JS(divide.js):%s 10V]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_VoltageAN:number"}
 Number I_AC_Power   "I-AC Power (Prodotta) [%.0f W]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Power:number"}
 Number I_AC_Power_SF   "I-AC Power SF"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Power_SF:number"}
-Number I_AC_Power_POST "Produzione [%.1f kW]" <solarplant> (gFVI, gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"] 
+Number I_AC_Power_POST "Produzione [%.1f kW]" <solarplant> (gFVI, gInfluxdb) 
+Number:Power PowerAvailable "Potenza teorica disponibile [%.1f kW]" <solarplant> (gFVI, gInfluxdb) 
 
 Number I_AC_Frequency   "I-AC Frequency [JS(divide.js):%s 1000H]"  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Frequency:number"}
 //Number I_AC_Frequency_SF_   "I-AC Frequency Scale factor "  (gFVI) {channel="modbus:data:localhostTCP:inverter:I_AC_Frequency_SF:number"}
@@ -57,8 +58,8 @@ Number M_AC_Freq   "M-AC Frequency [JS(divide.js):%s 100H]" (gFVM)  {channel="mo
 
 Number M_AC_Power   "M-Total Power [%.0f W]" (gFVM)  {channel="modbus:data:localhostTCP:realPower:M_AC_Power:number"}
 Number M_AC_Power_SF   "M-Total Power SF" (gFVM)   {channel="modbus:data:localhostTCP:realPower:M_AC_Power_SF:number"}
-Number M_AC_Power_POST_abs "M-Total Power abs [%.2f kW]" <softener> (gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"] 
-Number M_AC_Power_POST "M-Total Power [%.2f kW]" <softener> (gFVM, gInfluxdb)
+Number M_AC_Power_POST_abs "M-Total Power abs [%.2f kW]" <softener> (gInfluxdb)
+Number M_AC_Power_POST "M-Total Power [%.2f kW]" <softener> (gFVM, gInfluxdb) 
 
 Number M_AC_VA   "M-Total AC Apparent Power (sum of active phases) [%.1f VA] " (gFVM)   {channel="modbus:data:localhostTCP:apparentPower:M_AC_VA:number"}
 
@@ -72,6 +73,6 @@ Number M_AC_PF   "M-Average Power Factor (average of active phases) [JS(divide.j
 
 // Number M_Exported_   "M-Total Exported Real Energy [%.0f Wh] " (gFVM, gInfluxdb)   {channel="modbus:data:localhostTCP:realenergy:M_Exported:number"}
 // Number M_Imported_   "M-Total Imported Real Energy [%.0f Wh] " (gFVM, gInfluxdb)   {channel="modbus:data:localhostTCP:realenergy:M_Imported:number"}
-Number AC_Power_USED "Assorbita [%.1f kW]" <fan> (gFVM, gInfluxdb) ["iss:type:DevElectricity","iss:unit:KW","iss:room:Fotovoltaico"]
+Number AC_Power_USED "Assorbita [%.1f kW]" <fan> (gFVM, gInfluxdb)
 
 Number I_Status "[MAP(solaredge.map):%s]" <solarplant> (gFVI) {channel="modbus:data:localhostTCP:inverter:I_Status:number"} 

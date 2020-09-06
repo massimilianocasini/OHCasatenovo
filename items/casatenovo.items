@@ -20,7 +20,7 @@ Group gZwave
 Group gSystemInfo
 Group gUmidita
 
-Group:Number:AVG gAvgTemperatura "Temp.media interna [%.1f °C]" (gInfluxdb, gTemperatura) ["iss:type:DevTemperature","iss:unit:°C","iss:room:Generale"]
+Group:Number:AVG gAvgTemperatura "Temp.media interna [%.1f °C]" (gInfluxdb, gTemperatura)
 Group:Number:AVG gAvgUmidita "Umidità media interna [%.1f %%]" (gInfluxdb, gUmidita) 
 Group:Switch:OR(ON, OFF) gMotion "Stato presenza [MAP(ir.map):%s]"
 

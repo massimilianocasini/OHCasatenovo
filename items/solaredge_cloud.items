@@ -27,3 +27,4 @@ Number:Energy   SE5000_AggregateWeekPerAutoconsumo    "Autoconsumo ultimi 7gg [%
 Number:Dimensionless   SE5000_AggregateWeekAutoconsumo    "Autoconsumo ultimi 7gg [%.1f]" <price> (gInfluxdb, gFotoVoltaico) {channel="solaredge:generic:se5000private:aggregate_week#selfConsumptionCoverage"}
 Number:Energy   SE5000_AggregateWeekImport    "Prelievo ultimi 7gg da rete [%.0f kWh]" <energy> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#import"}
 Number:Energy   SE5000_AggregateWeekExport    "Immissione in rete ultimi 7gg [%.0f kWh]" <price> (gInfluxdb, gFotoVoltaico)     {channel="solaredge:generic:se5000private:aggregate_week#export"}
+
