@@ -1,0 +1,90 @@
+Bridge modbus:tcp:localhostTCP [ host="192.168.178.6", port=502, id=1, timeBetweenReconnectMillis=250, connectMaxTries=3 ] {
+    // The base Register Common Block is set to 10001 (MODBUS PLC address [base 1]), or 10000 (MODBUS Protocol Address [base 0]).
+    Bridge poller inverter [ start=40071, length=38, refresh=5000, type="holding" ] {
+        Thing data I_AC_Current [readStart="40071", readValueType="uint16"]
+        Thing data I_AC_CurrentA [readStart="40072", readValueType="uint16"]
+        Thing data I_AC_CurrentB [readStart="40073", readValueType="uint16"]
+        Thing data I_AC_CurrentC [readStart="40074", readValueType="uint16"]
+        Thing data I_AC_Current_SF [readStart="40075", readValueType="int16"]
+        Thing data I_AC_VoltageAB [readStart="40076", readValueType="uint16"]
+        Thing data I_AC_VoltageBC [readStart="40077", readValueType="uint16"]
+        Thing data I_AC_VoltageCA [readStart="40078", readValueType="uint16"]
+        Thing data I_AC_VoltageAN [readStart="40079", readValueType="uint16"]
+        Thing data I_AC_VoltageBN [readStart="40080", readValueType="uint16"]
+        Thing data I_AC_VoltageCN [readStart="40081", readValueType="uint16"]
+        Thing data I_AC_Voltage_SF [readStart="40082", readValueType="int16"]
+        Thing data I_AC_Power [readStart="40083", readValueType="int16"] //AC Power value --> produzione 
+        Thing data I_AC_Power_SF [readStart="40084", readValueType="int16"]
+        Thing data I_AC_Frequency [readStart="40085", readValueType="uint16"]
+        Thing data I_AC_Frequency_SF [readStart="40086", readValueType="int16"]
+        Thing data I_AC_VA [readStart="40087", readValueType="int16"]
+        Thing data I_AC_VA_SF [readStart="40088", readValueType="int16"]
+        Thing data I_AC_VAR [readStart="40089", readValueType="int16"]
+        Thing data I_AC_VAR_SF [readStart="40090", readValueType="int16"]
+        Thing data I_AC_PF [readStart="40091", readValueType="int16"]
+        Thing data I_AC_PF_SF [readStart="40092", readValueType="int16"]
+        Thing data I_AC_Energy_WH [readStart="40093", readValueType="int32"]
+        Thing data I_AC_Energy_WH_SF [readStart="40095", readValueType="uint16"]
+        Thing data I_DC_Current [readStart="40096", readValueType="uint16"]
+        Thing data I_DC_Current_SF [readStart="40097", readValueType="int16"]
+        Thing data I_DC_Voltage [readStart="40098", readValueType="uint16"]
+        Thing data I_DC_Voltage_SF [readStart="40099", readValueType="int16"]
+        Thing data I_DC_Power [readStart="40100", readValueType="int16"]
+        Thing data I_DC_Power_SF [readStart="40101", readValueType="int16"]
+        Thing data I_Temp_Sink [readStart="40103", readValueType="int16"]
+        Thing data I_Temp_SF [readStart="40106", readValueType="int16"]
+        Thing data I_Status [readStart="40107", readValueType="uint16"]
+        Thing data I_Status_Vendor [readStart="40108", readValueType="uint16"]
+
+    }
+
+    //Bridge poller commonBlock [ start=40155, length=8, refresh=1000, type="holding" ] {
+    //    Thing data C_Option [ readStart="40155", readValueType="float32"]
+   // }
+
+    Bridge poller current [ start=40190, length=5, refresh=5000, type="holding" ] {
+        Thing data M_AC_Current [ readStart="40190", readValueType="int16"]
+        Thing data M_AC_Current_A [ readStart="40191", readValueType="int16"]
+        Thing data M_AC_Current_B [ readStart="40192", readValueType="int16"]
+        Thing data M_AC_Current_C [ readStart="40193", readValueType="int16"]
+        Thing data M_AC_Current_SF [ readStart="40194", readValueType="int16"]
+    }
+    Bridge poller voltage [ start=40195, length=5, refresh=10000, type="holding" ] {
+        Thing data M_AC_Voltage_L_N [ readStart="40195", readValueType="int16"]
+    }
+  //  Bridge poller voltage1 [ start=40199, length=5, refresh=10000, type="holding" ] {
+  //      Thing data M_AC_Voltage_L_L [ readStart="40199", readValueType="int16"]
+  //  }
+    Bridge poller frequency [ start=40204, length=2, refresh=20000, type="holding" ] {
+        Thing data M_AC_Freq [ readStart="40204", readValueType="int16"]
+        Thing data M_AC_Freq_SF [ readStart="40205", readValueType="int16"]
+    }
+    Bridge poller realPower [ start=40206, length=5, refresh=5000, type="holding" ] {
+        Thing data M_AC_Power [ readStart="40206", readValueType="int16"] //Total Real Power (sum of active phases) negativa prelevata, positiva immessa
+        Thing data M_AC_Power_A [ readStart="40207", readValueType="int16"] //Phase A AC Real Power
+        Thing data M_AC_Power_B [ readStart="40208", readValueType="int16"] //Phase B AC Real Power
+        Thing data M_AC_Power_C [ readStart="40209", readValueType="int16"] //Phase C AC Real Power
+        Thing data M_AC_Power_SF [ readStart="40210", readValueType="int16"] //AC Real Power Scale Factor
+
+    }
+   // Bridge poller apparentPower [ start=40211, length=1, refresh=21000, type="holding" ] {   
+   //     Thing data M_AC_VA [ readStart="40211", readValueType="int16"]
+   // }
+    //Bridge poller reactivePower [ start=40216, length=1, refresh=23000, type="holding" ] {   
+    //    Thing data M_AC_VAR [ readStart="40216", readValueType="int16"]
+    //}
+    Bridge poller powerFactor [ start=40221, length=5, refresh=10000, type="holding" ] {   
+        Thing data M_AC_PF [ readStart="40221", readValueType="int16"]
+        Thing data M_AC_PF_A [ readStart="40222", readValueType="int16"]
+        Thing data M_AC_PF_B [ readStart="40223", readValueType="int16"]
+        Thing data M_AC_PF_C [ readStart="40224", readValueType="int16"]
+        Thing data M_AC_PF_SF [ readStart="40225", readValueType="int16"]
+    }
+    // Bridge poller realenergy [ start=40226, length=10, refresh=10000, type="holding" ] {   
+    //     Thing data M_Exported [ readStart="40226", readValueType="uint32"]
+    //     Thing data M_Exported_A [ readStart="40228", readValueType="uint32"]
+    //     Thing data M_Exported_B [ readStart="40230", readValueType="uint32"]
+    //     Thing data M_Exported_C [ readStart="40232", readValueType="uint32"]
+    //     Thing data M_Imported [ readStart="40234", readValueType="uint32"]
+    // }
+}

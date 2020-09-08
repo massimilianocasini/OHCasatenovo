@@ -1,0 +1,13 @@
+Number:Temperature I_Cabinet_Temperature "Temperatura cabinet [%.0f]" {channel="modbus:inverter-single-phase:bridge:40069:deviceInformation#cabinet-temperature"}
+Number:Temperature I_Heat_Sink_Temperature "Temperatura radiatore [%.0f]" {channel="modbus:inverter-single-phase:bridge:40069:deviceInformation#heatsink-temperature"}
+Number:Temperature I_Transformer_Temperature "Temperatura trasformatore [%.0f]" {channel="modbus:inverter-single-phase:bridge:40069:deviceInformation#transformer-temperature"}
+Number:Temperature I_Other_Temperature "Temperatura altra [%.0f]" {channel="modbus:inverter-single-phase:bridge:40069:deviceInformation#other-temperature"}
+String I_Status "Stato inverter [%s]" <solarplant> {channel="modbus:inverter-single-phase:bridge:40069:deviceInformation#status"}
+Number:ElectricCurrent I_AC_Current  "I-AC Total Current [%.0f]" (gFVI) {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-total-current"}
+Number:Power I_AC_Power_Value "Produzione [%.1f kW]" <solarplant> (gInfluxdb) {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-power"}
+Number:Frequency I_AC_Frequency_Value "Frequenza [%.0f]" {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-frequency"}
+Number:Dimensionless I_AC_Power_Factor "Fattore di potenza [%.1f]" {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-power-factor"}
+Number:Energy I_AC_Lifetime_Energy_Production "Energia prodotta in vita [%.1f]" {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-lifetime-energy"}
+
+Number Power_Teoric_Available "Potenza teorica disponibile [%.1f kW]" <sun> (gFVI, gInfluxdb)
+Number Power_Used "Potenza richiesta [%.1f kW]" <poweroutlet_eu> (gInfluxdb)
