@@ -1,0 +1,3 @@
+influx -username admin -password admin
+use openhab_db
+DROP MEASUREMENT "Aquara1H"

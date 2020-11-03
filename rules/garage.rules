@@ -11,16 +11,16 @@ rule "Invia messaggio a BOT quando si apre/chiude la serranda"
             sendTelegram("bot1", "Garage Serranda Chiusa") 
 end
 
-rule "Accensione luce Garage"
-when 
-    Item SwitchBinary2_Luce_Garage_ZW15 changed
-then
-    if(SwitchBinary2_Luce_Garage_ZW15.state == ON) {
-       sendTelegram("bot1", "Luce Garage ON")
-      // mailActions.sendMail("massimiliano.casini@gmail.com","Garage", "Luce accesa") 
-    }
-     if(SwitchBinary2_Luce_Garage_ZW15.state == OFF) {
-       sendTelegram("bot1", "Luce Garage OFF")
-     //  mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Luce SPENTA")
-    }
-end
+// rule "Accensione luce Garage"
+// when 
+//     Item SwitchBinary2_Luce_Garage_ZW15 changed
+// then
+//     if(SwitchBinary2_Luce_Garage_ZW15.state == ON) {
+//        sendTelegram("bot1", "Luce Garage ON")
+//       // mailActions.sendMail("massimiliano.casini@gmail.com","Garage", "Luce accesa") 
+//     }
+//      if(SwitchBinary2_Luce_Garage_ZW15.state == OFF) {
+//        sendTelegram("bot1", "Luce Garage OFF")
+//      //  mailActions.sendMail("massimiliano.casini@gmail.com","Antifurto", "Luce SPENTA")
+//     }
+// end

@@ -1,7 +1,6 @@
 Group gCond
-Group gCondSet
-Group gCondMod
-Group gCondVel
+//Group gCondSet
+//Group roup gCondVel
 Group gCondTInt
 Group gCondTExt
 Group gCondSalotto
@@ -10,45 +9,45 @@ Group gCondCameretta
 Group gCondStudio
 Group gCondMov
 
-Group:Switch:OR(ON, OFF) gORCondSwitch "Stato Power generale" 
-Group:String:EQUALITY gEqualityDaikinMode "Modo Lavoro generale"
+Group:Switch:OR(ON, OFF) gORDaikinPower "Power ALL"  <switch> 
+Group:String:EQUALITY gEqualityDaikinMode "Modo Lavoro ALL" <settings> 
+Group:Number:EQUALITY gEqualityDaikinSetPoint "SetPoint ALL [%.1f °C]" <temperature>
+Group:Number:AVG gAvgDaikinTemp "Temperatura media [%.1f °C]" <temperature>  
 
-Switch DaikinACUnit_Power_Studio "Studio Power" <switch> (gAll, gCond, gORCondSwitch, gCondStudio)  { channel="daikin:ac_unit:Studio:power" }
-Number:Temperature DaikinACUnit_SetPoint_Studio "Studio SP" <temperature> (gAll, gCond, gCondSet, gCondStudio)  { channel="daikin:ac_unit:Studio:settemp" }
-String DaikinACUnit_Mode_Studio "Modalità" <settings> (gAll, gCond, gCondMod, gEqualityDaikinMode,gCondStudio)  { channel="daikin:ac_unit:Studio:mode" }
+
+Switch DaikinACUnit_Power_Studio "Studio Power" <switch> (gAll, gCond, gORDaikinPower, gCondStudio)  {synonyms="Condizionatore Studio", ga="Switch", channel="daikin:ac_unit:Studio:power" }
+Number:Temperature DaikinACUnit_SetPoint_Studio "Studio SP" <temperature> (gAll, gCond, gEqualityDaikinSetPoint, gCondStudio)  { channel="daikin:ac_unit:Studio:settemp" }
+String DaikinACUnit_Mode_Studio "Modalità" <settings> (gAll, gCond, gEqualityDaikinMode,gCondStudio)  { channel="daikin:ac_unit:Studio:mode" }
 String DaikinACUnit_Fan_Studio "Velocità" <fan> (gAll, gCond, gCondVel, gCondStudio) { channel="daikin:ac_unit:Studio:fanspeed" }
 String DaikinACUnit_Fan_Movement_Studio "Swing" <fan> (gAll, gCond, gCondMov, gCondStudio) { channel="daikin:ac_unit:Studio:fandir" }
-Number:Temperature DaikinACUnit_IndoorTemperature_Studio  "Temp. Interna" <temperature> (gAll, gCond, gCondTInt, gInfluxdb, gCondStudio)  { channel="daikin:ac_unit:Studio:indoortemp" }
+Number:Temperature    DaikinACUnit_IndoorTemperature_Studio    "Temp. Interna"    <temperature>    (gAll, gCond, gCondTInt, gInfluxdb, gCondStudio, gAvgDaikinTemp)    {channel="daikin:ac_unit:Studio:indoortemp"}
 Number:Temperature DaikinACUnit_OutdoorTemperature_Studio "Temp. Esterna" <temperature> (gAll, gCond,  gCondTExt, gInfluxdb, gCondStudio)  { channel="daikin:ac_unit:Studio:outdoortemp" }
 Number DaikinACUnit_CompressorFrequency_Studio "Frequenza compressore" (gAll, gCond, gCondStudio, gInfluxdb) { channel="daikin:ac_unit:Studio:cmpfrequency"}
 //Number DaikinACUnit_SpecialMode_Studio "Modo speciale" (gAll, gCond, gCondStudio) { channel="daikin:ac_unit:Studio:specialmode"}
 
-Switch DaikinACUnit_Power_Salotto "Salotto Power" <switch> (gAll, gCond, gORCondSwitch, gCondSalotto) { channel="daikin:ac_unit:Salotto:power" }
-Number:Temperature DaikinACUnit_SetPoint_Salotto "Salotto SP" <temperature> (gAll, gCond, gCondSet, gCondSalotto)  { channel="daikin:ac_unit:Salotto:settemp" }
-String DaikinACUnit_Mode_Salotto "Modalità" <settings> (gAll, gCond, gCondMod, gEqualityDaikinMode, gCondSalotto)  { channel="daikin:ac_unit:Salotto:mode" }
+Switch DaikinACUnit_Power_Salotto "Salotto Power" <switch> (gAll, gCond, gORDaikinPower, gCondSalotto) { ga="Switch" [roomHint="Salotto"], channel="daikin:ac_unit:Salotto:power" }
+Number:Temperature DaikinACUnit_SetPoint_Salotto "Salotto SP" <temperature> (gAll, gCond, gEqualityDaikinSetPoint, gCondSalotto)  { channel="daikin:ac_unit:Salotto:settemp" }
+String DaikinACUnit_Mode_Salotto "Modalità" <settings> (gAll, gCond, gEqualityDaikinMode, gCondSalotto)  { channel="daikin:ac_unit:Salotto:mode" }
 String DaikinACUnit_Fan_Salotto "Velocità" <fan> (gAll, gCond, gCondVel, gCondSalotto)  { channel="daikin:ac_unit:Salotto:fanspeed" }
 String DaikinACUnit_Fan_Movement_Salotto "Swing" { channel="daikin:ac_unit:Salotto:fandir" }
-Number:Temperature DaikinACUnit_IndoorTemperature_Salotto  "Temp. Interna" <temperature> (gAll, gCond, gCondTInt, gInfluxdb, gCondSalotto) { channel="daikin:ac_unit:Salotto:indoortemp" }
+Number:Temperature    DaikinACUnit_IndoorTemperature_Salotto    "Temp. Interna"    <temperature>    (gAll, gCond, gCondTInt, gInfluxdb, gCondSalotto, gAvgDaikinTemp)    {channel="daikin:ac_unit:Salotto:indoortemp"}
 Number:Temperature DaikinACUnit_OutdoorTemperature_Salotto "Temp. Esterna" <temperature>  (gAll, gCond, gCondTExt, gInfluxdb, gCondSalotto) { channel="daikin:ac_unit:Salotto:outdoortemp" }
 Number DaikinACUnit_CompressorFrequency_Salotto "Frequenza compressore" (gAll, gCond, gCondSalotto) { channel="daikin:ac_unit:Salotto:cmpfrequency"}
 
-Switch DaikinACUnit_Power_Cameretta "Cameretta Power" <switch> (gAll, gCond, gORCondSwitch, gCondCameretta) { channel="daikin:ac_unit:Cameretta:power" }
-Number:Temperature DaikinACUnit_SetPoint_Cameretta "Cameretta SP" <temperature>  (gAll, gCond, gCondSet, gCondCameretta) { channel="daikin:ac_unit:Cameretta:settemp" }
-String DaikinACUnit_Mode_Cameretta "Modalità" <settings> (gAll, gCond, gCondMod, gEqualityDaikinMode, gCondCameretta) { channel="daikin:ac_unit:Cameretta:mode" }
+Switch DaikinACUnit_Power_Cameretta "Cameretta Power" <switch> (gAll, gCond, gORDaikinPower, gCondCameretta) { ga="Switch" [roomHint="Cameretta"], channel="daikin:ac_unit:Cameretta:power" }
+Number:Temperature DaikinACUnit_SetPoint_Cameretta "Cameretta SP" <temperature>  (gAll, gCond, gEqualityDaikinSetPoint, gCondCameretta) { channel="daikin:ac_unit:Cameretta:settemp" }
+String DaikinACUnit_Mode_Cameretta "Modalità" <settings> (gAll, gCond, gEqualityDaikinMode, gCondCameretta) { channel="daikin:ac_unit:Cameretta:mode" }
 String DaikinACUnit_Fan_Cameretta "Velocità" <fan> (gAll, gCond, gCondVel, gCondCameretta) { channel="daikin:ac_unit:Cameretta:fanspeed" }
 String DaikinACUnit_Fan_Movement_Cameretta "Swing" { channel="daikin:ac_unit:Cameretta:fandir" }
-Number:Temperature DaikinACUnit_IndoorTemperature_Cameretta  "Temp. Interna" <temperature> (gAll, gCond, gCondTInt, gInfluxdb, gCondCameretta) { channel="daikin:ac_unit:Cameretta:indoortemp" }
+Number:Temperature    DaikinACUnit_IndoorTemperature_Cameretta    "Temp. Interna"    <temperature>    (gAll, gCond, gCondTInt, gInfluxdb, gCondCameretta, gAvgDaikinTemp)    {channel="daikin:ac_unit:Cameretta:indoortemp"}
 Number:Temperature DaikinACUnit_OutdoorTemperature_Cameretta "Temp. Esterna"  <temperature> (gAll, gCond, gCondTExt, gInfluxdb, gCondCameretta) { channel="daikin:ac_unit:Cameretta:outdoortemp" }
 Number DaikinACUnit_CompressorFrequency_Cameretta "Frequenza compressore" (gAll, gCond, gCondCameretta) { channel="daikin:ac_unit:Cameretta:cmpfrequency"}
 
-Switch DaikinACUnit_Power_Letto "Letto Power" <switch> (gAll, gCond, gORCondSwitch, gCondLetto)  { channel="daikin:ac_unit:Letto:power" }
-Number:Temperature DaikinACUnit_SetPoint_Letto "Letto SP"  <temperature> (gAll, gCond, gCondSet, gCondLetto) { channel="daikin:ac_unit:Letto:settemp" }
-String DaikinACUnit_Mode_Letto "Modalità" <settings> (gAll, gCond, gCondMod, gEqualityDaikinMode, gCondLetto) { channel="daikin:ac_unit:Letto:mode" }
+Switch DaikinACUnit_Power_Letto "Letto Power" <switch> (gAll, gCond, gORDaikinPower, gCondLetto)  { ga="Switch" [roomHint="Letto"], channel="daikin:ac_unit:Letto:power" }
+Number:Temperature DaikinACUnit_SetPoint_Letto "Letto SP"  <temperature> (gAll, gCond, gEqualityDaikinSetPoint, gCondLetto) { channel="daikin:ac_unit:Letto:settemp" }
+String DaikinACUnit_Mode_Letto "Modalità" <settings> (gAll, gCond, gEqualityDaikinMode, gCondLetto) { channel="daikin:ac_unit:Letto:mode" }
 String DaikinACUnit_Fan_Letto "Velocità" <fan> (gAll, gCond, gCondVel, gCondLetto) { channel="daikin:ac_unit:Letto:fanspeed" }
 String DaikinACUnit_Fan_Movement_Letto "Swing" { channel="daikin:ac_unit:Letto:fandir" }
-Number:Temperature DaikinACUnit_IndoorTemperature_Letto  "Temp. Interna" <temperature> (gAll, gCond, gCondTInt, gInfluxdb, gCondLetto) { channel="daikin:ac_unit:Letto:indoortemp" }
+Number:Temperature    DaikinACUnit_IndoorTemperature_Letto    "Temp. Interna"    <temperature>    (gAll, gCond, gCondTInt, gInfluxdb, gCondLetto, gAvgDaikinTemp)    {channel="daikin:ac_unit:Letto:indoortemp"}
 Number:Temperature DaikinACUnit_OutdoorTemperature_Letto "Temp. Esterna"  <temperature> (gAll, gCond, gCondTExt, gInfluxdb, gCondLetto)  { channel="daikin:ac_unit:Letto:outdoortemp" }
 Number DaikinACUnit_CompressorFrequency_Letto "Frequenza compressore" (gAll, gCond, gCondLetto) { channel="daikin:ac_unit:Letto:cmpfrequency"}
-
-Switch DaikinACUnit_Power_All "ON/OFF" <switch>
-Number:Temperature DaikinACUnit_SetPoint_All "SetPoint ALL [%.1f]"  <temperature>

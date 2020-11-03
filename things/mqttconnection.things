@@ -1,16 +1,48 @@
 Bridge mqtt:broker:myUnsecureBroker [ host="localhost", secure=false ]
 {
-    Thing topic prodino {
+    Thing topic prodino "Prodino" @ "Soggiorno" {
     Channels:
       //  Type number : temp_prodino "Temperatura prodino" [ stateTopic="/KMP/ProDinoWiFi/dhtt"]
       //  Type number : umid_prodino "Umidità prodino" [ stateTopic="/KMP/ProDinoWiFi/dhth"]
-        Type string : alarmpanel "Alarm system status" [ stateTopic="ProDinoWiFi/optoin", transformationPattern="MAP:prodino.map" ]
-        Type switch : alarmkey "Alarm system key" [ commandTopic="ProDinoWiFi/Cmd", on="rel-0-1", off="rel-0-0" ]
+        Type string : alarmpanel "Alarm system status" [ stateTopic = "ProDinoWiFi/optoin", transformationPattern = "MAP:prodino.map" ]
+        Type switch : alarmkey "Alarm system key" [ commandTopic = "ProDinoWiFi/Cmd", on="rel-0-1", off="rel-0-0" ]
     }
     
-    Thing topic cm3panel {
+    Thing topic cm3panel "CM3PANEL" @ "Cucina" {
     Channels:
-        Type string : cm3panel-startx "Cm3Panel StartX" [ stateTopic="cm3panel/cm3shell", commandTopic="cm3panel/cm3shell"]
+        Type string : cm3panel-startx "Cm3Panel StartX" [ stateTopic="cm3panel/cm3shell", commandTopic = "cm3panel/cm3shell"]
+    }
+
+    Thing topic xiaomi_aqara_soggiorno  "TemperatureSoggiorno" @ "Soggiorno"  {
+        Channels:
+            Type number : temperature "temperature" [ stateTopic = "zigbee2mqtt/Soggiorno/temperature" ]
+            Type number : humidity "humidity" [ stateTopic = "zigbee2mqtt/Soggiorno/humidity" ]
+            Type number : pressure "pressure" [ stateTopic = "zigbee2mqtt/Soggiorno/pressure" ]
+            Type number : voltage "voltage" [ stateTopic = "zigbee2mqtt/Soggiorno/voltage" ]
+            Type number : battery "battery" [ stateTopic = "zigbee2mqtt/Soggiorno/battery" ]
+            Type number : linkquality "linkquality" [ stateTopic = "zigbee2mqtt/Soggiorno/linkquality" ]
+    }
+    Thing topic xiaomi_aqara_cameretta  "TemperatureCameretta" @ "Cameretta"  {
+        Channels:
+            Type number : temperature "temperature" [ stateTopic = "zigbee2mqtt/Cameretta/temperature" ]
+            Type number : humidity "humidity" [ stateTopic = "zigbee2mqtt/Cameretta/humidity" ]
+            Type number : pressure "pressure" [ stateTopic = "zigbee2mqtt/Cameretta/pressure" ]
+            Type number : voltage "voltage" [ stateTopic = "zigbee2mqtt/Cameretta/voltage" ]
+            Type number : battery "battery" [ stateTopic = "zigbee2mqtt/Cameretta/battery" ]
+            Type number : linkquality "linkquality" [ stateTopic = "zigbee2mqtt/Cameretta/linkquality" ]
+    }
+    Thing topic xiaomi_lumi_corridoio  "TemperatureCorridoio" @ "Corridoio"  {
+        Channels:
+            Type number : temperature "temperature" [ stateTopic = "zigbee2mqtt/Corridoio/temperature" ]
+            Type number : humidity "humidity" [ stateTopic = "zigbee2mqtt/Corridoio/humidity" ]
+            Type number : voltage "voltage" [ stateTopic = "zigbee2mqtt/Corridoio/voltage" ]
+            Type number : battery "battery" [ stateTopic = "zigbee2mqtt/Corridoio/battery" ]
+            Type number : linkquality "linkquality" [ stateTopic = "zigbee2mqtt/Corridoio/linkquality" ]
+    }
+    Thing topic osram  "PresaIngresso" @ "Ingresso"  {
+        Channels:
+            Type number : linkquality "linkquality" [ stateTopic = "zigbee2mqtt/Presa/linkquality" ]
+            Type switch : set "Stato" [stateTopic = "zigbee2mqtt/Presa/state", commandTopic = "zigbee2mqtt/Presa/set", on="ON", off="OFF"]
     }
 
 }

@@ -1,10 +1,21 @@
-rule "SetPoint All"
-    when
-        Item DaikinACUnit_SetPoint_All changed
-    then
-            val int setpoint_all = (DaikinACUnit_SetPoint_All.state)
-            DaikinACUnit_SetPoint_Studio.sendCommand(setpoint_all)
-            DaikinACUnit_SetPoint_Cameretta.sendCommand(setpoint_all)
-            DaikinACUnit_SetPoint_Letto.sendCommand(setpoint_all)
-            DaikinACUnit_SetPoint_Salotto.sendCommand(setpoint_all)
-end
+// rule "SetPoint All"
+//     when
+//         Item DaikinACUnit_SetPoint_All changed
+//     then
+//             val int setpoint_all = (DaikinACUnit_SetPoint_All.state)
+//             DaikinACUnit_SetPoint_Studio.sendCommand(setpoint_all)
+//             DaikinACUnit_SetPoint_Cameretta.sendCommand(setpoint_all)
+//             DaikinACUnit_SetPoint_Letto.sendCommand(setpoint_all)
+//             DaikinACUnit_SetPoint_Salotto.sendCommand(setpoint_all)
+// end
+
+// rule "Mode All"
+//     when
+//         Item DaikinACUnit_Mode_All changed
+//     then
+//             val str mode_all = (DaikinACUnit_Mode_All.state)
+//             DaikinACUnit_Mode_Studio.sendCommand(mode_all)
+//             DaikinACUnit_Mode_Cameretta.sendCommand(mode_all)
+//             DaikinACUnit_Mode_Letto.sendCommand(mode_all)
+//             DaikinACUnit_Mode_Salotto.sendCommand(mode_all)
+// end

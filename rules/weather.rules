@@ -6,7 +6,8 @@ when
 then 
 var min = (Temp_Min0.minimumSince(now.withTimeAtStartOfDay).state as Number).floatValue
 var max = (Temp_Max0.maximumSince(now.withTimeAtStartOfDay).state as Number).floatValue
-    if (max !== null && min !== null) {
+ // if (max !== null && min !== null) {
+    if (max !== 0 && min !== 0) {
         Temp_Max0.postUpdate(max)
         Temp_Min0.postUpdate(min)
         var result = String::format("%.0f °C  |  %.0f °C", min, max)

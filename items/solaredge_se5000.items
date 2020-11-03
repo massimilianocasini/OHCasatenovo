@@ -9,5 +9,6 @@ Number:Frequency I_AC_Frequency_Value "Frequenza [%.0f]" {channel="modbus:invert
 Number:Dimensionless I_AC_Power_Factor "Fattore di potenza [%.1f]" {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-power-factor"}
 Number:Energy I_AC_Lifetime_Energy_Production "Energia prodotta in vita [%.1f]" {channel="modbus:inverter-single-phase:bridge:40069:acGeneral#ac-lifetime-energy"}
 
-Number Power_Teoric_Available "Potenza teorica disponibile [%.1f kW]" <sun> (gFVI, gInfluxdb)
-Number Power_Used "Potenza richiesta [%.1f kW]" <poweroutlet_eu> (gInfluxdb)
+Number:Power Power_Teoric_Available "Potenza teorica disponibile [%.1f kW]" <sun> (gFVI, gInfluxdb)
+Number:Power Power_Used "Potenza richiesta [%.1f kW]" <poweroutlet_eu> (gInfluxdb)
+Number:Power Power_Used_abs "Potenza richiesta [%.1f kW]" <poweroutlet_eu> (gInfluxdb)

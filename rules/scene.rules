@@ -7,7 +7,10 @@ rule "Scene"
             logInfo("scena-0", "Notte, cond acceso settato a 28")
             DaikinACUnit_Power_Studio.sendCommand(OFF)
             DaikinACUnit_Power_Salotto.sendCommand(OFF)
+            DaikinACUnit_Power_Cameretta.sendCommand(OFF)
+            DaikinACUnit_Power_Letto.sendCommand(OFF)
             DaikinACUnit_SetPoint_All.sendCommand(28)
+            SwitchDimmer_Luce_Corridoio_ZW20.sendCommand(1)
       }
       case 1: {
             logInfo("scena-1", "Presenza, cond acceso settato a 27.5")
@@ -26,4 +29,18 @@ rule "Scene"
             DaikinACUnit_SetPoint_All.sendCommand(28)
       }
     }
+end
+//http://www.cronmaker.com/
+rule "Luce corridoio 22:30 ON "
+when
+    Time cron "0 30 22 1/1 * ? *"
+then
+    SwitchDimmer_Luce_Corridoio_ZW20.sendCommand(1)
+end
+
+rule "Luce corridoio 07:00 OFF "
+when
+    Time cron "0 0 7 1/1 * ? *"
+then
+    SwitchDimmer_Luce_Corridoio_ZW20.sendCommand(0)
 end

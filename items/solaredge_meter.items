@@ -2,12 +2,12 @@ Number:ElectricCurrent M_AC_Total_Current_Value "Corrente totale [%.2f]" {channe
 Number:ElectricPotential M_Average_Line_To_Neutral_AC_Voltage "Tensione L-N [%.0f V]" <energy> {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-average-voltage-to-n"}
 Number:ElectricPotential M_Average_Line_To_Line_AC_Voltage "Tensione L-L [%.0f]" <energy> {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-average-voltage-to-next"}
 Number:Frequency M_AC_Frequency_Value "Frequenza [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-frequency"}
-Number:Power M_Total_Real_Power_Value "Potenza totale reale [%.1f kW]" <softener> (gInfluxdb) {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-real-power"}
+Number:Power M_Total_Real_Power_Value "Potenza totale reale [%.1f kW]" <poweroutlet_eu> (gInfluxdb) {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-real-power"}
 Number:Power M_Total_Apparent_Power_Value "Potenza totale apparente [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-apparent-power"}
 Number:Power M_Total_Reactive_Power_Value "Potenza totale reattiva [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-reactive-power"}
 Number:Dimensionless M_Average_AC_Power_Factor "Fattore di potenza [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-average-power-factor"}
-Number:Energy M_Total_Real_Energy_Exported "Energia esportata reale [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-exported-real-energy"}
-Number:Energy M_Total_Real_Energy_Imported "Energia importata reale [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-imported-real-energy"}
+Number:Energy M_Total_Real_Energy_Exported "Energia esportata reale [%.2f]" (gInfluxdb) {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-exported-real-energy"}
+Number:Energy M_Total_Real_Energy_Imported "Energia importata reale [%.2f]" (gInfluxdb) {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-imported-real-energy"}
 Number:Energy M_Total_Apparent_Energy_Exported "Energia esportata apparente [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-exported-apparent-energy"}
 Number:Energy M_Total_Apparent_Energy_Imported "Energia importata apparente [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-imported-apparent-energy"}
 Number:Energy M_Total_Reactive_Energy_Imported_Quadrant_1 "Energia importata reattiva Q1 [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acGeneral#ac-total-imported-reactive-energy-q1"}
@@ -15,3 +15,5 @@ Number:Energy M_Total_Reactive_Energy_Imported_Quadrant_1 "Energia importata rea
 Number:Power M_AC_Real_Power_Value_Fase_A "Potenza reale fase A [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acPhaseA#ac-real-power"}
 Number:Power M_AC_Real_Power_Value_Fase_B "Potenza reale fase B [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acPhaseB#ac-real-power"}
 Number:Power M_AC_Real_Power_Value_Fase_C "Potenza reale fase C [%.2f]" {channel="modbus:meter-wye-phase:bridge:40188:acPhaseC#ac-real-power"}
+
+Number:Power M_Total_Real_Power_Value_abs "Assorbimento [%.1f kW]" <softener>

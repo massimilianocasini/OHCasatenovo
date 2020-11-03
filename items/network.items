@@ -3,9 +3,12 @@ Number:Time GoogleIPlt "8.8.8.8" <qualityofservice> (gInfluxdb) { channel="netwo
 DateTime GoogleIPls "LastSeen [%1$tH:%1$tM:%1$tS]" <time> {channel="network:pingdevice:GoogleIP:lastseen"}
 
 Switch CondSalottoIP "CondSalottoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondSalottoIP:online"}
-Switch CondAliceIP "CondAliceIP [%s]" <qualityofservice> { channel="network:pingdevice:CondAliceIP:online"}
-Switch CondStudioIP "CondStudioIP [%s]" <qualityofservice> { channel="network:pingdevice:CondStudioIP:online"}
-Switch CondLettoP "CondLettoP [%s]" <qualityofservice> { channel="network:pingdevice:CondLettoP:online"}
-Switch Repeater1750 "repeater1750 [%s]" <qualityofservice> { channel="network:pingdevice:repeater1750:online"}
-Switch Repeater1160 "repeater1160 [%s]" <qualityofservice> { channel="network:pingdevice:repeater1160:online"}
+Switch CondCamerettaIP "CondStudioIP [%s]" <qualityofservice> { channel="network:pingdevice:CondCamerettaIP:online"}
+Switch CondLettoIP "CondLettoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondLettoIP:online"}
+Switch CondStudioIP "CondLettoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondStudioIP:online"}
+Switch Repeater1750E "repeater1750E Garage [%s]" <qualityofservice> { channel="network:pingdevice:repeater1750E:online"}
+Switch Repeater1160 "repeater1160 Corridoio [%s]" <qualityofservice> { channel="network:pingdevice:repeater1160:online"}
+Switch Repeater310 "repeater310 Giardino [%s]" <qualityofservice> { channel="network:pingdevice:repeater310:online"}
 Switch Prodino "Prodino [%s]" <qualityofservice> { channel="network:pingdevice:Prodino:online"}
+Switch SolarEdgeInverter "Inverter [%s]" <qualityofservice> { channel="network:pingdevice:solaredgeinverter:online"}
+Switch Cm3Panel "CM3Panel [%s]" <qualityofservice> { channel="network:pingdevice:cm3panel:online"}

@@ -12,15 +12,15 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
 		Text item=gAvgUmidita labelcolor=[<40="orange",>=40="green",>=60="red"] valuecolor=[<40="orange",>=40="green",>=60="red"] icon="humidity"
 		Text label="Temperature/Umidità/Pressione Interna" icon=temperature {
-			Default item=Aquara1T
-			Default item=Aquara2T
+			Default item=Aqara1T
+			Default item=Aqara2T
 			Default item=Lumi1T
 			Default item=SensorTemperature_MotionSensor_Studio_ZW10
-			Default item=Aquara1H
-			Default item=Aquara2H
+			Default item=Aqara1H
+			Default item=Aqara2H
 			Default item=Lumi1H
-			Default item=Aquara1P
-			Default item=Aquara3P
+			Default item=Aqara1P
+			Default item=Aqara3P
 		}
 		Text item=Prodino0_in1  labelcolor=[DISINSERITO="green", INSERITO="red"] valuecolor=[DISINSERITO="green", INSERITO="red"]
 		Switch item=Prodino0_out1 label="Antifurto INS/DIS[]" mappings=[ON="Premi"]
@@ -29,12 +29,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Default item=Total_Radiation visibility=[Total_Radiation > 0]
 		Default item=Power_Teoric_Available visibility=[Total_Radiation > 0]
 		Default item=I_Status 
-		//Default item=I_AC_Power_Value labelcolor=[>0="green",<=0="black"] valuecolor=[>0="green",<=0="black"] visibility=[I_Status == ON] //Produzione
-		Default item=I_AC_Power_Value
-		Default item=M_Total_Real_Power_Value label="Immessa in rete" visibility=[M_Total_Real_Power_Value >= 0] labelcolor=["green"] valuecolor=["green"]
-		Default item=M_Total_Real_Power_Value label="Prelevata da rete" visibility=[M_Total_Real_Power_Value < 0] labelcolor=["red"] valuecolor=["red"]
-		Default item=Power_Used
-		Default item=M_Average_Line_To_Neutral_AC_Voltage labelcolor=[>226="green",>220="orange",<220="red"] valuecolor=[>226="green",>220="orange",<220="red"]
+		Default item=I_AC_Power_Value visibility=[I_Status == ON]
+		Default item=M_Total_Real_Power_Value_abs label="Immessa in rete" visibility=[M_Total_Real_Power_Value >= 0] labelcolor=["green"] valuecolor=["green"]
+		Default item=M_Total_Real_Power_Value_abs label="Prelevata da rete" visibility=[M_Total_Real_Power_Value < 0] labelcolor=["red"] valuecolor=["red"]
+		Default item=Power_Used labelcolor=[>0="green",>3="orange",>4="red"] valuecolor=[>0="green",>3="orange",>4="red"]
+		Default item=M_Average_Line_To_Neutral_AC_Voltage labelcolor=[>226="green",>=220="orange",<220="red"] valuecolor=[>226="green",>=220="orange",<220="red"]
 		
 		Text label="Dati aggregati" icon=line {
 			Text label="Odierni" icon=calendar {
@@ -52,16 +51,19 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Default item=SE5000_AggregateWeekAutoconsumo
 			}
 		}
-
 		Text label="SolarEdgeCloud" icon=line { 
 			Webview url="https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk?guid=35f0e451-ba70-4008-968b-414eaedf1395" height=30
 			}
 	}
 	Frame label="Condizionamento" {
 		Default item=MeterWatts_R220P_QE_ZW11
-		Setpoint item=DaikinACUnit_SetPoint_All minValue=16 maxValue=30 step=0.5
+		Switch item=gORDaikinPower mappings=[ON="ON", OFF="OFF"]
+		Selection item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
+		Setpoint item=gEqualityDaikinSetPoint minValue=16 maxValue=30 step=0.5
+		Text item=gAvgDaikinTemp
+		
 		Text label="Base" icon=climate {
-			Switch item=gORCondSwitch  mappings=[ON="ON", OFF="OFF"] 
+			Switch item=gORDaikinPower  mappings=[ON="ON", OFF="OFF"] 
 			Switch item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
 			Switch item=DaikinACUnit_Power_Studio mappings=[ON="ON", OFF="OFF"]
 			Setpoint item=DaikinACUnit_SetPoint_Studio minValue=16 maxValue=30 step=0.5
@@ -79,7 +81,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Setpoint item=DaikinACUnit_SetPoint_Studio visibility=[DaikinACUnit_Power_Studio==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Studio mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
 			//	Selection item=DaikinACUnit_SpecialMode_Studio mappings=["OFF"="Off", "STREAMER"="Streamer", "ECO"="ECO", "POWERFUL"="PowerFull", "POWERFUL & STREAMER"="PowerFull e Streamer", "ECO & STREAMER"="ECO e Streamer"]
-				Selection item=DaikinACUnit_Fan_Studio mappings=["OFF"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Studio==ON]
+				Selection item=DaikinACUnit_Fan_Studio mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinACUnit_Power_Studio==ON]
 				Selection item=DaikinACUnit_Fan_Movement_Studio mappings=["STOPPED"="Ferma", "VERTICAL"="Verticale", "HORIZONTAL"="Orizzontale", "VERTICAL_AND_HORIZONTAL"="Verticale e orizzontale"] visibility=[DaikinACUnit_Power_Studio==ON]
 				Text item=DaikinACUnit_IndoorTemperature_Studio
 				Text item=DaikinACUnit_OutdoorTemperature_Studio
@@ -117,7 +119,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 	Frame label="Riscaldamento"	{
 		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
 		Text item=SwitchBinary2_Caldaia_Tecnico_ZW22 valuecolor=[ON="green", OFF="red"]
-		Switch item=Riscaldamento_Auto mappings=[OFF="Manuale", ON="Automatico"]
+		Switch item=Riscaldamento_Auto mappings=[0="Manuale", 1="Automatico", 2="Disattivato"]
 		Default item=Riscaldamento_Auto_SP visibility=[Riscaldamento_Auto==ON]
 		Setpoint item=Riscaldamento_ManualSetPoint label="SetPoint Manuale [%.1f °C]" minValue=15 maxValue=25 step=0.5 visibility=[Riscaldamento_Auto==OFF] //Set temperatura
 	}	
@@ -126,8 +128,6 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Text item=Presence label="C'è qualcuno" visibility=[Presence==ON] 
 		Switch item=Presence_Auto label="Presenza" mappings=[OFF="Disabilitata", ON="Abilitata"]
 	}
-
-	
 	// Frame label="SystemInfo" {
 	// 	Group item=gSystemInfo
 	// }
@@ -137,22 +137,22 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		// 		Text item=MeterKwh_Frigorifero_Cucina_ZW3 icon="energy"
 		// 		Text item=SensorPower_Frigorifero_Cucina_ZW3 icon="energy"
 		// }
-		Text label="Camera Cameretta" icon="bedroom" {
+		Text label="Cameretta" icon="bedroom" {
 			//Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="Premi"]
-			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == OFF]
-			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == ON]
-			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == OFF]
-			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == ON]
+			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 icon=switch mappings=[ON="ACCENDI"] visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == OFF]
+			Switch item=SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 icon=switch mappings=[OFF="SPEGNI"] visibility=[SwitchBinary1_LuceLatoPorta_Cameretta_ZW18 == ON]
+			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 icon=switch mappings=[ON="ACCENDI"]  visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == OFF]
+			Switch item=SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 icon=switch  mappings=[OFF="SPEGNI"] visibility=[SwitchBinary2_LumettiLatoPorta_Cameretta_ZW18 == ON]
 			Text item=SensorBinary1_IRMotion_Cameretta_ZW17
 			Text item=SensorBinary2_IRTamper_Cameretta_ZW17
 			//Text item=FGBS001_17_sensor_temperature3 icon="temperature"
 			Default item=OffSetTemperature3_DS1820_Cameretta_ZW17 icon="temperature"
 		}
 		Text label="Salotto" icon="player" {
-			Switch item=SwitchBinary2_TV_Salotto_ZW22 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary2_TV_Salotto_ZW22 == OFF]
-			Switch item=SwitchBinary2_TV_Salotto_ZW22 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary2_TV_Salotto_ZW22 == ON]
-			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 mappings=[ON="ACCENDI"] icon="switch-off" visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == OFF]
-			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 mappings=[OFF="SPEGNI"] icon="switch-on" visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == ON]
+			Switch item=SwitchBinary2_TV_Salotto_ZW22 icon=switch mappings=[ON="ACCENDI"] visibility=[SwitchBinary2_TV_Salotto_ZW22 == OFF]
+			Switch item=SwitchBinary2_TV_Salotto_ZW22 icon=switch mappings=[OFF="SPEGNI"]  visibility=[SwitchBinary2_TV_Salotto_ZW22 == ON]
+			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 icon=switch mappings=[ON="ACCENDI"] visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == OFF]
+			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 icon=switch mappings=[OFF="SPEGNI"] visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == ON]
 			Default item=Prodino_temp
 			Default item=Prodino_umid
 		}
@@ -227,8 +227,9 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Default item=AlarmMotion_MotionSensor_Studio_ZW10
 				Default item=BatteryLevel_MotionSensor_Studio_ZW10
 			}
-			Text label="WallPlug" icon="cellar"	{
+			Text label="WallPlugOsram" icon="cellar"	{
 			 	Switch item=Osram01S
+				Default item=Osram01L 
 			 }
 			Text label="Energy Driven Switch C" icon="cellar"{
 				Text item=MeterVoltage_R220P_QE_ZW11
@@ -289,23 +290,47 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			Text label="CM3-Home" icon="cellar" {
 				Text item=Owcm3home
 			}
+			Text label="Aqara1 Cameretta" icon="cellar" {
+				Text item=Aqara1T
+				Text item=Aqara1P
+				Text item=Aqara1H
+				Text item=Aqara1V
+				Text item=Aqara1B
+				Text item=Aqara1L
+			}
+			Text label="Aqara2 Soggiorno" icon="cellar" {
+				Text item=Aqara2T
+				Text item=Aqara2P
+				Text item=Aqara2H
+				Text item=Aqara2V
+				Text item=Aqara2B
+				Text item=Aqara2L
+			}
+			Text label="Lumi1 Corridoio" icon="cellar" {
+				Text item=Lumi1T
+				Text item=Lumi1H
+				Text item=Lumi1V
+				Text item=Lumi1B
+				Text item=Lumi1L
+			}
 		}
 	}
 	Frame label="Gruppi" {
 			Group item=gTemperatura label="Temperature" icon="temperature"
 		//	Group item=gFritz label="Router" icon="settings"
 	}
-	
-
 	Frame label="System"  {
-		Text label="Dispositivi IP" icon="network" {
+		Text label="Dispositivi IP" icon="network-on" {
 		Text item=CondSalottoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondCamerettaIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondStudioIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
-		Text item=CondLettoP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
-		Text item=Repeater1750 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=CondLettoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Repeater1750E icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=Repeater1160 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Repeater310 icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]	
 		Text item=Prodino icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=SolarEdgeInverter icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
+		Text item=Cm3Panel icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		}
 		Text label="Hardware" icon="settings"{
 	//	Selection item=cm3panel label="CM3-Panel" mappings=[Startx="StartX", PowerOff="Shut down", Reboot="Reboot"]
@@ -334,6 +359,8 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		{
 			Text label="Camera1" icon=camera {
 			Video url="http://192.168.178.58:8081"  encoding="mjpeg"
+			//Text label="HLS Video Stream" icon="camera"{Video url="http://192.168.178.2:6554/ipcamera.m3u8" encoding="hls"}
+
 			}
 		
 			Text label="Camera2" icon=camera {

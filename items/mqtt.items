@@ -1,10 +1,12 @@
+Group:Number:AVG    gAvgUmidita    "Umidità [%.1f %%]"
+
 // Prodino
-String Prodino0_in1 "Stato Antifurto [%s]" <alarm> (gAll, gAntifurto) ["iss:type:DevDoor","iss:room:Antifurto","iss:icon:alarm"]    {channel="mqtt:topic:myUnsecureBroker:prodino:alarmpanel"}
+String                  Prodino0_in1     "Stato Antifurto [%s]"             <alarm>               (gAll, gAntifurto)                                  ["iss:type:DevDoor","iss:room:Antifurto","iss:icon:alarm"]    {channel="mqtt:topic:myUnsecureBroker:prodino:alarmpanel"}
 //Switch prodino0_in2 "In 2 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-1.*]"}
 //Switch prodino0_in3 "In 3 Status [%s]" 	 (gAll, gAntifurto)   {mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-2.*]"}
 //Switch prodino0_in4 "In 4 Status [%s]"  (gAll, gAntifurto)	{mqtt="<[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-3.*]"}
 // Switch prodino0_out1 "Key gAntifurto"    <switch>  {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-0-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-0-0], <[myUnsecureBroker:/KMP/ProDinoWiFi/nInfo:state:MAP(prodino.map):optoIn-0.*]"}
-Switch Prodino0_out1 "Chiave"    <switch> (gAll, gAntifurto) ["iss:type:DevSwitch","iss:room:Antifurto"] {channel="mqtt:topic:myUnsecureBroker:prodino:alarmkey", expire="2s,command=OFF"}
+Switch                  Prodino0_out1    "Chiave"                           <switch>              (gAll, gAntifurto)                                  ["iss:type:DevSwitch","iss:room:Antifurto"]                   {channel="mqtt:topic:myUnsecureBroker:prodino:alarmkey", expire="2s,command=OFF"}
 //Switch prodino0_out2 "Out 2"           (gAll, gAntifurto)      {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-1-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-1-0]"}
 //Switch prodino0_out3 "Out 3"           (gAll, gAntifurto)     {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-2-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-2-0]"}
 //Switch prodino0_out4 "Out 4"           (gAll, gAntifurto)     {mqtt=">[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:ON:rel-3-1], >[myUnsecureBroker:/KMP/ProDinoWiFi/Cmd:command:OFF:rel-3-0]"}
@@ -13,7 +15,30 @@ Switch Prodino0_out1 "Chiave"    <switch> (gAll, gAntifurto) ["iss:type:DevSwitc
 //Number Prodino_umid "Antifurto Umidità [%.1f %%]"     <humidity> (gAll, gAntifurto, gInfluxdb)  {channel="mqtt:topic:myUnsecureBroker:prodino:umid_prodino"}
 
 //StudioLuce 
-Switch StudioLuce "Luce Studio" <light> (gAll, gStudio) { ga="Light" [roomHint="Studio"]}
+Switch                  StudioLuce       "Luce Studio"                      <light>               (gAll, gStudio)                                                                                                   {ga="Light" [roomHint="Studio"]}
 
 //Cm3Panel
-String cm3panel "CM3Panel" <settings> {channel="mqtt:topic:myUnsecureBroker:cm3panel:cm3panel-startx"}
+String                  cm3panel         "CM3Panel"                         <settings>                                                                                                                              {channel="mqtt:topic:myUnsecureBroker:cm3panel:cm3panel-startx"}
+
+Number:Temperature      Aqara1T          "Cameretta Aqara1T [%.1f °C]"      <temperature>         (gAll, gTemperatura, gAvgTemperatura, gInfluxdb)                                                                  {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:temperature"}
+Number:Pressure         Aqara1P          "Cameretta Aqara1P [%.1f mbar]"    <pressure>            (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:pressure"}
+Number:Dimensionless    Aqara1H          "Cameretta Aqara1H [%.1f %%]"      <humidity>            (gAll, gUmidita, gAvgUmidita, gInfluxdb)                                                                          {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:humidity"}
+Number:Dimensionless    Aqara1V          "Cameretta Aqara1V [%.0f mV]"      <energy>              (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:voltage"}
+Number:Dimensionless    Aqara1B          "Cameretta Aqara1B [%.0f %%]"      <batterylevel>        (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:battery"}
+Number:Dimensionless    Aqara1L          "Cameretta Aqara1L link [%.0f]"    <qualityofservice>    (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:linkquality"}
+
+Number:Temperature      Aqara2T          "Soggiorno Aqara2T [%.1f °C]"      <temperature>         (gAll, gTemperatura, gAvgTemperatura, gInfluxdb)                                                                  {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:temperature"}
+Number:Pressure         Aqara2P          "Soggiorno Aqara2P [%.1f mbar]"    <pressure>            (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:pressure"}
+Number:Dimensionless    Aqara2H          "Soggiorno Aqara2H [%.1f %%]"      <humidity>            (gAll, gUmidita, gAvgUmidita, gInfluxdb)                                                                          {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:humidity"}
+Number:Dimensionless    Aqara2V          "Soggiorno Aqara2V [%.0f mV]"      <energy>              (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:voltage"}
+Number:Dimensionless    Aqara2B          "Soggiorno Aqara2B [%.0f %%]"      <batterylevel>        (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:battery"}
+Number:Dimensionless    Aqara2L          "Soggiorno Aqara2L link [%.0f]"    <qualityofservice>    (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_soggiorno:linkquality"}
+
+Number:Temperature      Lumi1T           "Corridoio Lumi1T [%.1f °C]"       <temperature>         (gAll, gTemperatura, gAvgTemperatura, gInfluxdb)                                                                  {channel="mqtt:topic:myUnsecureBroker:xiaomi_lumi_corridoio:temperature"}
+Number:Dimensionless    Lumi1H           "Corridoio Lumi1H [%.1f %%]"       <humidity>            (gAll, gUmidita, gAvgUmidita, gInfluxdb)                                                                          {channel="mqtt:topic:myUnsecureBroker:xiaomi_lumi_corridoio:humidity"}
+Number:Dimensionless    Lumi1V           "Corridoio Lumi1V  [%.0f mV]"      <energy>              (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_lumi_corridoio:voltage"}
+Number:Dimensionless    Lumi1B           "Corridoio Lumi1B [%.0f %%]"       <batterylevel>        (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_lumi_corridoio:battery"}
+Number:Dimensionless    Lumi1L           "Corridoio Lumi1L link [%.0f]"     <qualityofservice>    (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:xiaomi_lumi_corridoio:linkquality"}
+
+Switch                  Osram01S         "Presa"                            <switch>              (gAll, gSalone)                                                                                                   {channel="mqtt:topic:myUnsecureBroker:osram:set"}
+Number:Dimensionless    Osram01L         "Presa link [%.1f]"                <qualityofservice>    (gAll, gInfluxdb)                                                                                                 {channel="mqtt:topic:myUnsecureBroker:osram:linkquality"}

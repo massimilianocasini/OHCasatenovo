@@ -9,3 +9,11 @@
 // then
 //     Scena.postUpdate(1)
 // end
+
+rule "reset Variabili riscaldamento alla partenza "
+when
+    System started
+then
+    Riscaldamento_Auto.postUpdate(DIS)
+    Riscaldamento_ManualSetPoint.postUpdate(18)
+end
