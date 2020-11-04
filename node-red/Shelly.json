@@ -1,0 +1,135 @@
+[
+    {
+        "id": "d3fe4c24.033fa",
+        "type": "tab",
+        "label": "Shelly",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "59dfb4c7.fa2a5c",
+        "type": "mqtt in",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "topic": "stat/StudioLuce/POWER",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a716e172.465a8",
+        "x": 218.5,
+        "y": 347,
+        "wires": [
+            [
+                "bc2bf194.41d28"
+            ]
+        ]
+    },
+    {
+        "id": "51eb1a18.9b3fb4",
+        "type": "mqtt out",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "topic": "cmnd/StudioLuce/POWER",
+        "qos": "",
+        "retain": "",
+        "broker": "a716e172.465a8",
+        "x": 583.5,
+        "y": 226,
+        "wires": []
+    },
+    {
+        "id": "243e2e58.f0cad2",
+        "type": "openhab2-in",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "StudioLuce",
+        "x": 206.5,
+        "y": 228,
+        "wires": [
+            [
+                "51eb1a18.9b3fb4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "bc2bf194.41d28",
+        "type": "openhab2-out",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "StudioLuce",
+        "topic": "ItemUpdate",
+        "payload": "",
+        "x": 462.5,
+        "y": 347,
+        "wires": [
+            [
+                "6fc76df0.363494"
+            ]
+        ]
+    },
+    {
+        "id": "6fc76df0.363494",
+        "type": "debug",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 701,
+        "y": 347,
+        "wires": []
+    },
+    {
+        "id": "609cbd67.7ff524",
+        "type": "mqtt in",
+        "z": "d3fe4c24.033fa",
+        "name": "",
+        "topic": "tele/StudioLuce/SENSOR",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a716e172.465a8",
+        "x": 237,
+        "y": 108,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a716e172.465a8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Localhost",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "3fc4d16e.7deaae",
+        "type": "openhab2-controller",
+        "z": "",
+        "name": "cm3home",
+        "protocol": "http",
+        "host": "localhost",
+        "port": "8080",
+        "path": "",
+        "username": "",
+        "password": ""
+    }
+]

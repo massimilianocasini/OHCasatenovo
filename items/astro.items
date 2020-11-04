@@ -1,4 +1,4 @@
-Group gAstroRadation
+Group gAstroRadation 
 //Astro 
 DateTime Sunrise_Time "Il Sole sorge alle [%1$tH:%1$tM]"      <sunrise>	{channel="astro:sun:home:rise#start"}
 DateTime Sunset_Time  "Il Sole tramonta alle [%1$tH:%1$tM]"  <sunset>	{channel="astro:sun:home:set#start"}

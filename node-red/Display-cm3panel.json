@@ -1,0 +1,621 @@
+[
+    {
+        "id": "c5160b96.4c99f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "78c858bf.f88318",
+        "type": "mqtt in",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "topic": "cm3panel/cm3shell",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e266e512.76d978",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "2a6b4762.6103b8",
+                "b6dacdea.93a15"
+            ]
+        ]
+    },
+    {
+        "id": "2a6b4762.6103b8",
+        "type": "exec",
+        "z": "c5160b96.4c99f8",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c62b6d29.4a8be",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Restart chromium",
+        "props": [
+            {
+                "p": "payload",
+                "v": "sudo /bin/systemctl restart startx",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "string"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo /bin/systemctl restart startx",
+        "payloadType": "str",
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "2a6b4762.6103b8"
+            ]
+        ]
+    },
+    {
+        "id": "212a0b9b.b38574",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Reboot",
+        "props": [
+            {
+                "p": "payload",
+                "v": "sudo reboot",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "string"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo reboot",
+        "payloadType": "str",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "2a6b4762.6103b8"
+            ]
+        ]
+    },
+    {
+        "id": "942ed6e6.cb58d8",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Halt",
+        "props": [
+            {
+                "p": "payload",
+                "v": "sudo halt",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "string"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo halt",
+        "payloadType": "str",
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "2a6b4762.6103b8"
+            ]
+        ]
+    },
+    {
+        "id": "41b6ffea.23396",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Restart nodered",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo systemctl restart nodered",
+        "payloadType": "str",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "2a6b4762.6103b8"
+            ]
+        ]
+    },
+    {
+        "id": "5baf931d.13f1fc",
+        "type": "switch",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "",
+                "vt": "num"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 990,
+        "y": 340,
+        "wires": [
+            [
+                "56b5688c.1eafd8"
+            ],
+            [
+                "48a040a6.29a25"
+            ]
+        ]
+    },
+    {
+        "id": "48a040a6.29a25",
+        "type": "function",
+        "z": "c5160b96.4c99f8",
+        "name": "Ping Failed",
+        "func": "var count = global.get(\"count\")||0;\nvar msg1 ={};\nvar msg2 ={};\n\ncount++;\nnode.status({fill:\"green\",shape:\"ring\",text:count});\n\nif (count===10){\n    msg.payload = \n    {\n      content: \"CM3HOME non risponde al Ping dopo 10 tentativi\",\n        type: 'message',\n        chatId: 152196991\n    };\n    global.set(\"count\",count)\n    return [null, msg];\n}\nelse if (count===120) {\n    msg1.payload=\"sudo shutdown -r +1\";\n    msg2.payload = \n    {\n      content: \"CM3PANEL si riavvierà tra 1 minuto\",\n        type: 'message',\n        chatId: 152196991\n    };\n    global.set(\"count\",count)\n    return [msg1, msg2];\n} else {\n    global.set(\"count\",count)\n    return [null, null];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1150,
+        "y": 407,
+        "wires": [
+            [
+                "dfc5d583.c21f88",
+                "c802e307.f1913"
+            ],
+            [
+                "39f0e490.43d3cc",
+                "6f00d912.42adc8"
+            ]
+        ]
+    },
+    {
+        "id": "56b5688c.1eafd8",
+        "type": "function",
+        "z": "c5160b96.4c99f8",
+        "name": "Ping Ok",
+        "func": "global.set(\"count\",0);\nmsg.payload=\"Ok\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1200,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dfc5d583.c21f88",
+        "type": "exec",
+        "z": "c5160b96.4c99f8",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1370,
+        "y": 300,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f35a62f4.61dc8",
+        "type": "comment",
+        "z": "c5160b96.4c99f8",
+        "name": "LAN TEST",
+        "info": "",
+        "x": 720,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "ff3085a7.5f18b8",
+        "type": "function",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "func": "var count = context.get('count')||0;\nvar timeout=60;\n\nif (msg.payload===1) {\n    count=0;\n    context.set('count',count);\n    msg.payload=0;\n    return msg;\n}\n\nif (msg.payload===\"tick\") {\n    if (count<timeout) {\n        count=count+1;\n        context.set('count',count);\n    }\n    node.status({fill:\"green\",shape:\"ring\",text:count});\n    \n  //Bassa luminosità\n    \n    if (count>=timeout) {\n        msg.payload=50;\n        return msg;\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 680,
+        "wires": [
+            [
+                "79d134c6.d57e0c",
+                "7448118e.657a8"
+            ]
+        ]
+    },
+    {
+        "id": "246ad850.dc0738",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "tick",
+        "payloadType": "str",
+        "x": 290,
+        "y": 596,
+        "wires": [
+            [
+                "ff3085a7.5f18b8"
+            ]
+        ]
+    },
+    {
+        "id": "c96d6224.a5378",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Massima luminosità 0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 540,
+        "y": 520,
+        "wires": [
+            [
+                "79d134c6.d57e0c"
+            ]
+        ]
+    },
+    {
+        "id": "a897ba8b.7854d8",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "79d134c6.d57e0c"
+            ]
+        ]
+    },
+    {
+        "id": "ea54e517.71c5e8",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "Minima luminosità 100",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 540,
+        "y": 600,
+        "wires": [
+            [
+                "79d134c6.d57e0c"
+            ]
+        ]
+    },
+    {
+        "id": "a102892.9c9c778",
+        "type": "mqtt out",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "topic": "cm3panel/temp",
+        "qos": "",
+        "retain": "",
+        "broker": "e266e512.76d978",
+        "x": 900,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e29aca05.da5478",
+        "type": "inject",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "repeat": "15",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "vcgencmd measure_temp",
+        "payloadType": "str",
+        "x": 313,
+        "y": 838,
+        "wires": [
+            [
+                "f86c5421.d51938"
+            ]
+        ]
+    },
+    {
+        "id": "f86c5421.d51938",
+        "type": "exec",
+        "z": "c5160b96.4c99f8",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 620,
+        "y": 860,
+        "wires": [
+            [
+                "a102892.9c9c778"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "79d134c6.d57e0c",
+        "type": "pi-gpiod out",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "host": "localhost",
+        "port": 8888,
+        "pin": "22",
+        "set": "",
+        "level": "0",
+        "out": "pwm",
+        "sermin": "1000",
+        "sermax": "2000",
+        "x": 760,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "37b7c397.b40e6c",
+        "type": "rpi-mouse",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "butt": "1",
+        "x": 269,
+        "y": 683,
+        "wires": [
+            [
+                "ff3085a7.5f18b8"
+            ]
+        ]
+    },
+    {
+        "id": "7448118e.657a8",
+        "type": "debug",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "b6dacdea.93a15",
+        "type": "debug",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "be480cd1.8b855",
+        "type": "ping",
+        "z": "c5160b96.4c99f8",
+        "mode": "timed",
+        "name": "",
+        "host": "cm3home.local",
+        "timer": "1",
+        "inputs": 0,
+        "x": 820,
+        "y": 180,
+        "wires": [
+            [
+                "5baf931d.13f1fc"
+            ]
+        ]
+    },
+    {
+        "id": "39f0e490.43d3cc",
+        "type": "telegram sender",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "bot": "e159ed8d.793c5",
+        "x": 1360,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f00d912.42adc8",
+        "type": "debug",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1430,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c802e307.f1913",
+        "type": "debug",
+        "z": "c5160b96.4c99f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1430,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e266e512.76d978",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "cm3home",
+        "broker": "cm3home.local",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "e159ed8d.793c5",
+        "type": "telegram bot",
+        "z": "",
+        "botname": "bot1",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]

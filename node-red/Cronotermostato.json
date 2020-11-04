@@ -1,0 +1,940 @@
+[
+    {
+        "id": "f792b57.326bb48",
+        "type": "tab",
+        "label": "Cronotermostato",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "adf3caed.d9bbc8",
+        "type": "ui_template",
+        "z": "f792b57.326bb48",
+        "group": "edd62308.5b6eb",
+        "name": "css etc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n\n.filled { height: 48px !important;padding: 0 !important; margin: 0 !important;}\n.nr-dashboard-template { padding: 0; margin: 0; background-color:black}\n.rounded { border-radius: 12px 12px 12px 12px;}\n.bigfont { font-size: 18px;}\n.smallfont { font-size: 12px;}\n.thedays { cursor:pointer; vertical-align:bottom; height:48px; }\n.the2px  { background-color: #9E9E9E; height:2px; }\n.theblocks {width:100%; height:0%; background-color:#4CAF50; }\n.greybuttons { background-color:#cecac536 !important; width:48px; border: none;}\n.thetemps { cursor:pointer; font-size:70%; color:#9E9E9E !important; }\n.smallheadings { color:blue; font-size:100%; }\n\n</style>\n\n<script>\nvar current=1;\n\n$('.vibrate').on('click', function() {\n  navigator.vibrate(100);\n});\n\nfunction restore_bg(x) {\n            $(this).css(\"background-color\", x);\n    };\n\n$('.touched').on('mousedown', function() {\n    \n    var x= $(this).css(\"background-color\");\n    $(this).css(\"background-color\", \"yellow\");\n    \n    setTimeout(restore_bg.bind(this,x),50);\n    navigator.vibrate(80);\n    });\n    \n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "x": 385.55550384521484,
+        "y": 116.33331871032715,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad58b5aa.16d818",
+        "type": "ui_template",
+        "z": "f792b57.326bb48",
+        "group": "edd62308.5b6eb",
+        "name": "Settings page",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\nvar thedays=[\"DOMENICA\",\"LUNEDI\",\"MARTEDI\",\"MERCOLEDI\",\"GIOVEDI\",\"VENERDI\",\"SABATO\"];\nvar ID = \"AA\";\n\nvar last=29;\n\nfunction bar(mm,val)\n{\nif (val==14) { $(mm).height(\"12%\"); $(mm).css('background-color', '#1E88E5'); } //blue\nif (val==15) { $(mm).height(\"16%\"); $(mm).css('background-color', '#039BE5'); }\nif (val==16) { $(mm).height(\"20%\"); $(mm).css('background-color', '#00ACC1'); } \nif (val==17) { $(mm).height(\"24%\"); $(mm).css('background-color', '#039BE5'); } // cyan\nif (val==18) { $(mm).height(\"28%\"); $(mm).css('background-color', '#00ACC1'); }\nif (val==19) { $(mm).height(\"32%\"); $(mm).css('background-color', '#00897B'); } \nif (val==20) { $(mm).height(\"36%\"); $(mm).css('background-color', '#388E3C'); } // green\nif (val==21) { $(mm).height(\"40%\"); $(mm).css('background-color', '#689F38'); }\nif (val==22) { $(mm).height(\"44%\"); $(mm).css('background-color', '#C0CA33'); }\nif (val==23) { $(mm).height(\"48%\"); $(mm).css('background-color', '#FDD835'); } // yellow\nif (val==24) { $(mm).height(\"52%\"); $(mm).css('background-color', '#FBC02D'); }\nif (val==25) { $(mm).height(\"56%\"); $(mm).css('background-color', '#FFA000'); }\nif (val==26) { $(mm).height(\"60%\"); $(mm).css('background-color', '#E64A19'); } // red\n    \n}\n\nfunction stat(text)\n{\n$(\"#info\"+ID).text(text);\nvar tm=setTimeout(function(){ $(\"#info\"+ID).text(\"Ok\"); clearTimeout(tm);}, 10000); //Tempo permanenza selezione\n}\n\nfunction selec(val,sta)\n{\nvar w=\"#td\"+val+ID;\n if (sta) $(w).css('background-color','#4CAF50'); else $(w).css('background-color','#FFC107');\n}\n\n    (function(scope){\n        scope.ID = ID;\n        scope.send({payload: '29'})\n        scope.$watch('msg', function(msg) {\n            selec(last,0); last=msg.selector; selec(last,1);\n            for (var x=0; x<24; x++) \n                { \n                    var w=\"#t\"+x+ID; bar(w,msg.timing[((msg.days-1)*24)+x]); \n                    var v=\"#v\"+x+ID; $(v).text(msg.timing[((msg.days-1)*24)+x]+\"°\")\n                } \n            for (var x=0; x<2; x++) { var w=\"#s\"+x+ID; $(w).text(msg.timing[168+x]); }\n             $(\"#d0\"+ID).text(thedays[msg.days-1]);\n             if ((last>4) &&(last<29))\n                 $(\"#current\"+ID).text(msg.timing[((msg.days-1)*24)+last-5] + \"°\");\n             else\n                 $(\"#current\"+ID).text(\"-\");\n                 \n            if (msg.foryou!=\"\") { stat(msg.foryou);  }\n            \n             \n        });\n \n    })(scope);\n      \n\n</script>\n<table width=\"100%\">\n    \n    <tr>\n        <td colspan=24><center><span class=\"smallheadings\" style=\"color:red\" >Giorno</span></center></td>\n     <!--   <td colspan=3><center><span class=\"smallheadings\">Clima AUTO</span></center></td>\n        <td colspan=3><center><span class=\"smallheadings\">Fuori casa</span></center></td> -->\n    </tr>\n   \n    <tr>\n        <td ng-click=\"send({payload: '29'})\" colspan=24><center><span id=\"{{ 'd0' + ID }}\" style=\"cursor:pointer;color:red;font-size:120%\">LUNEDI</span></center></td>\n     <!--   <td ng-click=\"send({payload: '1'})\" colspan=3><center><span id=\"s0\" style=\"color:blue;font-size:120%\">14</span></center></td>\n        <td ng-click=\"send({payload: '2'})\" colspan=3><center><span id=\"s1\" style=\"color:blue;font-size:120%\">20</span></center></td> -->\n    </tr>\n    \n    <tr style=\"height:2px\">\n        <td id=\"{{ 'td29' + ID }}\" colspan=24 style=\"background-color:#9E9E9E;height:2px;\"></td> \n     <!--   <td id=\"td1\" colspan=3 style=\"background-color:#9E9E9E;height:2px;\"></td>\n        <td id=\"td2\" colspan=3 style=\"background-color:#9E9E9E;height:2px;\"></td> -->\n    </tr>  \n\n    <tr>\n        <td ng-click=\"send({payload: '5'})\" class=\"thedays\"><span id=\"{{ 'v0' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't0' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '6'})\" class=\"thedays\"><span id=\"{{ 'v1' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't1' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '7'})\" class=\"thedays\"><span id=\"{{ 'v2' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't2' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '8'})\" class=\"thedays\"><span id=\"{{ 'v3' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't3' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '9'})\" class=\"thedays\"><span id=\"{{ 'v4' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't4' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '10'})\" class=\"thedays\"><span id=\"{{ 'v5' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't5' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '11'})\" class=\"thedays\"><span id=\"{{ 'v6' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't6' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '12'})\" class=\"thedays\"><span id=\"{{ 'v7' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't7' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '13'})\" class=\"thedays\"><span id=\"{{ 'v8' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't8' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '14'})\" class=\"thedays\"><span id=\"{{ 'v9' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't9' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '15'})\" class=\"thedays\"><span id=\"{{ 'v10' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't10' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '16'})\" class=\"thedays\"><span id=\"{{ 'v11' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't11' + ID }}\" class=\"theblocks\"></div></td>\n    </tr>  \n    \n    <tr style=\"height:2px\">\n        <td id=\"{{ 'td5' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td6' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td7' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td8' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td9' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td10' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td11' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td12' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td13' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td14' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td15' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td16' + ID }}\" class=\"the2px\"></td>\n    </tr>   \n    \n    <tr>\n        <td align=\"center\">0</td>\n        <td align=\"center\">1</td>\n        <td align=\"center\">2</td>\n        <td align=\"center\">3</td>\n        <td align=\"center\">4</td>\n        <td align=\"center\">5</td>\n        <td align=\"center\">6</td>\n        <td align=\"center\">7</td>\n        <td align=\"center\">8</td>\n        <td align=\"center\">9</td>\n        <td align=\"center\">10</td>\n        <td align=\"center\">11</td>\n    </tr> \n    \n    <tr>\n        <td ng-click=\"send({payload: '17'})\" class=\"thedays\"><span id=\"{{ 'v12' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't12' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '18'})\" class=\"thedays\"><span id=\"{{ 'v13' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't13' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '19'})\" class=\"thedays\"><span id=\"{{ 'v14' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't14' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '20'})\" class=\"thedays\"><span id=\"{{ 'v15' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't15' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '21'})\" class=\"thedays\"><span id=\"{{ 'v16' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't16' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '22'})\" class=\"thedays\"><span id=\"{{ 'v17' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't17' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '23'})\" class=\"thedays\"><span id=\"{{ 'v18' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't18' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '24'})\" class=\"thedays\"><span id=\"{{ 'v19' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't19' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '25'})\" class=\"thedays\"><span id=\"{{ 'v20' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't20' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '26'})\" class=\"thedays\"><span id=\"{{ 'v21' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't21' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '27'})\" class=\"thedays\"><span id=\"{{ 'v22' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't22' + ID }}\" class=\"theblocks\"></div></td>\n        <td ng-click=\"send({payload: '28'})\" class=\"thedays\"><span id=\"{{ 'v23' + ID }}\" class=\"thetemps\"></span><div id=\"{{ 't23' + ID }}\" class=\"theblocks\"></div></td>\n    </tr>  \n    \n    <tr style=\"height:2px\">\n        <td id=\"{{ 'td17' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td18' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td19' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td20' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td21' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td22' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td23' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td24' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td25' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td26' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td27' + ID }}\" class=\"the2px\"></td>\n        <td id=\"{{ 'td28' + ID }}\" class=\"the2px\"></td>\n    </tr>  \n    \n    <tr>\n        <td align=\"center\">12</td>\n        <td align=\"center\">13</td>\n        <td align=\"center\">14</td>\n        <td align=\"center\">15</td>\n        <td align=\"center\">16</td>\n        <td align=\"center\">17</td>\n        <td align=\"center\">18</td>\n        <td align=\"center\">19</td>\n        <td align=\"center\">20</td>\n        <td align=\"center\">21</td>\n        <td align=\"center\">22</td>\n        <td align=\"center\">23</td>\n    </tr> \n    \n    <tr height=\"20px\">\n        <td colspan=2 class=\"smallheadings\" style=\"color:red\">Azioni:</td>\n\n        <td colspan=10 ><center><span id=\"{{ 'info' + ID }}\" class=\"smallheadings\" style=\"color:red\" ></span></center></td>\n\n    </tr>\n    \n    <tr height=\"10px\">\n        <td colspan=\"12\"></td>\n    </tr>\n\n    <tr style=\"height:48px\">\n        <td colspan=2>\n            <button class=\"vibrate filled touched smallfont rounded greybuttons\" ng-click=\"send({payload: 'd'})\"> \n               <ng-md-icon style=\"color: #fff;\" icon=\"keyboard_arrow_down\">\n                    <md-tooltip md-direction=\"bottom\">DECREMENTA</md-tooltip>\n                </ng-md-icon>\n            </button> \n        </td>\n        \n        <td colspan=2><center><span id=\"{{ 'current' + ID }}\" style=\"color:red;font-size:120%\">-</span></center></td>\n\n        <td colspan=2>\n            <button class=\"vibrate filled touched smallfont rounded greybuttons\" ng-click=\"send({payload: 'u'})\"> \n               <ng-md-icon style=\"color: #fff;\" icon=\"keyboard_arrow_up\">\n                    <md-tooltip md-direction=\"bottom\">INCREMENTA</md-tooltip>\n                </ng-md-icon>\n            </button> \n        </td>\n\n        <td colspan=2>\n            <button class=\"vibrate filled touched smallfont rounded greybuttons\" ng-click=\"send({payload: 'r'})\"> \n               <ng-md-icon style=\"color: #fff;\" icon=\"content_copy\">\n                    <md-tooltip md-direction=\"bottom\">COPIA</md-tooltip>\n                </ng-md-icon>\n            </button> \n        </td>\n\n\n        <td colspan=2>\n            <button class=\"vibrate filled touched smallfont rounded greybuttons\" ng-click=\"send({payload: 's'})\"> \n                 <ng-md-icon style=\"color: #fff;\" icon=\"save\">\n                    <md-tooltip md-direction=\"bottom\">SALVA</md-tooltip>\n                </ng-md-icon>\n            </button> \n        </td>\n\n        <td colspan=2>\n            <button class=\"vibrate filled touched smallfont rounded greybuttons\"  ng-click=\"send({payload: 'c'})\"> \n                 <ng-md-icon style=\"color: #fff;\" icon=\"cancel\">\n                    <md-tooltip md-direction=\"bottom\">ANNULLA</md-tooltip>\n                </ng-md-icon>\n            </button> \n        </td>\n        <td colspan=1></td>\n    </tr>\n\n</table>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "x": 405.55550384521484,
+        "y": 153.33331871032715,
+        "wires": [
+            [
+                "407e6882.69b108"
+            ]
+        ]
+    },
+    {
+        "id": "407e6882.69b108",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "Process controls",
+        "func": "if ( typeof context.days == 'undefined' ) context.days=1;\nif ( typeof context.selector == 'undefined' ) context.selector=29;\nif ( typeof context.saving == 'undefined' ) context.saving=1;\nif ( typeof context.global.timing == 'undefined' ) \n    {\n        context.global.timing=[\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,\n                        6,14\n                        ];\n        context.saving=1;                    \n    }\nvar timing=global.get(\"timing\");\n\nswitch (msg.payload)\n    {\n    case \"u\" :  if ((context.selector>1)&&(context.selector<29))\n                {\n                    timing[((context.days-1)*24)+context.selector-5]++; \n                    if (timing[((context.days-1)*24)+context.selector-5]>26){ timing[((context.days-1)*24)+context.selector-5]=26; msg.foryou=\"Limite raggiunto\";}\n                    else msg.foryou=\"Temperatura aumentata\";\n                }\n                if (context.selector==1) { if (timing[168+(context.selector-1)]<26) {  timing[168+(context.selector-1)]++; msg.foryou=\"Temperatura clima aumentata di 1°C\"; } else msg.foryou=\"Limite raggiunto\"; }\n                if (context.selector==2) { if (timing[169+(context.selector-1)]<26) {  timing[169+(context.selector-1)]++; msg.foryou=\"Temperatura fuori casa aumentata di 1°C\"; } else msg.foryou=\"Limite raggiunto\"; }\n                if (context.selector==29) { msg.foryou=\"Giorno successivo\"; context.days++; if (context.days>7) { context.days = 1; } }\n                break;\n    case \"d\" :  if ((context.selector>1)&&(context.selector<29))\n                {\n                    timing[((context.days-1)*24)+context.selector-5]--; \n                    if (timing[((context.days-1)*24)+context.selector-5]<14){ timing[((context.days-1)*24)+context.selector-5]=14; msg.foryou=\"Limite raggiunto\";}\n                    else msg.foryou=\"Temperatura decrementata\";\n                }\n                if (context.selector==1) { if (timing[168+(context.selector-1)]>12) { timing[168+(context.selector-1)]--; msg.foryou=\"Temperatura clima diminuita di 1°C\"; } else msg.foryou=\"Limite raggiunto\"; }\n                if (context.selector==2) { if (timing[169+(context.selector-1)]>12) { timing[169+(context.selector-1)]--; msg.foryou=\"Temperatura fuori casa diminuita di 1°C\"; } else msg.foryou=\"Limite raggiunto\"; }\n                if (context.selector==29) {  msg.foryou=\"Giorno precedente\";  context.days--; if (context.days < 1) { context.days = 7;  } }\n                break;\n    case 'r' :  if ((context.selector>=5)&&(context.selector<28))\n                        {\n                         timing[((context.days-1)*24)+context.selector-4]=timing[((context.days-1)*24)+context.selector-5];   \n                         context.selector++;\n                         msg.foryou=\"Temperatura copiata nello slot successivo\";\n                        }\n                if ((context.selector==29)&&(context.days<7))\n                        {\n                         for (var a=0;a<24;a++)\n                            {\n                             timing[((context.days)*24)+a]=timing[((context.days-1)*24)+a];   \n                            }\n                         context.days++;\n                         msg.foryou=\"Impostazioni copiate nel giorno successivo\";\n                        }\n                        else if(context.days==7)\n                            msg.foryou=\"Fine della settimana raggiunto!\";\n                break;\n    case 's': context.saving=0;  msg.foryou=\"Impostazioni salvate\"; break;\n    case '1':\n    case '2':\n    case '3':\n    case '4':\n    case '5':\n    case '6':\n    case '7':\n    case '8':\n    case '9':\n    case '10':\n    case '11':\n    case '12':\n    case '13':\n    case '14':\n    case '15':\n    case '16':\n    case '17':\n    case '18':\n    case '19':\n    case '20':\n    case '21':\n    case '22':\n    case '23':\n    case '24':\n    case '25':\n    case '26':\n    case '27':\n    case '28':\n    case '29': context.selector=parseInt(msg.payload);\n               if (msg.payload=='1') msg.foryou=\"Temperatura clima selezionata\"; \n               else if (msg.payload=='2') msg.foryou=\"Temperatura fuori casa selezionata\";\n               else if (msg.payload=='29') msg.foryou=\"Giorno selezionato\";\n               else  msg.foryou=\"Regolazione temperatura ore: \" + (parseInt(msg.payload)-5);\n    break;\n    case 'c' : msg.payload=\"niente\";  msg.foryou=\"Cambiamenti annullati\"; node.send([null,null,msg]);\n    }\n\nmsg.temperatures=context.temperatures;\nmsg.timing=timing;\nmsg.days=context.days;\nmsg.selector=context.selector;\n\nnode.send([msg,null,null]);\n\nif (context.saving===0) \n    { \n       msg.topic=\"\";\n        msg.timing=\"\";\n        msg.payload=JSON.stringify(timing);\n        node.send([null,msg,null]); \n        context.saving=1;\n    }\n    msg.foryou=\"\"",
+        "outputs": "3",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 628.5555038452148,
+        "y": 205.33331871032715,
+        "wires": [
+            [
+                "35b4fc46.528e74"
+            ],
+            [
+                "f49af1a4.1457"
+            ],
+            [
+                "e97ad286.f56e2"
+            ]
+        ]
+    },
+    {
+        "id": "3d1003a1.30400c",
+        "type": "inject",
+        "z": "f792b57.326bb48",
+        "name": "Once only",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "407e6882.69b108",
+                "700c1189.dd4cd"
+            ]
+        ]
+    },
+    {
+        "id": "66ae8c38.1b04c4",
+        "type": "inject",
+        "z": "f792b57.326bb48",
+        "name": "Every 10 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 142.55550384521484,
+        "y": 669.3333129882812,
+        "wires": [
+            [
+                "ab8d242b.32fb68",
+                "47fe82b5.033c1c"
+            ]
+        ]
+    },
+    {
+        "id": "40301637.dd38a8",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "Process heat",
+        "func": "var timing=global.get(\"timing\");\nvar now = new Date(msg.time);\nmsg.topic=\"SetPoint\"\n//msg.payload=timing[(now.getDay()*24)+now.getHours()-1];\nmsg.payload=timing[(now.getDay()*24)+now.getHours()-1];\nmsg.frost=timing[168];\nmsg.away=timing[169];\nnode.status({fill:\"blue\",shape:\"dot\",text:\"Set point \" + msg.payload + \"°C \" + msg.time});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 281.5555114746094,
+        "y": 438.33331298828125,
+        "wires": [
+            [
+                "8d0421ee.dfc2d",
+                "a0868c89.aa9c9"
+            ]
+        ]
+    },
+    {
+        "id": "f49af1a4.1457",
+        "type": "file",
+        "z": "f792b57.326bb48",
+        "name": "backup",
+        "filename": "/etc/openhab2/node-red/data/thermo_scheduler.log",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 817.5555038452148,
+        "y": 204.33331871032715,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "700c1189.dd4cd",
+        "type": "file in",
+        "z": "f792b57.326bb48",
+        "name": "Restore",
+        "filename": "/etc/openhab2/node-red/data/thermo_scheduler.log",
+        "format": "utf8",
+        "sendError": true,
+        "x": 606.5555038452148,
+        "y": 283.33331871032715,
+        "wires": [
+            [
+                "a705aa47.7f0ac8"
+            ]
+        ]
+    },
+    {
+        "id": "a705aa47.7f0ac8",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "Restore data from SD",
+        "func": "context.global.timing=JSON.parse(msg.payload);\nmsg.payload=\"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 806.5555038452148,
+        "y": 283.33331871032715,
+        "wires": [
+            [
+                "29fcc7fc.eae1a8"
+            ]
+        ]
+    },
+    {
+        "id": "d1059b5.2603468",
+        "type": "link in",
+        "z": "f792b57.326bb48",
+        "name": "restore",
+        "links": [
+            "e97ad286.f56e2"
+        ],
+        "x": 467.05550384521484,
+        "y": 304.33331871032715,
+        "wires": [
+            [
+                "700c1189.dd4cd"
+            ]
+        ]
+    },
+    {
+        "id": "e97ad286.f56e2",
+        "type": "link out",
+        "z": "f792b57.326bb48",
+        "name": "restore",
+        "links": [
+            "d1059b5.2603468"
+        ],
+        "x": 780.0555038452148,
+        "y": 241.33331871032715,
+        "wires": []
+    },
+    {
+        "id": "3e8c11b6.8f44fe",
+        "type": "link in",
+        "z": "f792b57.326bb48",
+        "name": "restoreSD",
+        "links": [
+            "29fcc7fc.eae1a8"
+        ],
+        "x": 466.55550384521484,
+        "y": 205.33331871032715,
+        "wires": [
+            [
+                "407e6882.69b108"
+            ]
+        ]
+    },
+    {
+        "id": "29fcc7fc.eae1a8",
+        "type": "link out",
+        "z": "f792b57.326bb48",
+        "name": "restoreSD",
+        "links": [
+            "3e8c11b6.8f44fe"
+        ],
+        "x": 960.5555038452148,
+        "y": 283.33331871032715,
+        "wires": []
+    },
+    {
+        "id": "35b4fc46.528e74",
+        "type": "link out",
+        "z": "f792b57.326bb48",
+        "name": "setSettings",
+        "links": [
+            "4fd040a7.e11a2"
+        ],
+        "x": 781.0555038452148,
+        "y": 165.33331871032715,
+        "wires": []
+    },
+    {
+        "id": "4fd040a7.e11a2",
+        "type": "link in",
+        "z": "f792b57.326bb48",
+        "name": "setSettings",
+        "links": [
+            "35b4fc46.528e74"
+        ],
+        "x": 273.05550384521484,
+        "y": 153.33331871032715,
+        "wires": [
+            [
+                "ad58b5aa.16d818"
+            ]
+        ]
+    },
+    {
+        "id": "b4d72d9d.b2818",
+        "type": "comment",
+        "z": "f792b57.326bb48",
+        "name": "EDIT",
+        "info": "https://flows.nodered.org/flow/65f411e9e37745a4bbeef5926d052c97\n\nSettings page:\n-thedays2\n-ID2\n-last2\n-bar2\n-stat2\n-selec2\n\nProcess controls\n-days2\n-selector2\n-saving2\n-timing2\n-temperatures2\n\nRestore data from SD\n-timing2\n\nProcess heat\n-timing2\n\nBackup/Restore File read\nchange name of the file .log",
+        "x": 317.05550384521484,
+        "y": 66.33331871032715,
+        "wires": []
+    },
+    {
+        "id": "413a4975.397978",
+        "type": "moment",
+        "z": "f792b57.326bb48",
+        "name": "time",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Europe/Rome",
+        "adjAmount": "1",
+        "adjType": "hours",
+        "adjDir": "add",
+        "format": "",
+        "locale": "it_IT",
+        "output": "time",
+        "outputType": "msg",
+        "outTz": "Europe/Rome",
+        "x": 108.16659545898438,
+        "y": 438.77777099609375,
+        "wires": [
+            [
+                "40301637.dd38a8"
+            ]
+        ]
+    },
+    {
+        "id": "41b6a169.75c82",
+        "type": "openhab2-out",
+        "z": "f792b57.326bb48",
+        "name": "Caldaia",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "SwitchBinary2_Caldaia_Tecnico_ZW22",
+        "topic": "ItemCommand",
+        "payload": "",
+        "x": 1033.166748046875,
+        "y": 437.49993896484375,
+        "wires": [
+            [
+                "8f6920c1.c9c1f"
+            ]
+        ]
+    },
+    {
+        "id": "2a184855.ff27e8",
+        "type": "openhab2-in",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "gAvgTemperatura",
+        "x": 136.05551147460938,
+        "y": 297.1969299316406,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2c47f290.a614de",
+        "type": "ui_gauge",
+        "z": "f792b57.326bb48",
+        "name": "Gauge",
+        "group": "edd62308.5b6eb",
+        "order": 6,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Attuale",
+        "label": "°C",
+        "format": "{{msg.payload | number:0}}",
+        "min": 0,
+        "max": "35",
+        "colors": [
+            "#162ee3",
+            "#00e663",
+            "#ca3838"
+        ],
+        "seg1": "18",
+        "seg2": "25",
+        "x": 1030.3888549804688,
+        "y": 600.4443969726562,
+        "wires": []
+    },
+    {
+        "id": "8f6920c1.c9c1f",
+        "type": "ui_text",
+        "z": "f792b57.326bb48",
+        "group": "edd62308.5b6eb",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "Stato:",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1190.9444580078125,
+        "y": 436.22216796875,
+        "wires": []
+    },
+    {
+        "id": "b762d144.b156d",
+        "type": "ui_chart",
+        "z": "f792b57.326bb48",
+        "name": "Chart",
+        "group": "edd62308.5b6eb",
+        "order": 7,
+        "width": 6,
+        "height": "3",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": "",
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "x": 1038.4998779296875,
+        "y": 635.2222290039062,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f56cd59a.d90388",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "func": "var riscaldamentoAuto=flow.get('riscaldamentoAuto');\nvar riscaldamento;\nvar setPointManuale=flow.get('setPointManuale');\n\n\nif ((msg.payload===true)&&(riscaldamentoAuto!=2)) { \n    msg.payload=\"ON\";\n    }\nelse {\n    msg.payload=\"OFF\";\n    }\n    \nif (riscaldamentoAuto===1) {\n    riscaldamento=\"Automatico\";\n     node.status({fill:\"green\",shape:\"dot\",text:\"In \"+riscaldamento});\n}\nelse if (riscaldamentoAuto===0) {\n    riscaldamento=\"Manuale\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"In \"+riscaldamento});\n}\nelse if (riscaldamentoAuto===2){\n    riscaldamento=\"Disattivo\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"In \"+riscaldamento});\n}\n\n\n\n//node.status({fill:\"red\",shape:\"dot\",text:\"In \"+riscaldamento});\n//node.status({fill:\"blue\",shape:\"dot\",text:\"Stato \"+msg.payload});\nreturn msg;\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 884.964599609375,
+        "y": 409.70703125,
+        "wires": [
+            [
+                "41b6a169.75c82",
+                "4cee28e.7cbfed8"
+            ]
+        ]
+    },
+    {
+        "id": "4cee28e.7cbfed8",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1073.1109619140625,
+        "y": 355.8887939453125,
+        "wires": []
+    },
+    {
+        "id": "7efc9d1f.3ea914",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "Funzione originale",
+        "func": "var vsetPoint = global.get('vsetPoint')||0;\nvar vtemp= global.get('vtemp')||0;\nvar stato= flow.get('stato')|| 0\n\nif (msg.topic==\"SetPoint\")\n    {\n    global.set(\"vsetPoint\", msg.payload);\n    }\nelse\n    global.set(\"vtemp\", msg.payload.payload.value);\n\nif (vsetPoint>vtemp)\n    {msg.payload=\"ON\";\n    //flow.set('stato', 1);\n    }\n//else if (stato==1)\n    \nelse {msg.payload=\"OFF\";\n  //  flow.set('stato', 0);\n    }\nmsg.topic=\"\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 981.5554809570312,
+        "y": 88.33331298828125,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d0421ee.dfc2d",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "func": "var currentString;\nvar riscaldamentoAuto=flow.get('riscaldamentoAuto');\nvar setPointManuale=flow.get('setPointManuale');\nvar newMsg ={};\n\nif ((msg.topic==\"SetPoint\") && (riscaldamentoAuto==\"1\")){  //setpoint in modalità automatica\n    msg.topic=\"setTarget\";\n    newMsg.payload=msg.payload;\n    node.status({fill:\"green\",shape:\"dot\",text:msg.topic + \" \" + msg.payload + \" Mod: AUTO\"});\n    return [msg, newMsg];}\n    \n    \nelse if ((msg.topic==\"SetPoint\") && (riscaldamentoAuto==\"0\")){ //setpoint in modalità manuale\n    msg.payload=setPointManuale;\n    msg.topic=\"setTarget\";\n    newMsg.payload=msg.payload;\n    node.status({fill:\"red\",shape:\"dot\",text:msg.topic + \" \" + msg.payload + \" Mod: MANU\"});\n    return [msg, newMsg];}\n\nelse if (msg.topic==\"CurrentTemp\") { //registrazione temperatura attuale\n    \n//    msg.payload=msg.payload\n    msg.payload=msg.payload.state;\n    msg.topic=\"setCurrent\"\n    node.status({fill:\"blue\",shape:\"dot\",text:msg.topic + \" \" + msg.payload});\n    return msg ;\n\n}\n//node.status({fill:\"blue\",shape:\"dot\",text:msg.topic + \" \" + msg.payload});\n//return [msg, newMsg] ;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 470.99993896484375,
+        "y": 405.6666564941406,
+        "wires": [
+            [
+                "55acbb4d.535004",
+                "b269ff7a.2c3b4"
+            ],
+            [
+                "48977736.c9bf28",
+                "5df6f57c.71acac"
+            ]
+        ]
+    },
+    {
+        "id": "55acbb4d.535004",
+        "type": "ramp-thermostat",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "profile": "575d3a65.a451c4",
+        "hysteresisplus": "0.1",
+        "hysteresisminus": "0.1",
+        "x": 672.111083984375,
+        "y": 411.6666259765625,
+        "wires": [
+            [
+                "f56cd59a.d90388",
+                "4978283c.4dd9c8"
+            ],
+            [
+                "2c47f290.a614de",
+                "b762d144.b156d"
+            ],
+            [
+                "eb4e8467.e19678",
+                "327715a4.e6b7ca"
+            ]
+        ]
+    },
+    {
+        "id": "eb4e8467.e19678",
+        "type": "ui_text",
+        "z": "f792b57.326bb48",
+        "group": "edd62308.5b6eb",
+        "order": 5,
+        "width": 2,
+        "height": 1,
+        "name": "Setpoint:",
+        "label": "Setpoint",
+        "format": "{{msg.payload}}°C",
+        "layout": "row-center",
+        "x": 1056.8888549804688,
+        "y": 670.8888549804688,
+        "wires": []
+    },
+    {
+        "id": "ab8d242b.32fb68",
+        "type": "openhab2-get",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "Riscaldamento_Auto",
+        "x": 420,
+        "y": 640,
+        "wires": [
+            [
+                "a072d3c1.c234b"
+            ]
+        ]
+    },
+    {
+        "id": "a072d3c1.c234b",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "func": "var riscaldamentoAuto=flow.get('riscaldamentoAuto');\n\n//if (msg.payload.state==\"AUTO\"){\n //   flow.set('riscaldamentoAuto', 1); //Automatico\n   if (msg.payload.state===1)\n   {\n    flow.set('riscaldamentoAuto', 1); \n    msg.payload.state=\"AUTO\";\n    }\n//else if (msg.payload.state==\"MAN\"){\n  //  flow.set('riscaldamentoAuto', 0); //Manuale\n    else if (msg.payload.state===0)\n    {\n    flow.set('riscaldamentoAuto', 0); \n    msg.payload.state=\"MAN\";\n    }\n//else if (msg.payload.state==\"DIS\"){\n  //  flow.set('riscaldamentoAuto', 2); //Spento\n    else if (msg.payload.state===2)\n    {\n    flow.set('riscaldamentoAuto', 2); \n    msg.payload.state=\"DISATTIVO\";\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 675,
+        "y": 653,
+        "wires": [
+            [
+                "f1291e1e.46b2b"
+            ]
+        ]
+    },
+    {
+        "id": "6470f0df.b994d",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 815,
+        "y": 713,
+        "wires": []
+    },
+    {
+        "id": "10da0faa.9fc34",
+        "type": "inject",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "Started!",
+        "payloadType": "str",
+        "x": 618,
+        "y": 854,
+        "wires": [
+            [
+                "c4c60161.14c28"
+            ]
+        ]
+    },
+    {
+        "id": "c4c60161.14c28",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "General var",
+        "func": "flow.set('riscaldamentoAuto', 1);\nflow.set('setPointManuale', 20);",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 857,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1093a9.19de1c58",
+        "type": "ui_text",
+        "z": "f792b57.326bb48",
+        "group": "edd62308.5b6eb",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "name": "Modo:",
+        "label": "",
+        "format": "{{msg.payload.state}}",
+        "layout": "row-left",
+        "x": 1070,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "54a33921.96efc8",
+        "type": "function",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "func": "var setPointManuale=flow.get('setPointManuale');\nflow.set('setPointManuale', msg.payload.state); \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 680,
+        "y": 710,
+        "wires": [
+            [
+                "6470f0df.b994d"
+            ]
+        ]
+    },
+    {
+        "id": "4978283c.4dd9c8",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 910,
+        "y": 346,
+        "wires": []
+    },
+    {
+        "id": "47fe82b5.033c1c",
+        "type": "openhab2-get",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "Riscaldamento_ManualSetPoint",
+        "x": 430,
+        "y": 700,
+        "wires": [
+            [
+                "54a33921.96efc8"
+            ]
+        ]
+    },
+    {
+        "id": "b269ff7a.2c3b4",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 677,
+        "y": 349,
+        "wires": []
+    },
+    {
+        "id": "a0868c89.aa9c9",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 306,
+        "y": 512,
+        "wires": []
+    },
+    {
+        "id": "327715a4.e6b7ca",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1180,
+        "y": 634,
+        "wires": []
+    },
+    {
+        "id": "6ae39c31.68b9b4",
+        "type": "inject",
+        "z": "f792b57.326bb48",
+        "name": "Every 1 min",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 113,
+        "y": 519,
+        "wires": [
+            [
+                "413a4975.397978"
+            ]
+        ]
+    },
+    {
+        "id": "13763e98.b1c061",
+        "type": "openhab2-get",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "gAvgTemperatura",
+        "x": 293.5,
+        "y": 357,
+        "wires": [
+            [
+                "8d0421ee.dfc2d",
+                "7b181605.9ff8b8"
+            ]
+        ]
+    },
+    {
+        "id": "7b181605.9ff8b8",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 339,
+        "y": 302,
+        "wires": []
+    },
+    {
+        "id": "a8862382.27f85",
+        "type": "inject",
+        "z": "f792b57.326bb48",
+        "name": "Every 1 min",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "CurrentTemp",
+        "payload": "",
+        "payloadType": "str",
+        "x": 104,
+        "y": 357,
+        "wires": [
+            [
+                "13763e98.b1c061"
+            ]
+        ]
+    },
+    {
+        "id": "48977736.c9bf28",
+        "type": "openhab2-out",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "controller": "3fc4d16e.7deaae",
+        "itemname": "Riscaldamento_Auto_SP",
+        "topic": "ItemUpdate",
+        "payload": "",
+        "x": 698.5909042358398,
+        "y": 540.6363582611084,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5df6f57c.71acac",
+        "type": "debug",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 704.54541015625,
+        "y": 493.6363525390625,
+        "wires": []
+    },
+    {
+        "id": "f1291e1e.46b2b",
+        "type": "change",
+        "z": "f792b57.326bb48",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.state",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "MAN",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.state",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "AUTO",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.state",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "DISATTIVATO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 640,
+        "wires": [
+            [
+                "1093a9.19de1c58"
+            ]
+        ]
+    },
+    {
+        "id": "edd62308.5b6eb",
+        "type": "ui_group",
+        "z": "",
+        "name": "",
+        "tab": "d4495bdb.2d4448",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3fc4d16e.7deaae",
+        "type": "openhab2-controller",
+        "z": "",
+        "name": "cm3home",
+        "protocol": "http",
+        "host": "localhost",
+        "port": "8080",
+        "path": "",
+        "username": "",
+        "password": ""
+    },
+    {
+        "id": "575d3a65.a451c4",
+        "type": "profile",
+        "z": "",
+        "name": "Casa",
+        "time1": "00:00",
+        "temp1": "25",
+        "time2": "23:59",
+        "temp2": "25",
+        "time3": "",
+        "temp3": "",
+        "time4": "",
+        "temp4": "",
+        "time5": "",
+        "temp5": "",
+        "time6": "",
+        "temp6": "",
+        "time7": "",
+        "temp7": "",
+        "time8": "",
+        "temp8": "",
+        "time9": "",
+        "temp9": "",
+        "time10": "",
+        "temp10": ""
+    },
+    {
+        "id": "d4495bdb.2d4448",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Cronotermostato",
+        "icon": "dashboard",
+        "order": "1"
+    }
+]

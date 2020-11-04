@@ -17,7 +17,7 @@ Switch                  Prodino0_out1    "Chiave"                           <swi
 //StudioLuce 
 Switch                  StudioLuce       "Luce Studio"                      <light>               (gAll, gStudio)                                                                                                   {ga="Light" [roomHint="Studio"]}
 
-//Cm3Panel
+//Cm3Panel 
 String                  cm3panel         "CM3Panel"                         <settings>                                                                                                                              {channel="mqtt:topic:myUnsecureBroker:cm3panel:cm3panel-startx"}
 
 Number:Temperature      Aqara1T          "Cameretta Aqara1T [%.1f °C]"      <temperature>         (gAll, gTemperatura, gAvgTemperatura, gInfluxdb)                                                                  {channel="mqtt:topic:myUnsecureBroker:xiaomi_aqara_cameretta:temperature"}
