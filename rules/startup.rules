@@ -14,6 +14,6 @@ rule "reset Variabili riscaldamento alla partenza "
 when
     System started
 then
-    Riscaldamento_Auto.postUpdate(DIS)
+    Riscaldamento_Auto.postUpdate(1) //[0="Manuale", 1="Automatico", 2="Disattivato"]
     Riscaldamento_ManualSetPoint.postUpdate(18)
 end

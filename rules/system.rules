@@ -34,10 +34,21 @@ when
     Member of gIP changed
 then
     val host = triggeringItem
-    if (host.state==OPEN) {
+    if (host.state==ON) {
         sendTelegram("bot1", host.name+" CONNESSO") 
     }
     else {
         sendTelegram("bot1", host.name+" DISCONNESSO")
     }
+end
+
+rule "Test termostato"
+when Time cron "0 0/1 * 1/1 * ? *"
+    then 
+        Aqara1M.postUpdate("heat")
+        Aqara1S.postUpdate(Riscaldamento_Auto_SP.state)
+        Aqara2M.postUpdate("heat")
+        Aqara2S.postUpdate(Riscaldamento_Auto_SP.state)
+        Lumi1M.postUpdate("heat")
+        Lumi1S.postUpdate(Riscaldamento_Auto_SP.state)
 end

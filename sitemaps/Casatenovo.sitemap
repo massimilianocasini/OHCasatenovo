@@ -60,7 +60,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Switch item=gORDaikinPower mappings=[ON="ON", OFF="OFF"]
 		Selection item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
 		Setpoint item=gEqualityDaikinSetPoint minValue=16 maxValue=30 step=0.5
-		Text item=gAvgDaikinTemp
+		Text item=gAvgTemperatura
 		
 		Text label="Base" icon=climate {
 			Switch item=gORDaikinPower  mappings=[ON="ON", OFF="OFF"] 
@@ -117,11 +117,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		}
 	}
 	Frame label="Riscaldamento"	{
-		Text item=gAvgTemperatura labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
+		Text item=Lumi1T labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
 		Text item=SwitchBinary2_Caldaia_Tecnico_ZW22 valuecolor=[ON="green", OFF="red"]
-		Switch item=Riscaldamento_Auto mappings=[0="Manuale", 1="Automatico", 2="Disattivato"]
-		Default item=Riscaldamento_Auto_SP visibility=[Riscaldamento_Auto==ON]
-		Setpoint item=Riscaldamento_ManualSetPoint label="SetPoint Manuale [%.1f °C]" minValue=15 maxValue=25 step=0.5 visibility=[Riscaldamento_Auto==OFF] //Set temperatura
+		Switch item=Riscaldamento_Modo mappings=[3="Manuale", 1="Automatico", 2="Disattivato"]
+		Default item=Riscaldamento_Auto_SP visibility=[Riscaldamento_Modo==1]
+		Setpoint item=Riscaldamento_Man_SP minValue=15 maxValue=25 step=0.5 visibility=[Riscaldamento_Modo==3] //Set temperatura
 	}	
 	Frame label="Gestione presenza" {
 		Text item=Presence label="Non c'è nessuno!" visibility=[Presence==OFF] 

@@ -1,14 +1,16 @@
-Switch GoogleIP "Device" <qualityofservice> { channel="network:pingdevice:GoogleIP:online"}
-Number:Time GoogleIPlt "8.8.8.8" <qualityofservice> (gInfluxdb) { channel="network:pingdevice:GoogleIP:latency" }
-DateTime GoogleIPls "LastSeen [%1$tH:%1$tM:%1$tS]" <time> {channel="network:pingdevice:GoogleIP:lastseen"}
+Group          gIP
 
-Switch CondSalottoIP "CondSalottoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondSalottoIP:online"}
-Switch CondCamerettaIP "CondStudioIP [%s]" <qualityofservice> { channel="network:pingdevice:CondCamerettaIP:online"}
-Switch CondLettoIP "CondLettoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondLettoIP:online"}
-Switch CondStudioIP "CondLettoIP [%s]" <qualityofservice> { channel="network:pingdevice:CondStudioIP:online"}
-Switch Repeater1750E "repeater1750E Garage [%s]" <qualityofservice> { channel="network:pingdevice:repeater1750E:online"}
-Switch Repeater1160 "repeater1160 Corridoio [%s]" <qualityofservice> { channel="network:pingdevice:repeater1160:online"}
-Switch Repeater310 "repeater310 Giardino [%s]" <qualityofservice> { channel="network:pingdevice:repeater310:online"}
-Switch Prodino "Prodino [%s]" <qualityofservice> { channel="network:pingdevice:Prodino:online"}
-Switch SolarEdgeInverter "Inverter [%s]" <qualityofservice> { channel="network:pingdevice:solaredgeinverter:online"}
-Switch Cm3Panel "CM3Panel [%s]" <qualityofservice> { channel="network:pingdevice:cm3panel:online"}
+Switch         GoogleIP             "Device"                          <qualityofservice>                   {channel="network:pingdevice:GoogleIP:online"}
+Number:Time    GoogleIPlt           "8.8.8.8"                         <qualityofservice>    (gInfluxdb)    {channel="network:pingdevice:GoogleIP:latency"}
+DateTime       GoogleIPls           "LastSeen [%1$tH:%1$tM:%1$tS]"    <time>                               {channel="network:pingdevice:GoogleIP:lastseen"}
+
+Switch         CondSalottoIP        "CondSalottoIP [%s]"              <qualityofservice>    (gIP)          {channel="network:pingdevice:CondSalottoIP:online"}
+Switch         CondCamerettaIP      "CondStudioIP [%s]"               <qualityofservice>    (gIP)          {channel="network:pingdevice:CondCamerettaIP:online"}
+Switch         CondLettoIP          "CondLettoIP [%s]"                <qualityofservice>    (gIP)          {channel="network:pingdevice:CondLettoIP:online"}
+Switch         CondStudioIP         "CondLettoIP [%s]"                <qualityofservice>    (gIP)          {channel="network:pingdevice:CondStudioIP:online"}
+Switch         Repeater1750E        "repeater1750E Garage [%s]"       <qualityofservice>    (gIP)          {channel="network:pingdevice:repeater1750E:online"}
+Switch         Repeater1160         "repeater1160 Corridoio [%s]"     <qualityofservice>    (gIP)          {channel="network:pingdevice:repeater1160:online"}
+Switch         Repeater310          "repeater310 Giardino [%s]"       <qualityofservice>    (gIP)          {channel="network:pingdevice:repeater310:online"}
+Switch         Prodino              "Prodino [%s]"                    <qualityofservice>    (gIP)          {channel="network:pingdevice:Prodino:online"}
+Switch         SolarEdgeInverter    "Inverter [%s]"                   <qualityofservice>    (gIP)          {channel="network:pingdevice:solaredgeinverter:online"}
+Switch         Cm3Panel             "CM3Panel [%s]"                   <qualityofservice>    (gIP)          {channel="network:pingdevice:cm3panel:online"}
