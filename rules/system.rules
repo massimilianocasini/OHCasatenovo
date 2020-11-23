@@ -1,33 +1,33 @@
-rule "cm3panel"
-when Item cm3panel received update
-then
-if (cm3panel.state == "restartX") {
-       executeCommandLine("ssh openhab@cm3panel sudo /bin/systemctl restart startx", 5000)
-      // mqttActions.publishMQTT("cm3panel/cm3shell","sudo startx", true)
-       logInfo("Flag_System", "Rebooting STARTX su CM3-PANEL")
-    }
-if (cm3panel.state == "PowerOff") {
-       executeCommandLine("ssh openhab@cm3panel sudo poweroff", 5000)
-       logInfo("Flag_System", "PowerOff su CM3-PANEL")
-    }
-if (cm3panel.state == "Reboot") {
-       executeCommandLine("ssh openhab@cm3panel sudo reboot", 5000)
-       logInfo("Flag_System", "Rebooting su CM3-PANEL")
-    }
-end
+// rule "cm3panel"
+// when Item cm3panel received update
+// then
+// if (cm3panel.state == "restartX") {
+//        executeCommandLine("ssh openhab@cm3panel sudo /bin/systemctl restart startx", 5000)
+//       // mqttActions.publishMQTT("cm3panel/cm3shell","sudo startx", true)
+//        logInfo("Flag_System", "Rebooting STARTX su CM3-PANEL")
+//     }
+// if (cm3panel.state == "PowerOff") {
+//        executeCommandLine("ssh openhab@cm3panel sudo poweroff", 5000)
+//        logInfo("Flag_System", "PowerOff su CM3-PANEL")
+//     }
+// if (cm3panel.state == "Reboot") {
+//        executeCommandLine("ssh openhab@cm3panel sudo reboot", 5000)
+//        logInfo("Flag_System", "Rebooting su CM3-PANEL")
+//     }
+// end
 
-rule "cm3home"
-when Item cm3home received update
-then
-if (cm3home.state == "PowerOff") {
-       executeCommandLine("sudo poweroff", 5000)
-       logInfo("Flag_System", "PowerOff su CM3-HOME")
-    }
-if (cm3home.state == "Reboot") {
-       executeCommandLine("sudo reboot", 5000)
-       logInfo("Flag_System", "Rebooting su CM3-HOME")
-    }
-end
+// rule "cm3home"
+// when Item cm3home received update
+// then
+// if (cm3home.state == "PowerOff") {
+//        executeCommandLine("sudo poweroff", 5000)
+//        logInfo("Flag_System", "PowerOff su CM3-HOME")
+//     }
+// if (cm3home.state == "Reboot") {
+//        executeCommandLine("sudo reboot", 5000)
+//        logInfo("Flag_System", "Rebooting su CM3-HOME")
+//     }
+// end
 
 rule "Controllo dispositivi IP"
 when 

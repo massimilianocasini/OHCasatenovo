@@ -65,14 +65,16 @@ then
         gPresence_Sensors.sendCommand(OFF)
 end
 
-
-// when
-//         Item gIP changed
-// then
-//         if (pMacOnline1.state == OPEN) {
-//            sendTelegram("bot1", "Repeater 1160 CONNESSO") 
-//         }
-//         else {
-//             sendTelegram("bot1", "Repeater 1160 DISCONNESSO") 
-//         }
-// end
+rule "Accendi luce corridoio"
+when
+        
+        Item FGS222_25_input2 changed
+then
+        val dimmervalue = FGD211_ZW20_Dimmer.state as Number
+        if (dimmervalue==0 && FGS222_25_input2.state==ON) {
+            FGD211_ZW20_Dimmer.sendCommand(10)
+         }
+         else if (dimmervalue==10 && FGS222_25_input2.state==OFF) {
+             FGD211_ZW20_Dimmer.sendCommand(0)
+         }
+end

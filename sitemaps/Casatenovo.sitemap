@@ -59,7 +59,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		Default item=MeterWatts_R220P_QE_ZW11
 		Switch item=gORDaikinPower mappings=[ON="ON", OFF="OFF"]
 		Selection item=gEqualityDaikinMode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"]
-		Setpoint item=gEqualityDaikinSetPoint minValue=16 maxValue=30 step=0.5
+		Setpoint item=gEqualityDaikinSetPoint minValue=18 maxValue=30 step=1
 		Text item=gAvgTemperatura
 		
 		Text label="Base" icon=climate {
@@ -157,12 +157,15 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			Default item=Prodino_umid
 		}
 		Text label="Corridoio" icon="corridor" {
-			Slider item=SwitchDimmer_Luce_Corridoio_ZW20
+			Slider item=FGD211_ZW20_Dimmer
+			Text item=FGS222_25_input2
+
 		}
 		Text label="Studio" icon="office" {
-			Default item=SensorTemperature_MotionSensor_Studio_ZW10 icon="temperature"
-			Default item=SensorLuminance_MotionSensor_Studio_ZW10 icon="rgb"
-			Text item=AlarmMotion_MotionSensor_Studio_ZW10 icon="motion" 
+			Default item=FGMS001_ZW10_Temp 
+			Default item=FGMS001_ZW10_Lum 
+			Text item=FGMS001_ZW10_All 
+			Default item=FGMS001_ZW10_Batt 
 			Switch item=StudioLuce icon=light visibility=[StudioLuce == OFF] mappings=[ON="ACCENDI"]
 			Switch item=StudioLuce icon=light visibility=[StudioLuce == ON] mappings=[OFF="SPEGNI"]
 		}
@@ -274,6 +277,11 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Default item=BlindsControl_Pergotenda_Giardino_ZW24
 				Text item=MeterWatts_Pergotenda_Giardino_ZW24
 				Text item=MeterKwh_Pergotenda_Giardino_ZW24
+			}
+			Text label="Smart Implant, Corridoio" icon="cellar" {
+				Switch item=FGS222_25_input1
+				Default	item=FGS222_25_input2
+				Default item=FGS222_25_sensor_temperature
 			}
 			Text label="Prodino WIFI MQTT, Sala da pranzo" icon="cellar" {
 				Switch item=Prodino0_in1

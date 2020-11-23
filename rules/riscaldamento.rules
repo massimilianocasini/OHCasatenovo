@@ -6,14 +6,22 @@ rule "invia a telegram lo stato caldaia ON"
 when
     Item SwitchBinary2_Caldaia_Tecnico_ZW22 changed from OFF to ON
 then
-    sendTelegram("bot1", "Termosifoni ON")
+    var riscaldamentomodo = Riscaldamento_Modo.state as Number
+    var tempint = Lumi1T.state as Number
+    var setpointauto = Riscaldamento_Auto_SP.state as Number
+    var setpointmanu = Riscaldamento_Man_SP.state as Number
+    sendTelegram("bot1", "Modo: " + riscaldamentomodo + " Termosifoni ON Temp Attuale: " + tempint + " SetPointAuto:" + setpointauto + " SetPointManu:" + setpointmanu )
 end 
 
 rule "invia a telegram lo stato caldaia OFF"
 when
     Item SwitchBinary2_Caldaia_Tecnico_ZW22 changed from ON to OFF
 then
-    sendTelegram("bot1", "Termosifoni OFF")
+    var riscaldamentomodo = Riscaldamento_Modo.state as Number
+    var tempint = Lumi1T.state as Number
+    var setpointauto = Riscaldamento_Auto_SP.state as Number
+    var setpointmanu = Riscaldamento_Man_SP.state as Number
+    sendTelegram("bot1", "Modo: " + riscaldamentomodo + " Termosifoni OFF Temp Attuale: " + tempint + " SetPointAuto:" + setpointauto + " SetPointManu:  " + setpointmanu )
 end 
 
 // rule "imposta il riscaldamento in auto a mezzanotte"

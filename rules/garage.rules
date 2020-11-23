@@ -2,9 +2,9 @@ val mailActions = getActions("mail","mail:smtp:gmail_service")
 
 rule "Invia messaggio a BOT quando si apre/chiude la serranda"
     when
-        Item SensorBinary1_Serranda_Garage_ZW16 changed
+        Item FGBS001_16_SensorBinary1 changed
     then
-        if(SensorBinary1_Serranda_Garage_ZW16.state == ON) {
+        if(FGBS001_16_SensorBinary1.state == ON) {
             sendTelegram("bot1", "Garage Serranda Aperta") 
         }
         else 
