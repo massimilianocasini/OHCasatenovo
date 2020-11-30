@@ -35,12 +35,12 @@ rule "Luce corridoio 22:30 ON "
 when
     Time cron "0 30 22 1/1 * ? *"
 then
-    SwitchDimmer_Luce_Corridoio_ZW20.sendCommand(1)
+    FGD211_ZW20_Dimmer.sendCommand(3)
 end
 
 rule "Luce corridoio 07:00 OFF "
 when
     Time cron "0 0 7 1/1 * ? *"
 then
-    SwitchDimmer_Luce_Corridoio_ZW20.sendCommand(0)
+    FGD211_ZW20_Dimmer.sendCommand(0)
 end

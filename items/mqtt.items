@@ -54,3 +54,5 @@ Number:Dimensionless    Lumi1L           "Corridoio Lumi1L link [%.0f]"     <qua
 
 Switch                  Osram01S         "Presa"                            <switch>              (gAll, gSalone)                                                                                                                {channel="mqtt:topic:myUnsecureBroker:osram:set"}
 Number:Dimensionless    Osram01L         "Presa link [%.1f]"                <qualityofservice>    (gAll, gInfluxdb)                                                                                                              {channel="mqtt:topic:myUnsecureBroker:osram:linkquality"}
+
+//Switch    IKEAE27_TOGGLE    "IKEAE27 [%s]"    <light>    {channel="mqtt:topic:myUnsecureBroker:osram:set"}

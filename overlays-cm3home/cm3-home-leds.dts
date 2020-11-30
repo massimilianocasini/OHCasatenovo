@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+/ {
+    compatible = "brcm,bcm2708";
+
+    fragment@0 {
+        target = <&leds>;
+        __overlay__ {
+
+            rgb_red: rgb_red {
+                label = "rgb_red";
+                gpios = <&gpio 36 1>;
+                linux,default-trigger = "mmc0";
+            };
+
+
+            rgb_green: rgb_green {
+                label = "rgb_green";
+                gpios = <&gpio 35 1>;
+                linux,default-trigger = "heartbeat";
+            };
+
+            rgb_blue: rgb_blue {
+                label = "rgb_blue";
+                gpios = <&gpio 34 1>;
+                linux,default-trigger = "none";
+            };
+        };
+    };
+};

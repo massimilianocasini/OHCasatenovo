@@ -16,4 +16,8 @@ when
 then
     Riscaldamento_Auto_SP.postUpdate(1) //[0="Manuale", 1="Automatico", 2="Disattivato"]
     Riscaldamento_Man_SP.postUpdate(18)
+    Presence.sendCommand(OFF)
+    gPresence_Sensors.sendCommand(OFF)
+    Presence_Auto.sendCommand(OFF)
+    Presence_Timer.sendCommand(OFF)
 end

@@ -1,14 +1,3 @@
-
-rule "Reset Presence and sensors to OFF on startup"
-when
-    System started
-then
-    Presence.sendCommand(OFF)
-    gPresence_Sensors.sendCommand(OFF)
-    Presence_Auto.sendCommand(OFF)
-    Presence_Timer.sendCommand(OFF)
-end
-
 rule "Presenza accendi albero"
 when
     Item gPresence_Sensors changed
@@ -75,6 +64,7 @@ then
             FGD211_ZW20_Dimmer.sendCommand(10)
          }
          else if (dimmervalue==10 && FGS222_25_input2.state==OFF) {
+             Thread::sleep(10000)
              FGD211_ZW20_Dimmer.sendCommand(0)
          }
 end

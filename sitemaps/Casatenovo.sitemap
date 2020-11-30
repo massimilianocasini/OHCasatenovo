@@ -105,7 +105,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Text item=DaikinACUnit_IndoorTemperature_Cameretta
 				Text item=DaikinACUnit_OutdoorTemperature_Cameretta
 			}
-			Text label="Salotto" icon=climate {
+			Text label="Soggiorno" icon=climate {
 				Switch item=DaikinACUnit_Power_Salotto mappings=[ON="ON", OFF="OFF"]
 				Setpoint item=DaikinACUnit_SetPoint_Salotto visibility=[DaikinACUnit_Power_Salotto==ON] minValue=16 maxValue=30 step=0.5
 				Selection item=DaikinACUnit_Mode_Salotto mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] 
@@ -148,18 +148,20 @@ sitemap Casatenovo label="Benvenuto a Casa"
 			//Text item=FGBS001_17_sensor_temperature3 icon="temperature"
 			Default item=OffSetTemperature3_DS1820_Cameretta_ZW17 icon="temperature"
 		}
-		Text label="Salotto" icon="player" {
+		Text label="Soggiorno" icon="player" {
 			Switch item=SwitchBinary2_TV_Salotto_ZW22 icon=switch mappings=[ON="ACCENDI"] visibility=[SwitchBinary2_TV_Salotto_ZW22 == OFF]
 			Switch item=SwitchBinary2_TV_Salotto_ZW22 icon=switch mappings=[OFF="SPEGNI"]  visibility=[SwitchBinary2_TV_Salotto_ZW22 == ON]
 			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 icon=switch mappings=[ON="ACCENDI"] visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == OFF]
 			Switch item=SwitchBinary1_AlberoNatale_Salotto_ZW22 icon=switch mappings=[OFF="SPEGNI"] visibility=[SwitchBinary1_AlberoNatale_Salotto_ZW22 == ON]
 			Default item=Prodino_temp
 			Default item=Prodino_umid
+			Default item=Aqara2T
+			Default item=Osram01S
 		}
 		Text label="Corridoio" icon="corridor" {
 			Slider item=FGD211_ZW20_Dimmer
 			Text item=FGS222_25_input2
-
+			Default item=Lumi1T
 		}
 		Text label="Studio" icon="office" {
 			Default item=FGMS001_ZW10_Temp 
@@ -225,10 +227,10 @@ sitemap Casatenovo label="Benvenuto a Casa"
 				Switch item=SwitchBinary2_TV_Salotto_ZW22
 			}
 			Text label="MotionSensor" icon="cellar"	{
-				Text item=SensorTemperature_MotionSensor_Studio_ZW10 
-				Text item=SensorLuminance_MotionSensor_Studio_ZW10
-				Default item=AlarmMotion_MotionSensor_Studio_ZW10
-				Default item=BatteryLevel_MotionSensor_Studio_ZW10
+				Text item=FGMS001_ZW10_Temp 
+				Text item=FGMS001_ZW10_Lum
+				Default item=FGMS001_ZW10_All
+				Default item=FGMS001_ZW10_Batt
 			}
 			Text label="WallPlugOsram" icon="cellar"	{
 			 	Switch item=Osram01S
@@ -328,7 +330,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		//	Group item=gFritz label="Router" icon="settings"
 	}
 	Frame label="System"  {
-		Text label="Dispositivi IP" icon="network-on" {
+		Text label="Dispositivi IP" icon="network-off" {
 		Text item=CondSalottoIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondCamerettaIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
 		Text item=CondStudioIP icon="network" valuecolor=[ON="green",OFF="red"] labelcolor=[ON="green", OFF="red"]
