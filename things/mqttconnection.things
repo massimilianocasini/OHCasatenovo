@@ -44,9 +44,9 @@ Bridge mqtt:broker:myUnsecureBroker [ host="localhost", secure=false ]
             Type number : linkquality "linkquality" [ stateTopic = "zigbee2mqtt/Presa/linkquality" ]
             Type switch : set "Stato" [stateTopic = "zigbee2mqtt/Presa/state", commandTopic = "zigbee2mqtt/Presa/set", on="ON", off="OFF"]
     }
-    Thing topic IKEA_gu10_1  "LED1" @ "Soggiorno"  {
-        Channels:
-            Type switch : set "Stato" [stateTopic = "zigbee2mqtt/IKEA-GU10-1/state", commandTopic = "zigbee2mqtt/IKEA-GU10-1/set", on="ON", off="OFF"]
-    }
+    //Thing topic IKEA_gu10_1  "LED1" @ "Soggiorno"  {
+    //    Channels:
+    //        Type switch : set "Stato" [stateTopic = "zigbee2mqtt/IKEA-GU10-1/state", commandTopic = "zigbee2mqtt/IKEA-GU10-1/set", on="ON", off="OFF"]
+   // }
 
 }

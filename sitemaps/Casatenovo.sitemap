@@ -117,7 +117,7 @@ sitemap Casatenovo label="Benvenuto a Casa"
 		}
 	}
 	Frame label="Riscaldamento"	{
-		Text item=Lumi1T labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
+		Text item=FGMS001_ZW10_Temp labelcolor=[>25="orange",>15="green",>5="orange",<=5="blue"] valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] icon="temperature"
 		Text item=SwitchBinary2_Caldaia_Tecnico_ZW22 valuecolor=[ON="green", OFF="red"]
 		Switch item=Riscaldamento_Modo mappings=[3="Manuale", 1="Automatico", 2="Disattivato"]
 		Default item=Riscaldamento_Auto_SP visibility=[Riscaldamento_Modo==1]
